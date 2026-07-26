@@ -1,16 +1,19 @@
-# Детонация Подрывного Жилета. @s = носитель.
+# Детонация Подрывного Жилета. Контекст: as <игрок>, at @s.
 scoreboard players set @s bv_active 0
-scoreboard players set @s bv_timer -1
+scoreboard players set @s bv_timer 0
+
+# Владелец жилета — сам носитель, идентификатор не нужен.
+tag @s add bv_owner
+
+particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 2
+playsound minecraft:entity.generic.explode master @a[distance=..64] ~ ~ ~ 2 0.8
+
+# Урон по площади с явным указанием источника-игрока.
+execute as @e[distance=..6,type=!minecraft:item,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:text_display,type=!minecraft:item_display,type=!minecraft:interaction,type=!minecraft:experience_orb,type=!minecraft:area_effect_cloud] run function nuke:blast_vest/hurt
+
+# Взрывы криперов на сервере отключены сторонним датапаком, поэтому
+# разрушение блоков делает обычный ТНТ и только если защита блоков выключена.
+execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:1s,Tags:["nuke_boom"]}
+
 clear @s minecraft:chainmail_chestplate[minecraft:custom_data~{blast_vest:1}]
-
-particle minecraft:explosion_emitter ~ ~1 ~ 2 2 2 0 5
-playsound minecraft:entity.generic.explode master @a ~ ~ ~ 4 1
-
-# Носитель — это и есть источник урона, поэтому убийства засчитываются ему.
-tag @s add nuke_attacker
-execute as @e[distance=0.1..10,type=!item,type=!marker,type=!block_display,type=!text_display,type=!interaction,type=!experience_orb,type=!area_effect_cloud] run damage @s 80 minecraft:explosion by @a[tag=nuke_attacker,limit=1]
-damage @s 1000 minecraft:explosion by @s
-tag @s remove nuke_attacker
-
-# summon creeper заменён на компонентный tnt и только при выключенной защите блоков.
-execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:1s}
+tag @s remove bv_owner

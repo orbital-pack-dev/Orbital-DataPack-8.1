@@ -1,13 +1,7 @@
-# Шипы + отбрасывание. Контекст: as цель, at цель.
-# Хак с summon marker в точке 0 0 0 удалён: он грузил чанк спавна каждый удар.
-# Ванильный тип урона player_attack сам даёт отбрасывание и зачёт убийства игроку.
-scoreboard players add @s nuke.bd_count 0
-execute if score @s nuke.bd_count matches 1.. run scoreboard players remove @s nuke.bd_count 1
-execute if score @s nuke.bd_count matches 1.. run return fail
-
-execute if entity @a[tag=archi_user,limit=1] run damage @s 4 minecraft:player_attack by @a[tag=archi_user,limit=1]
-execute unless entity @a[tag=archi_user] run damage @s 4 minecraft:mob_attack
-
-playsound minecraft:enchant.thorns.hit player @a ~ ~ ~ 1.0 1.0
-particle minecraft:enchanted_hit ~ ~1 ~ 0.3 0.3 0.3 0.05 4
-scoreboard players set @s nuke.bd_count 12
+# Отбрасывание и шипы. Контекст: as <игрок с тегом archi_user>, at @s.
+# Раньше здесь был костыль с маркером-началом координат и ручным Motion,
+# который ломался при любом смещении контекста. Теперь используется ванильный
+# урон minecraft:player_attack: он сам даёт отбрасывание и, что важнее,
+# засчитывает убийство игроку (сервер выдаёт лут только за смерть от игрока).
+execute as @e[distance=0.1..5,type=!minecraft:player,type=!minecraft:item,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:text_display,type=!minecraft:item_display,type=!minecraft:interaction,type=!minecraft:experience_orb,type=!minecraft:area_effect_cloud,type=!minecraft:armor_stand] run function nuke:archi_shield/thorns_hit
+execute as @a[distance=0.1..5,tag=!archi_user] run function nuke:archi_shield/thorns_hit
