@@ -1,11 +1,15 @@
-# Детонация Таймер-ТНТ
-particle explosion_emitter ~ ~0.5 ~ 3 3 3 0 8
-playsound minecraft:entity.generic.explode master @a ~ ~ ~ 4 1
-execute as @e[distance=0.1..12,type=!#nuke:technical,type=!item] run damage @s 70 minecraft:explosion by @p[limit=1]
+# Детонация Таймер-ТНТ. Контекст: as <block_display>, at @s.
+execute if block ~ ~ ~ minecraft:barrier run setblock ~ ~ ~ minecraft:air replace
 
-# Настоящий взрыв (разрушает блоки, если block_protection выключен)
-execute if score block_protection nuke.settings matches 0 run summon creeper ~ ~ ~ {Fuse:0,ExplosionRadius:8b,ignited:true}
-execute if score block_protection nuke.settings matches 1 run summon creeper ~ ~ ~ {Fuse:0,ExplosionRadius:0b,ignited:true}
+function nuke:util/resolve_owner
 
-kill @e[type=text_display,tag=tt_text,distance=..3,limit=1]
+particle minecraft:explosion_emitter ~0.5 ~0.5 ~0.5 0 0 0 0 1
+playsound minecraft:entity.generic.explode master @a[distance=..64] ~0.5 ~0.5 ~0.5 2 0.7
+
+execute positioned ~0.5 ~0.5 ~0.5 as @e[distance=..7,type=!minecraft:item,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:text_display,type=!minecraft:item_display,type=!minecraft:interaction,type=!minecraft:experience_orb,type=!minecraft:area_effect_cloud] run function nuke:timer_tnt/hurt
+
+execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~0.5 ~0.5 ~0.5 {fuse:1s,Tags:["nuke_boom"]}
+
+tag @a remove nuke_attacker
+kill @e[type=minecraft:text_display,tag=tt_text,distance=..3]
 kill @s

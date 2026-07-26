@@ -1,1 +1,6 @@
-execute as @e[type=tnt] if data entity @s {fuse:1} run function nuke:orbital_strike_cannon/safe_tnt
+# Защита блоков. Раньше функция работала ВНЕ зависимости от настройки
+# и гасила даже те взрывы, которые должны были сработать.
+# Теперь: если защита включена (1), НИ ОДИН заряд датапака не рвёт блоки:
+# сущность ТНТ сносится до взрыва, а урон по сущностям выдаётся вручную
+# с указанием игрока-источника, чтобы сервер засчитал убийство и лут.
+execute if score block_protection nuke.settings matches 1 as @e[type=minecraft:tnt,tag=nuke_boom] at @s run function nuke:orbital_strike_cannon/safe_tnt

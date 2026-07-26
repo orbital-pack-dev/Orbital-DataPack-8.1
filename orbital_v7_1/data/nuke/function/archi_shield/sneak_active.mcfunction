@@ -1,23 +1,17 @@
-# ARCHI-SHIELD SNEAKING ACTIVE — Particle Wall + Thorns III + Knockback
-# Context: runs AS the player (with Archi-Shield) AT the player's position.
-
-# ── Smooth Particle Wall (pulses every 4 ticks to avoid visual spam) ──
+# Энергетический барьер по шифту. Контекст: as <игрок>, at @s.
 scoreboard players set #four nuke.settings 4
-scoreboard players operation @s nuke.temp = @s sneak_time
-scoreboard players operation @s nuke.temp %= #four nuke.settings
+scoreboard players operation #archi_mod nuke.settings = @s sneak_time
+scoreboard players operation #archi_mod nuke.settings %= #four nuke.settings
 
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^-1.2 ^0.5 ^2 run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^-0.6 ^0.5 ^2 run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^0 ^0.5 ^2 run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^0.6 ^0.5 ^2 run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^1.2 ^0.5 ^2 run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force
+# Стена рисуется раз в 4 тика — раньше условие ссылалось на счётчик,
+# который нигде не увеличивался, поэтому стена не появлялась вообще.
+execute if score #archi_mod nuke.settings matches 0 run particle minecraft:electric_spark ~ ~1 ~ 1.4 1.0 1.4 30 0.02
+execute if score #archi_mod nuke.settings matches 0 run particle minecraft:enchanted_hit ~ ~1 ~ 1.2 0.9 1.2 12 0.01
+execute if score #archi_mod nuke.settings matches 0 run effect give @s minecraft:resistance 1 0 true
 
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^-1.2 ^1.3 ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^-0.6 ^1.3 ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^0 ^1.3 ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^0.6 ^1.3 ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-execute if score @s nuke.temp matches 0 at @s rotated as @s positioned ^1.2 ^1.3 ^2 run particle minecraft:enchanted_hit ~ ~ ~ 0 0 0 0 1 force
-
-# ── Knockback + Thorns (runs every tick) ──
-execute at @s rotated as @s positioned ^ ^1 ^1.5 as @e[distance=..3.5,type=!player,type=!item,type=!marker,type=!block_display,type=!text_display,type=!interaction,type=!area_effect_cloud,type=!experience_orb,type=!armor_stand,type=!firework_rocket] at @s run function nuke:archi_shield/knockback_and_thorns
-
+# Пока игрок держит барьер, снаряды рядом гасятся.
+kill @e[type=minecraft:arrow,distance=..2.5]
+kill @e[type=minecraft:spectral_arrow,distance=..2.5]
+kill @e[type=minecraft:fireball,distance=..2.5]
+kill @e[type=minecraft:small_fireball,distance=..2.5]
+kill @e[type=minecraft:wither_skull,distance=..2.5]

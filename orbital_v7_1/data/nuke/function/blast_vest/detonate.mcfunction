@@ -1,16 +1,19 @@
-# Детонация Подрывного Жилета
+# Детонация Подрывного Жилета. Контекст: as <игрок>, at @s.
 scoreboard players set @s bv_active 0
-scoreboard players set @s bv_timer -1
-clear @s chainmail_chestplate[custom_data~{blast_vest:1}]
+scoreboard players set @s bv_timer 0
 
-particle explosion_emitter ~ ~1 ~ 2 2 2 0 5
-playsound minecraft:entity.generic.explode master @a ~ ~ ~ 4 1
-playsound minecraft:entity.creeper.primed master @a ~ ~ ~ 4 0.5
+# Владелец жилета — сам носитель, идентификатор не нужен.
+tag @s add bv_owner
 
-# Гарантированное убийство носителя и других сущностей от имени игрока
-execute as @e[distance=0.1..10,type=!#nuke:technical,type=!item] run damage @s 80 minecraft:explosion by @p[limit=1]
-damage @s 1000 minecraft:explosion by @s
+particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 2
+playsound minecraft:entity.generic.explode master @a[distance=..64] ~ ~ ~ 2 0.8
 
-# Настоящий взрыв (разрушает блоки, если block_protection выключен)
-execute if score block_protection nuke.settings matches 0 run summon creeper ~ ~ ~ {Fuse:0,ExplosionRadius:6b,ignited:true}
-execute if score block_protection nuke.settings matches 1 run summon creeper ~ ~ ~ {Fuse:0,ExplosionRadius:0b,ignited:true}
+# Урон по площади с явным указанием источника-игрока.
+execute as @e[distance=..6,type=!minecraft:item,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:text_display,type=!minecraft:item_display,type=!minecraft:interaction,type=!minecraft:experience_orb,type=!minecraft:area_effect_cloud] run function nuke:blast_vest/hurt
+
+# Взрывы криперов на сервере отключены сторонним датапаком, поэтому
+# разрушение блоков делает обычный ТНТ и только если защита блоков выключена.
+execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:1s,Tags:["nuke_boom"]}
+
+clear @s minecraft:chainmail_chestplate[minecraft:custom_data~{blast_vest:1}]
+tag @s remove bv_owner

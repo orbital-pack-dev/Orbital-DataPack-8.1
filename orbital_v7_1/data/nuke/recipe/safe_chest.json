@@ -1,11 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "nuke_safe",
   "pattern": [
-    " I ",
+    "III",
     "ICI",
-    " I "
+    "III"
   ],
   "key": {
     "I": "minecraft:iron_nugget",

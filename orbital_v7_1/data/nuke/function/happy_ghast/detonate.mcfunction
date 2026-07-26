@@ -1,11 +1,13 @@
-# Цепной взрыв Счастливого Гаста-Камикадзе
-particle explosion_emitter ~ ~1 ~ 4 4 4 0 12
-playsound minecraft:entity.generic.explode master @a ~ ~ ~ 5 0.8
-playsound minecraft:entity.ghast.scream master @a ~ ~ ~ 4 1.2
+# Подрыв прицепа. Контекст: as <happy_ghast>, at @s.
+function nuke:util/resolve_owner
 
-execute if score @s ghast_tnt matches 1..4 as @e[distance=0.1..10,type=!player,type=!#nuke:technical,type=!item] run damage @s 40 minecraft:explosion by @p[limit=1]
-execute if score @s ghast_tnt matches 5..9 as @e[distance=0.1..15,type=!player,type=!#nuke:technical,type=!item] run damage @s 80 minecraft:explosion by @p[limit=1]
-execute if score @s ghast_tnt matches 10..14 as @e[distance=0.1..22,type=!player,type=!#nuke:technical,type=!item] run damage @s 150 minecraft:explosion by @p[limit=1]
+particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 0 3
+playsound minecraft:entity.generic.explode master @a[distance=..64] ~ ~ ~ 3 0.7
 
-kill @e[type=block_display,tag=ghast_tnt_display,distance=..8]
-kill @s
+execute as @e[distance=..8,type=!minecraft:item,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:text_display,type=!minecraft:item_display,type=!minecraft:interaction,type=!minecraft:experience_orb,type=!minecraft:area_effect_cloud] run function nuke:happy_ghast/hurt
+
+execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:1s,Tags:["nuke_boom"]}
+
+kill @e[type=minecraft:block_display,tag=ghast_tnt_display,distance=..12]
+scoreboard players set @s ghast_tnt 0
+tag @a remove nuke_attacker
