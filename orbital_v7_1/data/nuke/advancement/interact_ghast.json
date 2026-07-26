@@ -1,10 +1,14 @@
 {
   "criteria": {
-    "interact": {
+    "requirement": {
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
         "entity": {
-          "type": "#nuke:ghast_types"
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "#nuke:ghast_types"
+          }
         }
       }
     }

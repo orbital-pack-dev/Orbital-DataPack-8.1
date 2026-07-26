@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "placed": {
+    "requirement": {
       "trigger": "minecraft:placed_block",
       "conditions": {
         "location": [

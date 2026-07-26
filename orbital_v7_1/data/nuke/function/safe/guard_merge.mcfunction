@@ -1,6 +1,6 @@
-# Защита сейфа от объединения в двойной сундук.
-# Вызывается достижением nuke:chest_placed при установке ЛЮБОГО сундука.
-# Контекст: as <игрок>.
-advancement revoke @s only nuke:chest_placed
-scoreboard players set @s raycast_limit 30
-execute at @s anchored eyes positioned ^ ^ ^ run function nuke:safe/guard_merge_loop
+# Выполняется as игрок (награда достижения nuke:chest_placed) — мгновенная реакция
+# в тот же тик, без ожидания общего тикового обхода.
+# Работает для любого направления склейки: любой сейф рядом перепроверяет себя.
+# Райкаст больше не нужен: маркер сейфа сам знает своё место.
+execute as @e[type=minecraft:marker,tag=safe_box,distance=..10] at @s run function nuke:safe/guard_one
+execute as @e[type=minecraft:interaction,tag=safe_shield,distance=..10] at @s run function nuke:safe/split_setup

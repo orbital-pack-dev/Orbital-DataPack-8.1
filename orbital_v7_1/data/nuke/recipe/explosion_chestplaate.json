@@ -20,25 +20,32 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "blast_vest": 1
+        "blast_vest": true
       },
       "minecraft:custom_name": {
         "color": "red",
         "bold": true,
         "italic": false,
-        "text": "💥 Подрывной Жилет"
+        "text": "Подрывной Жилет"
       },
       "minecraft:lore": [
         {
-          "text": "Активируется при надевании. Обратного пути нет.",
+          "text": "Активируется при надевании — снять невозможно",
           "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Шифт — досрочный подрыв",
+          "color": "dark_gray",
           "italic": false
         }
       ],
       "minecraft:enchantments": {
         "minecraft:blast_protection": 4,
-        "minecraft:protection": 4
-      }
+        "minecraft:protection": 4,
+        "minecraft:binding_curse": 1
+      },
+      "minecraft:rarity": "rare"
     }
   }
 }

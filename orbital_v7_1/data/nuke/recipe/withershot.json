@@ -20,7 +20,7 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "withershot": 1
+        "withershot": true
       },
       "minecraft:custom_name": {
         "text": "Wither-Shot",
@@ -28,6 +28,13 @@
         "bold": true,
         "italic": false
       },
+      "minecraft:lore": [
+        {
+          "text": "ПКМ — залп визера. Нужны 3 черепа визер-скелета",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:rarity": "epic",
       "minecraft:damage": 63
     }

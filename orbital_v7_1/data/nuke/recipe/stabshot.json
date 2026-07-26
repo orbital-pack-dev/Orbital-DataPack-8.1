@@ -21,7 +21,7 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "stabshot": 1
+        "stabshot": true
       },
       "minecraft:custom_name": {
         "text": "Stab-Shot",
@@ -29,6 +29,13 @@
         "bold": true,
         "italic": false
       },
+      "minecraft:lore": [
+        {
+          "text": "ПКМ — орбитальный STAB-удар по точке взгляда",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:rarity": "rare",
       "minecraft:damage": 63
     }
