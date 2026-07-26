@@ -1,5 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nuke_safe",
   "pattern": [
     " I ",
     "ICI",
@@ -14,7 +16,13 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "safe_box": 1
+        "safe_box": true
+      },
+      "minecraft:item_name": {
+        "text": "📦 Сундук с Паролем",
+        "color": "gold",
+        "bold": true,
+        "italic": false
       },
       "minecraft:lore": [
         {
@@ -22,13 +30,7 @@
           "color": "gray",
           "italic": false
         }
-      ],
-      "minecraft:item_name": {
-        "text": "📦 Сундук с Паролем",
-        "color": "gold",
-        "bold": true,
-        "italic": false
-      }
+      ]
     }
   }
 }

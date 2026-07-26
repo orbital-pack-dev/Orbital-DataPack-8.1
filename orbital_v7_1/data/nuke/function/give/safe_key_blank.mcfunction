@@ -1,1 +1,1 @@
-give @s tripwire_hook[minecraft:item_name={"text":"Болванка Ключа","color":"gray"},minecraft:custom_data={nuke_key_blank:true},minecraft:lore=[{"text":"Переименуйте в Наковальне и примените на сундук","color":"dark_gray"}]] 1
+give @s minecraft:tripwire_hook[minecraft:item_name={"text":"Болванка Ключа","color":"gray","italic":false},minecraft:custom_data={nuke_key_blank:true},minecraft:lore=[{"text":"Переименуйте в Наковальне и примените на сундук","color":"dark_gray","italic":false}]] 1
