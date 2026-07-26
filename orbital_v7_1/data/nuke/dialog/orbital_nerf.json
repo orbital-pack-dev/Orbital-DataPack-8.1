@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "⚔️ orbital_nerf (Баланс урона)",
+    "color": "#55ff55",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "1 = сбалансированный урон для PvP, 0 = полный урон.",
+      "color": "gray"
+    }
+  },
+  "columns": 2,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "🔴 ВЫКЛЮЧИТЬ (0)",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_orbital_nerf set 0"
+      }
+    },
+    {
+      "label": {
+        "text": "🟢 ВКЛЮЧИТЬ (1)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_orbital_nerf set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "📊 Показать значение",
+        "color": "#55ff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_info set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "⬅️ Назад в Главное Меню",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:main"
+      }
+    }
+  ]
+}

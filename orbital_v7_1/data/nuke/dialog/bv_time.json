@@ -1,0 +1,51 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "⏱️ НАСТРОЙКА ПОДРЫВНОГО ЖИЛЕТА",
+    "color": "#ff5555",
+    "bold": true
+  },
+  "columns": 2,
+  "actions": [
+    {
+      "label": {
+        "text": "16 секунд",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_bv_time set 320"
+      }
+    },
+    {
+      "label": {
+        "text": "32 секунды (Стандарт)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_bv_time set 640"
+      }
+    },
+    {
+      "label": {
+        "text": "64 секунды",
+        "color": "#ffaa00"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_bv_time set 1280"
+      }
+    },
+    {
+      "label": {
+        "text": "120 секунд (2 мин)",
+        "color": "#ffff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_bv_time set 2400"
+      }
+    }
+  ]
+}

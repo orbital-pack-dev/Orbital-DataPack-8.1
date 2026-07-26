@@ -1,0 +1,1 @@
+give @s wind_charge[custom_data={light_tnt:1},custom_name='{"color":"yellow","bold":true,"text":"💣 Лёгкий ТНТ","italic":false}',lore=['{"text":"Метательный мини-заряд ТНТ с вращением","color":"gray","italic":false}']] 16

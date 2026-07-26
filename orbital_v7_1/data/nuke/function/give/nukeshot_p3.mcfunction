@@ -1,0 +1,1 @@
+give @s fishing_rod[custom_data={nukeshot:1b,nukeshot_power:3,power_level:3,nukeshot_p3:1b,power_tag:"power_3"},custom_model_data={floats:[1003f]},custom_name={"italic":false,"color":"dark_red","text":"NukeShot | Power-3"},rarity="epic",damage=63] 1

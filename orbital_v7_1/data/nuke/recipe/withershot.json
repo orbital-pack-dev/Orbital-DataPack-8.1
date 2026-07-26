@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "WFG",
+    "#/#",
+    "E#N"
+  ],
+  "key": {
+    "W": "minecraft:wither_rose",
+    "F": "minecraft:firework_star",
+    "G": "minecraft:ghast_tear",
+    "#": "minecraft:wither_skeleton_skull",
+    "/": "minecraft:fishing_rod",
+    "E": "minecraft:end_crystal",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "minecraft:fishing_rod",
+    "components": {
+      "minecraft:custom_data": {
+        "withershot": 1
+      },
+      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Визер)\",\"color\":\"dark_gray\",\"bold\":true,\"italic\":false}"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "⏱️ Перезарядка (КД) | Wither-Shot",
+    "color": "#ffaa00",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "20 тиков = 1 секунда.\nСтандарт: 400 тиков (20 сек). Диапазон: 0–2400.",
+      "color": "gray"
+    }
+  },
+  "columns": 4,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "-100"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_wither_cd set -100"
+      }
+    },
+    {
+      "label": {
+        "text": "-20"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_wither_cd set -20"
+      }
+    },
+    {
+      "label": {
+        "text": "+20"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_wither_cd set 20"
+      }
+    },
+    {
+      "label": {
+        "text": "+100"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_wither_cd set 100"
+      }
+    },
+    {
+      "label": {
+        "text": "📊 Показать значение",
+        "color": "#55ff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_info set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "⬅️ Назад в Главное Меню",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:main"
+      }
+    }
+  ]
+}

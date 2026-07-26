@@ -1,0 +1,22 @@
+scoreboard players enable @s t_stab_cd
+scoreboard players enable @s t_nuke_cd
+scoreboard players enable @s t_wither_cd
+scoreboard players enable @s t_mortar_cd
+scoreboard players enable @s t_archi_cd
+scoreboard players enable @s t_xp_stab
+scoreboard players enable @s t_xp_nuke
+scoreboard players enable @s t_xp_wither
+scoreboard players enable @s t_xp_mortar
+scoreboard players enable @s t_xp_archi
+scoreboard players enable @s t_vip
+scoreboard players enable @s t_wither
+scoreboard players enable @s t_orbital_nerf
+scoreboard players enable @s t_block_protection
+scoreboard players enable @s t_personal_cd
+scoreboard players enable @s t_info
+scoreboard players enable @s t_reset
+scoreboard players enable @s t_safe_key
+scoreboard players enable @s t_safe_cancel
+
+scoreboard players enable @s t_bv_time
+scoreboard players enable @s t_tt_scale

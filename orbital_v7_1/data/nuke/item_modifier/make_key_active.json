@@ -1,0 +1,6 @@
+[
+  {
+    "function": "minecraft:set_custom_data",
+    "tag": "{nuke_key_blank:0b,nuke_key_active:1b}"
+  }
+]

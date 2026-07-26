@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "=.#",
+    "TRF",
+    "f#W"
+  ],
+  "key": {
+    "=": "minecraft:resin_brick",
+    ".": "minecraft:blaze_powder",
+    "#": "minecraft:tnt_minecart",
+    "T": "minecraft:tnt",
+    "R": "minecraft:fishing_rod",
+    "F": "minecraft:firework_rocket",
+    "f": "minecraft:fire_charge",
+    "W": "minecraft:wind_charge"
+  },
+  "result": {
+    "id": "minecraft:fishing_rod",
+    "components": {
+      "minecraft:custom_data": {
+        "stabshot": 1
+      },
+      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Кинетический)\",\"color\":\"gray\",\"bold\":true,\"italic\":false}"
+    }
+  }
+}

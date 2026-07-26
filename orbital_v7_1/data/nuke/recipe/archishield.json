@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "#B#",
+    "oSo",
+    "ANA"
+  ],
+  "key": {
+    "#": "minecraft:turtle_scute",
+    "B": "minecraft:bolt_armor_trim_smithing_template",
+    "o": "minecraft:echo_shard",
+    "S": "minecraft:shield",
+    "A": "minecraft:armadillo_scute",
+    "N": "minecraft:netherite_scrap"
+  },
+  "result": {
+    "id": "minecraft:shield",
+    "components": {
+      "minecraft:custom_data": {
+        "archi_shield": 1
+      },
+      "minecraft:custom_name": {
+        "color": "gold",
+        "bold": true,
+        "text": "Архи-Щит"
+      },
+      "minecraft:rarity": "epic",
+      "minecraft:max_damage": 1680,
+      "minecraft:damage": 0
+    }
+  }
+}

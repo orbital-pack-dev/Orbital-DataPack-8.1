@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "🔒 НАСТРОЙКА СУНДУКА",
+    "color": "gold",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "Этот сундук пока не защищён. Создать ключ-пароль?",
+      "color": "gray"
+    }
+  },
+  "columns": 2,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "🔑 Создать Ключ",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_safe_key"
+      }
+    },
+    {
+      "label": {
+        "text": "❌ Оставить открытым",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_safe_cancel"
+      }
+    }
+  ]
+}

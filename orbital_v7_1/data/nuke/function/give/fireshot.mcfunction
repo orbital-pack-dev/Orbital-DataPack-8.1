@@ -1,0 +1,1 @@
+give @s crossbow[custom_name={"color":"gold","text":"Орбитальный Миномет"},max_damage=1,damage=0,custom_data={orbital_mortar_bow:1b},charged_projectiles=[{id:"minecraft:firework_rocket",count:1,components:{"minecraft:custom_data":{orbital_rocket:1b},"minecraft:fireworks":{flight_duration:3}}}]] 1

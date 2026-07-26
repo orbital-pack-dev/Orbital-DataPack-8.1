@@ -1,0 +1,51 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "⏲️ МАСШТАБ ТАЙМЕР-ТНТ (за 1 час)",
+    "color": "#ffaa00",
+    "bold": true
+  },
+  "columns": 2,
+  "actions": [
+    {
+      "label": {
+        "text": "1 час = 1 секунда",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_tt_scale set 20"
+      }
+    },
+    {
+      "label": {
+        "text": "1 час = 10 секунд",
+        "color": "#ffaa00"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_tt_scale set 200"
+      }
+    },
+    {
+      "label": {
+        "text": "1 час = 1 минута (Стандарт)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_tt_scale set 1200"
+      }
+    },
+    {
+      "label": {
+        "text": "1 час = 4 минуты",
+        "color": "#ffff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_tt_scale set 4800"
+      }
+    }
+  ]
+}

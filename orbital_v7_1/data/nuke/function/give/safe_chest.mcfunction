@@ -1,0 +1,1 @@
+give @s chest[custom_data={safe_box:1},custom_name='{"text":"📦 Сундук с Паролем","color":"gold","bold":true,"italic":false}',lore=['{"text":"Поставьте, чтобы установить пароль","color":"gray","italic":false}']] 1

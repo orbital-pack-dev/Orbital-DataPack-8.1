@@ -1,0 +1,15 @@
+{
+  "criteria": {
+    "interact": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "#nuke:ghast_types"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "nuke:happy_ghast/on_interact"
+  }
+}

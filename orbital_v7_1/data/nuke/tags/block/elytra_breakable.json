@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:glass",
+    "minecraft:white_stained_glass",
+    "minecraft:tinted_glass",
+    "#minecraft:leaves",
+    "minecraft:ice",
+    "minecraft:glass_pane",
+    "#minecraft:fences"
+  ]
+}

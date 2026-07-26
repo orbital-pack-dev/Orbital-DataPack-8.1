@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:tnt"
+    },
+    "title": {
+      "text": "Orbital Complex",
+      "color": "aqua"
+    },
+    "description": {
+      "text": "Кастомное орбитальное вооружение сервера."
+    },
+    "background": "minecraft:block/deepslate_tiles",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "recipes_ready": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

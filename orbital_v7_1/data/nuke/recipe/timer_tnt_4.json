@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    ".#.",
+    "#T#",
+    ".#."
+  ],
+  "key": {
+    ".": "minecraft:redstone",
+    "#": "minecraft:clock",
+    "T": "minecraft:tnt_minecart"
+  },
+  "result": {
+    "id": "minecraft:tnt_minecart",
+    "components": {
+      "minecraft:custom_data": {
+        "timer_tnt": 4
+      },
+      "minecraft:custom_name": "{\"color\":\"red\",\"bold\":true,\"text\":\"⏲️ Таймер-ТНТ (4 ч.)\",\"italic\":false}"
+    }
+  }
+}

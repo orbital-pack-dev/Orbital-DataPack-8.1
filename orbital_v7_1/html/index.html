@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Datapack Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Cytoscape.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.29.2/cytoscape.min.js"></script>
+</head>
+<body>
+    <div id="background-glow"></div>
+    
+    <header id="toolbar" class="glass-panel">
+        <div class="logo">
+            <span class="icon">🛰️</span>
+            <h1>Orbital Explorer</h1>
+            <span class="badge">v8.0</span>
+        </div>
+        
+        <div class="stats-pill">
+            <span id="stats-nodes">0</span> Функций
+            <span class="divider">|</span>
+            <span id="stats-edges">0</span> Связей
+        </div>
+
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input id="search" type="text" placeholder="Поиск функции..." autocomplete="off">
+        </div>
+    </header>
+
+    <div id="legend" class="glass-panel">
+        <div class="leg-item"><div class="leg-dot" style="background:#ff4757; box-shadow: 0 0 10px #ff4757;"></div>Главные (tick/load)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#1e90ff; box-shadow: 0 0 10px #1e90ff;"></div>Орбиталки</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#2ed573; box-shadow: 0 0 10px #2ed573;"></div>Щит/Таймер</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#ff7f50; box-shadow: 0 0 10px #ff7f50;"></div>Жилет</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#ff6b81; box-shadow: 0 0 10px #ff6b81;"></div>Сейф</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#9b59b6; box-shadow: 0 0 10px #9b59b6;"></div>Пробивной</div>
+    </div>
+
+    <div id="cy"></div>
+
+    <aside id="info-panel" class="glass-panel hidden">
+        <div class="panel-header">
+            <button id="close-panel" aria-label="Close panel">✕</button>
+            <div class="node-icon">📄</div>
+            <h2 id="panel-title">namespace:function</h2>
+            <div class="tags">
+                <span id="panel-ns" class="tag">namespace</span>
+                <span class="tag"><span id="panel-lines">0</span> строк</span>
+            </div>
+        </div>
+        
+        <div class="panel-content">
+            <div class="connection-section">
+                <h3><span class="icon">📤</span> Вызывает</h3>
+                <ul id="panel-calls" class="connection-list"></ul>
+            </div>
+            
+            <div class="connection-section">
+                <h3><span class="icon">📥</span> Вызывается из</h3>
+                <ul id="panel-callers" class="connection-list"></ul>
+            </div>
+        </div>
+    </aside>
+
+    <div class="controls glass-panel">
+        <button class="btn" id="btn-fit" title="Поместить всё">⊞</button>
+        <button class="btn" id="btn-zoom-in" title="Приблизить">+</button>
+        <button class="btn" id="btn-zoom-out" title="Отдалить">−</button>
+        <button class="btn" id="btn-reset" title="Сбросить выделение">⟲</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

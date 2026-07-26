@@ -1,0 +1,12 @@
+function nuke:give/archishield
+function nuke:give/chest
+function nuke:give/chest_of_shulkers
+function nuke:give/fireshot
+function nuke:give/nukeshot
+function nuke:give/shulker_of_explosives
+function nuke:give/stabshot
+function nuke:give/withershot
+function nuke:give/blast_vest
+function nuke:give/light_tnt
+function nuke:give/potion_of_saturation
+function nuke:give/timer_tnt

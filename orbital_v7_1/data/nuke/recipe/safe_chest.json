@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "ICI",
+    " I "
+  ],
+  "key": {
+    "I": "minecraft:iron_nugget",
+    "C": "minecraft:chest"
+  },
+  "result": {
+    "id": "minecraft:chest",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "safe_box": 1
+      },
+      "minecraft:lore": [
+        {
+          "text": "Поставьте, чтобы установить пароль",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "minecraft:item_name": {
+        "text": "📦 Сундук с Паролем",
+        "color": "gold",
+        "bold": true,
+        "italic": false
+      }
+    }
+  }
+}

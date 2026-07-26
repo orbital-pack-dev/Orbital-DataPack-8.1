@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "drink": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": "{potion_of_saturation:1}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "nuke:potion_of_saturation/consume"
+  }
+}

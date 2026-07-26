@@ -1,0 +1,1 @@
+give @s potion[custom_data={potion_of_saturation:1},custom_name='{"text":"🧪 Зелье Сытости","color":"gold","bold":true,"italic":false}',potion_contents={potion:"minecraft:water",custom_color:16755200,custom_effects:[{id:"minecraft:regeneration",duration:240,amplifier:0,show_particles:1b},{id:"minecraft:saturation",duration:3600,amplifier:1,show_particles:1b}]}] 1

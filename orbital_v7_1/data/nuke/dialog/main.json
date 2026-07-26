@@ -1,0 +1,212 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "🛰️ ORBITAL RAILGUN | НАСТРОЙКИ",
+    "color": "#ff5555",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "Выберите параметр для регулировки перезарядки (КД) и затрат опыта (XP):",
+      "color": "gray"
+    }
+  },
+  "columns": 2,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "⏱️ КД Stab-Shot",
+        "color": "#55ffff"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:stab_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "💎 XP Stab-Shot",
+        "color": "#55ffff"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:xp_stab"
+      }
+    },
+    {
+      "label": {
+        "text": "⏱️ КД NukeShot",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:nuke_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "💎 XP NukeShot",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:xp_nuke"
+      }
+    },
+    {
+      "label": {
+        "text": "⏱️ КД Wither-Shot",
+        "color": "#aa00aa"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:wither_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "💎 XP Wither-Shot",
+        "color": "#aa00aa"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:xp_wither"
+      }
+    },
+    {
+      "label": {
+        "text": "⏱️ КД Миномёт",
+        "color": "#ffaa00"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:mortar_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "💎 XP Миномёт",
+        "color": "#ffaa00"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:xp_mortar"
+      }
+    },
+    {
+      "label": {
+        "text": "⏱️ КД Архи-Щит",
+        "color": "#ffff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:archi_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "💎 XP Архи-Щит",
+        "color": "#ffff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:xp_archi"
+      }
+    },
+    {
+      "label": {
+        "text": "💥 Подрывной Жилет (Таймер)",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:bv_time"
+      }
+    },
+    {
+      "label": {
+        "text": "⏲️ Масштаб Таймер-ТНТ",
+        "color": "#ffaa00"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:tt_scale"
+      }
+    },
+    {
+      "label": {
+        "text": "👑 VIP режим (Без XP)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:vip"
+      }
+    },
+    {
+      "label": {
+        "text": "💀 Черепа Визера (Nuke)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:wither"
+      }
+    },
+    {
+      "label": {
+        "text": "⚔️ orbital_nerf (Урон)",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:orbital_nerf"
+      }
+    },
+    {
+      "label": {
+        "text": "🛡️ block_protection",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:block_protection"
+      }
+    },
+    {
+      "label": {
+        "text": "👤 Личные КД (personal_cd)",
+        "color": "#55ff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:personal_cd"
+      }
+    },
+    {
+      "label": {
+        "text": "📊 ПОКАЗАТЬ ВСЕ ТЕКУЩИЕ ЗНАЧЕНИЯ",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_info set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "🔄 СБРОСИТЬ ВСЁ К СТАНДАРТУ",
+        "color": "#ff0000"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_reset set 1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    ".MG",
+    "#C#",
+    "BT."
+  ],
+  "key": {
+    ".": "minecraft:redstone",
+    "M": "minecraft:magma_cream",
+    "G": "minecraft:gunpowder",
+    "#": "minecraft:tnt",
+    "C": "minecraft:chainmail_chestplate",
+    "B": "minecraft:blaze_powder",
+    "T": "minecraft:tnt_minecart"
+  },
+  "result": {
+    "id": "minecraft:chainmail_chestplate",
+    "components": {
+      "minecraft:custom_data": {
+        "blast_vest": 1
+      },
+      "minecraft:custom_name": "{\"color\":\"red\",\"bold\":true,\"text\":\"💥 Подрывной Жилет\",\"italic\":false}",
+      "minecraft:enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:protection": 4
+      }
+    }
+  }
+}

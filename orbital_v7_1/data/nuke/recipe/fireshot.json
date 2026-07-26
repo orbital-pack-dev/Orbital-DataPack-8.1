@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F#.",
+    "#)M",
+    "B_f"
+  ],
+  "key": {
+    "F": "minecraft:firework_star",
+    "#": "minecraft:firework_rocket",
+    ".": "minecraft:gunpowder",
+    ")": "minecraft:crossbow",
+    "M": "minecraft:mojang_banner_pattern",
+    "B": "minecraft:blaze_powder",
+    "_": "minecraft:paper",
+    "f": "minecraft:fire_charge"
+  },
+  "result": {
+    "id": "minecraft:fishing_rod",
+    "components": {
+      "minecraft:custom_data": {
+        "nukeshot": 1
+      },
+      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Ядерный)\",\"color\":\"red\",\"bold\":true,\"italic\":false}"
+    }
+  }
+}

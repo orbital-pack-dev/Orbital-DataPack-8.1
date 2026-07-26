@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    " B ",
+    "   "
+  ],
+  "key": {
+    "G": "minecraft:golden_apple",
+    "B": "minecraft:glass_bottle"
+  },
+  "result": {
+    "id": "minecraft:potion",
+    "components": {
+      "minecraft:custom_data": {
+        "potion_of_saturation": 1
+      },
+      "minecraft:item_name": {
+        "color": "gold",
+        "bold": true,
+        "text": "🧪 Зелье Сытости"
+      },
+      "minecraft:lore": [
+        {
+          "text": "Даёт эффект Сытости на 3 минуты (180 сек)",
+          "color": "gray"
+        }
+      ],
+      "minecraft:potion_contents": {
+        "custom_color": 16766720,
+        "custom_effects": [
+          {
+            "id": "minecraft:saturation",
+            "duration": 3600,
+            "amplifier": 0
+          },
+          {
+            "id": "minecraft:regeneration",
+            "duration": 3600,
+            "amplifier": 0
+          }
+        ]
+      }
+    }
+  }
+}

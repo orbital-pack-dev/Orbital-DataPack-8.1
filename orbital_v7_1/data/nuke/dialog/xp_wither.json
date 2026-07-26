@@ -1,0 +1,77 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "💎 Затраты опыта (XP) | Wither-Shot",
+    "color": "#55ffff",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "Списывается при выстреле/срабатывании.\nСтандарт: 10 ур.. Диапазон: 0–100.",
+      "color": "gray"
+    }
+  },
+  "columns": 4,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "-5"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_xp_wither set -5"
+      }
+    },
+    {
+      "label": {
+        "text": "-1"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_xp_wither set -1"
+      }
+    },
+    {
+      "label": {
+        "text": "+1"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_xp_wither set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "+5"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_xp_wither set 5"
+      }
+    },
+    {
+      "label": {
+        "text": "📊 Показать значение",
+        "color": "#55ff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_info set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "⬅️ Назад в Главное Меню",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:main"
+      }
+    }
+  ]
+}
