@@ -25,6 +25,10 @@ scoreboard objectives add personal_cd dummy
 scoreboard objectives add nuke.bd_count dummy
 scoreboard objectives add nuke.xp_cost dummy
 
+# Идентификатор владельца заряда. Нужен, чтобы урон от ТНТ/пушек
+# наносился ОТ ИМЕНИ игрока и сервер засчитывал убийства и лут.
+scoreboard objectives add nuke.pid dummy
+
 # ── Триггеры для диалоговых кнопок (игрок может /trigger без OP) ────
 scoreboard objectives add t_stab_cd trigger
 scoreboard objectives add t_nuke_cd trigger
@@ -62,10 +66,13 @@ scoreboard objectives add damage_blocked_by_shield minecraft.custom:minecraft.da
 scoreboard objectives add shield_used minecraft.used:minecraft.shield
 scoreboard objectives add sneak_time minecraft.custom:minecraft.sneak_time
 
-
 scoreboard objectives add bv_active dummy
 scoreboard objectives add bv_timer dummy
 scoreboard objectives add ghast_tnt dummy
 scoreboard objectives add tt_timer dummy
 scoreboard objectives add tt_hours dummy
 scoreboard objectives add tt_seconds dummy
+scoreboard objectives add tt_mod dummy
+
+# Счётчик выданных идентификаторов владельцев (не сбрасывать!).
+execute unless score #pid_seq nuke.settings matches 0.. run scoreboard players set #pid_seq nuke.settings 0
