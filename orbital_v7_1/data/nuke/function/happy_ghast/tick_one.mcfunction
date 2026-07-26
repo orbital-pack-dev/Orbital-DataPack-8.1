@@ -1,5 +1,7 @@
-# Выполняется as Гаст, at @s
-tp @e[type=minecraft:block_display,tag=ghast_tnt_display,distance=..10] ~ ~2.5 ~
-particle minecraft:smoke ~ ~2.5 ~ 0.4 0.2 0.4 4 0.01
+# Контекст: as <Гаст с зарядами>, at @s.
+# Визуалы держатся на модельке.
+execute as @e[type=minecraft:block_display,tag=ghast_tnt_display,distance=..10] run tp @s ~ ~ ~ ~14 ~0
+particle minecraft:smoke ~ ~1 ~ 1 1 1 3 0.01
 
-execute if score @s ghast_tnt matches 4.. run function nuke:happy_ghast/detonate
+# Максимальная загрузка — подрыв.
+execute if score @s ghast_tnt matches 14.. run function nuke:happy_ghast/detonate

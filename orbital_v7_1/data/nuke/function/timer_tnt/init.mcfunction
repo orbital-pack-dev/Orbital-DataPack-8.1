@@ -1,13 +1,10 @@
-# Выполняется as item, at @s
+# Контекст: as <упавший предмет Таймер-ТНТ>, at @s.
+tag @s add tt_init
+
+# Уровень заряда (1..4 часа) — простые проверки без макросов.
 scoreboard players set #tt_hours nuke.settings 1
-execute if data entity @s Item.components."minecraft:custom_data"{timer_tnt:2} run scoreboard players set #tt_hours nuke.settings 2
-execute if data entity @s Item.components."minecraft:custom_data"{timer_tnt:3} run scoreboard players set #tt_hours nuke.settings 3
-execute if data entity @s Item.components."minecraft:custom_data"{timer_tnt:4} run scoreboard players set #tt_hours nuke.settings 4
+execute if items entity @s contents minecraft:tnt[minecraft:custom_data~{timer_tnt:2}] run scoreboard players set #tt_hours nuke.settings 2
+execute if items entity @s contents minecraft:tnt[minecraft:custom_data~{timer_tnt:3}] run scoreboard players set #tt_hours nuke.settings 3
+execute if items entity @s contents minecraft:tnt[minecraft:custom_data~{timer_tnt:4}] run scoreboard players set #tt_hours nuke.settings 4
 
-scoreboard players set #tt_pid nuke.settings 0
-execute as @p[distance=..12] run function nuke:util/assign_pid
-execute if entity @p[distance=..12] run scoreboard players operation #tt_pid nuke.settings = @p[distance=..12] nuke.pid
-
-# Тег tt_init ставится только внутри place при УСПЕШНОЙ установке,
-# чтобы невалидное место повторило попытку в следующем тике.
-execute align xyz run function nuke:timer_tnt/place
+function nuke:timer_tnt/place
