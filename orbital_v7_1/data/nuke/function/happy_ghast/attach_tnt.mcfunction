@@ -1,16 +1,14 @@
-# Закрепление ТНТ на Гасте. Контекст: as гаст, at гаст. Игрок = @a[tag=gt_user].
-execute if score @s ghast_tnt matches 14.. run tellraw @a[tag=gt_user,limit=1] [{"text":"[!] ","color":"yellow"},{"text":"На этом Гасте уже максимум ТНТ (14/14)!","color":"red"}]
-execute if score @s ghast_tnt matches 14.. run return fail
+# Контекст: as <happy_ghast>, at @s.
+execute if score @s ghast_tnt matches 4.. run return 0
 
 clear @a[tag=gt_user,limit=1] minecraft:tnt 1
 scoreboard players add @s ghast_tnt 1
 
-# Запоминаем владельца заряда для зачёта убийств.
+# Запоминаем владельца прицепа для правильного зачёта убийств.
 execute as @a[tag=gt_user,limit=1] run function nuke:util/assign_pid
-scoreboard players operation @s nuke.pid = @a[tag=gt_user,limit=1] nuke.pid
+execute if entity @a[tag=gt_user,limit=1] run scoreboard players operation @s nuke.pid = @a[tag=gt_user,limit=1] nuke.pid
 
-playsound minecraft:entity.tnt.primed master @a ~ ~ ~ 2 1.2
-particle minecraft:smoke ~ ~2 ~ 0.5 0.5 0.5 0.05 15
-summon minecraft:block_display ~ ~1.5 ~ {Tags:["ghast_tnt_display"],teleport_duration:2,block_state:{Name:"minecraft:tnt"},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[-0.4f,-0.4f,-0.4f],scale:[0.8f,0.8f,0.8f]}}
+summon minecraft:block_display ~ ~2.4 ~ {Tags:["ghast_tnt_display"],block_state:{Name:"minecraft:tnt"},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[-0.35f,0.0f,-0.35f],scale:[0.7f,0.7f,0.7f]}}
 
-tellraw @a[tag=gt_user,limit=1] [{"text":"[КАМИКАДЗЕ] ","color":"red","bold":true},{"text":"Заряд ТНТ закреплён на Гасте! Всего: ","color":"yellow","bold":false},{"score":{"name":"@s","objective":"ghast_tnt"},"color":"red","bold":true},{"text":"/14","color":"gray","bold":false}]
+playsound minecraft:entity.tnt.primed neutral @a[distance=..24] ~ ~ ~ 1 1
+tellraw @a[tag=gt_user,limit=1] [{"text":"[ГАСТ] ","color":"aqua","bold":true},{"text":"ТНТ прицеплён. Шифт + ПКМ — подрыв.","color":"gray","bold":false}]

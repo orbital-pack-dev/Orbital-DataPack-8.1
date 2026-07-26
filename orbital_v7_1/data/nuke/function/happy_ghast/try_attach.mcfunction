@@ -1,6 +1,8 @@
-# Попытка закрепить ТНТ. Контекст: as игрок, at игрок.
-# Игрок помечается тегом, иначе внутри attach_tnt контекст игрока терялся
-# и clear/сообщения уходили случайному ближайшему игроку.
-tag @s add gt_user
-execute as @e[type=#nuke:ghast_types,distance=..6,limit=1,sort=nearest] at @s run function nuke:happy_ghast/attach_tnt
-tag @s remove gt_user
+# Контекст: as <happy_ghast>, at @s. Игрок — @a[tag=gt_user].
+execute unless entity @a[tag=gt_user,limit=1] run return fail
+
+# Шифт + взаимодействие = ручной подрыв прицепа.
+execute if score @s ghast_tnt matches 1.. if entity @a[tag=gt_user,limit=1,predicate=nuke:is_sneaking] run return run function nuke:happy_ghast/detonate
+
+# Иначе — прицепляем ТНТ из руки.
+execute if items entity @a[tag=gt_user,limit=1] weapon.mainhand minecraft:tnt run return run function nuke:happy_ghast/attach_tnt
