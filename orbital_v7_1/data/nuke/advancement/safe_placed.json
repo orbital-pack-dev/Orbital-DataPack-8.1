@@ -8,19 +8,23 @@
             "condition": "minecraft:location_check",
             "predicate": {
               "block": {
-                "blocks": "minecraft:chest"
+                "blocks": [
+                  "minecraft:chest",
+                  "minecraft:trapped_chest"
+                ]
               }
             }
-          }
-        ],
-        "player": [
+          },
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
               "slots": {
                 "weapon.mainhand": {
-                  "items": "minecraft:chest",
+                  "items": [
+                    "minecraft:chest",
+                    "minecraft:trapped_chest"
+                  ],
                   "predicates": {
                     "minecraft:custom_data": {
                       "safe_box": true

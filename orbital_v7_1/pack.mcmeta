@@ -1,10 +1,11 @@
 {
   "pack": {
-    "pack_format": 48,
-    "description": "UUSMP Orbital Railgun | Хаос Апдейт v8.0 | 1.21+ | By Void7676_",
+    "description": "UUSMP Orbital Railgun | Хаос Апдейт v8.1 | MC 1.21.11 | By Void7676_",
+    "pack_format": 75,
+    "data_pack_format": 94,
     "supported_formats": {
-      "min_inclusive": 48,
-      "max_inclusive": 64
+      "min_inclusive": 75,
+      "max_inclusive": 75
     }
   }
 }
