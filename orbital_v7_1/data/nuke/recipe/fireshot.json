@@ -21,14 +21,21 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "orbital_mortar_bow": 1
+        "orbital_mortar_bow": true
       },
       "minecraft:custom_name": {
-        "text": "Орбитальный Миномет",
+        "text": "Орбитальный Миномёт",
         "color": "gold",
         "bold": true,
         "italic": false
       },
+      "minecraft:lore": [
+        {
+          "text": "Стрельба заряженной орбитальной ракетой",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:max_damage": 1,
       "minecraft:damage": 0,
       "minecraft:charged_projectiles": [
@@ -37,7 +44,7 @@
           "count": 1,
           "components": {
             "minecraft:custom_data": {
-              "orbital_rocket": 1
+              "orbital_rocket": true
             },
             "minecraft:fireworks": {
               "flight_duration": 3
