@@ -1,5 +1,6 @@
 {
   "values": [
-    "nuke:load"
+    "nuke:load",
+    "nuke:load_recipes"
   ]
 }

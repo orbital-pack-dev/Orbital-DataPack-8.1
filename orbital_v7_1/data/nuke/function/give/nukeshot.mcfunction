@@ -1,4 +1,4 @@
-give @s minecraft:fishing_rod[minecraft:custom_data={nukeshot:1,nukeshot_power:1,power_level:1,nukeshot_p1:1,power_tag:"power_1"},minecraft:custom_model_data={floats:[1001f]},minecraft:custom_name={"italic":false,"color":"red","text":"NukeShot | Power-1"},minecraft:rarity="rare",minecraft:damage=63] 1
-give @s minecraft:fishing_rod[minecraft:custom_data={nukeshot:1,nukeshot_power:2,power_level:2,nukeshot_p2:1,power_tag:"power_2"},minecraft:custom_model_data={floats:[1002f]},minecraft:custom_name={"italic":false,"color":"red","text":"NukeShot | Power-2"},minecraft:rarity="rare",minecraft:damage=63] 1
-give @s minecraft:fishing_rod[minecraft:custom_data={nukeshot:1,nukeshot_power:3,power_level:3,nukeshot_p3:1,power_tag:"power_3"},minecraft:custom_model_data={floats:[1003f]},minecraft:custom_name={"italic":false,"color":"dark_red","text":"NukeShot | Power-3"},minecraft:rarity="epic",minecraft:damage=63] 1
-give @s minecraft:fishing_rod[minecraft:custom_data={nukeshot:1,nukeshot_power:4,power_level:4,nukeshot_p4:1,power_tag:"power_4"},minecraft:custom_model_data={floats:[1004f]},minecraft:custom_name={"italic":false,"color":"dark_red","text":"NukeShot | Power-4"},minecraft:rarity="epic",minecraft:damage=63] 1
+# Базовый Nuke-Shot = уровень мощности 1.
+# Делегируем в nukeshot_p1, чтобы компоненты гарантированно совпадали
+# с предметом, который ожидает orbital_strike_cannon/upgrade_nukeshot/**.
+function nuke:give/nukeshot_p1

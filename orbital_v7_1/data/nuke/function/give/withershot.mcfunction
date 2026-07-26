@@ -1,1 +1,1 @@
-give @s minecraft:fishing_rod[minecraft:custom_data={withershot:1},minecraft:custom_name={"italic":false,"color":"dark_purple","text":"Wither-Shot"},minecraft:rarity="epic",minecraft:damage=63] 1
+give @s minecraft:fishing_rod[minecraft:custom_data={withershot:1b},minecraft:custom_name={"text":"Wither-Shot","color":"dark_purple","bold":true,"italic":false},minecraft:lore=[{"text":"ПКМ — залп визера. Нужны 3 черепа визер-скелета","color":"gray","italic":false}],minecraft:rarity="epic",minecraft:damage=63] 1
