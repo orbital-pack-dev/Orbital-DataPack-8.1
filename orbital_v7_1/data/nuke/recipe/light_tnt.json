@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     "#.",
     "W "
@@ -16,9 +17,18 @@
       "minecraft:custom_data": {
         "light_tnt": 1
       },
-      "minecraft:custom_name": "{\"color\":\"yellow\",\"bold\":true,\"text\":\"💣 Лёгкий ТНТ\",\"italic\":false}",
+      "minecraft:custom_name": {
+        "color": "yellow",
+        "bold": true,
+        "italic": false,
+        "text": "💣 Лёгкий ТНТ"
+      },
       "minecraft:lore": [
-        "{\"text\":\"Метательный мини-заряд ТНТ с вращением\",\"color\":\"gray\",\"italic\":false}"
+        {
+          "text": "Метательный мини-заряд ТНТ с вращением",
+          "color": "gray",
+          "italic": false
+        }
       ]
     }
   }

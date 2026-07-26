@@ -1,1 +1,1 @@
-give @s chainmail_chestplate[custom_data={blast_vest:1},custom_name='{"color":"red","bold":true,"text":"💥 Подрывной Жилет","italic":false}',enchantments={"minecraft:blast_protection":4,"minecraft:protection":4}] 1
+give @s minecraft:chainmail_chestplate[minecraft:custom_data={blast_vest:1},minecraft:custom_name={"color":"red","bold":true,"text":"💥 Подрывной Жилет","italic":false},minecraft:lore=[{"text":"Активируется при надевании. Обратного пути нет.","color":"gray","italic":false}],minecraft:enchantments={"minecraft:blast_protection":4,"minecraft:protection":4}] 1

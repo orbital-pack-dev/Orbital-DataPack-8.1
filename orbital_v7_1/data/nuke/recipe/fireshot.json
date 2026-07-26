@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
     "F#.",
     "#)M",
@@ -16,12 +17,34 @@
     "f": "minecraft:fire_charge"
   },
   "result": {
-    "id": "minecraft:fishing_rod",
+    "id": "minecraft:crossbow",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "nukeshot": 1
+        "orbital_mortar_bow": 1
       },
-      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Ядерный)\",\"color\":\"red\",\"bold\":true,\"italic\":false}"
+      "minecraft:custom_name": {
+        "text": "Орбитальный Миномет",
+        "color": "gold",
+        "bold": true,
+        "italic": false
+      },
+      "minecraft:max_damage": 1,
+      "minecraft:damage": 0,
+      "minecraft:charged_projectiles": [
+        {
+          "id": "minecraft:firework_rocket",
+          "count": 1,
+          "components": {
+            "minecraft:custom_data": {
+              "orbital_rocket": 1
+            },
+            "minecraft:fireworks": {
+              "flight_duration": 3
+            }
+          }
+        }
+      ]
     }
   }
 }

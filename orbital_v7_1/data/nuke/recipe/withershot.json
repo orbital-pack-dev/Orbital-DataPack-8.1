@@ -17,11 +17,19 @@
   },
   "result": {
     "id": "minecraft:fishing_rod",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
         "withershot": 1
       },
-      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Визер)\",\"color\":\"dark_gray\",\"bold\":true,\"italic\":false}"
+      "minecraft:custom_name": {
+        "text": "Wither-Shot",
+        "color": "dark_purple",
+        "bold": true,
+        "italic": false
+      },
+      "minecraft:rarity": "epic",
+      "minecraft:damage": 63
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
     ".MG",
     "#C#",
@@ -16,11 +17,24 @@
   },
   "result": {
     "id": "minecraft:chainmail_chestplate",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
         "blast_vest": 1
       },
-      "minecraft:custom_name": "{\"color\":\"red\",\"bold\":true,\"text\":\"💥 Подрывной Жилет\",\"italic\":false}",
+      "minecraft:custom_name": {
+        "color": "red",
+        "bold": true,
+        "italic": false,
+        "text": "💥 Подрывной Жилет"
+      },
+      "minecraft:lore": [
+        {
+          "text": "Активируется при надевании. Обратного пути нет.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:enchantments": {
         "minecraft:blast_protection": 4,
         "minecraft:protection": 4

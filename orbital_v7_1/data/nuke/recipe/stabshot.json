@@ -18,11 +18,19 @@
   },
   "result": {
     "id": "minecraft:fishing_rod",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
         "stabshot": 1
       },
-      "minecraft:custom_name": "{\"text\":\"Орбитальный Мушкет (Кинетический)\",\"color\":\"gray\",\"bold\":true,\"italic\":false}"
+      "minecraft:custom_name": {
+        "text": "Stab-Shot",
+        "color": "aqua",
+        "bold": true,
+        "italic": false
+      },
+      "minecraft:rarity": "rare",
+      "minecraft:damage": 63
     }
   }
 }

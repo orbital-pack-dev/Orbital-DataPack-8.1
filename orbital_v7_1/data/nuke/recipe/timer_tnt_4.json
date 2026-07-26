@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     ".#.",
     "#T#",
@@ -12,11 +13,24 @@
   },
   "result": {
     "id": "minecraft:tnt_minecart",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
         "timer_tnt": 4
       },
-      "minecraft:custom_name": "{\"color\":\"red\",\"bold\":true,\"text\":\"⏲️ Таймер-ТНТ (4 ч.)\",\"italic\":false}"
+      "minecraft:custom_name": {
+        "color": "red",
+        "bold": true,
+        "italic": false,
+        "text": "⏲️ Таймер-ТНТ (4 ч.)"
+      },
+      "minecraft:lore": [
+        {
+          "text": "Положите на твёрдую опору, чтобы взвести",
+          "color": "gray",
+          "italic": false
+        }
+      ]
     }
   }
 }

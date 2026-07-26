@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     "G.S",
     "#g#",
@@ -19,24 +20,41 @@
     "id": "minecraft:potion",
     "count": 1,
     "components": {
-      "minecraft:custom_name": "{\"text\":\"🧪 Зелье Сытости\",\"color\":\"gold\",\"bold\":true,\"italic\":false}",
       "minecraft:custom_data": {
         "potion_of_saturation": 1
       },
+      "minecraft:custom_name": {
+        "text": "🧪 Зелье Сытости",
+        "color": "gold",
+        "bold": true,
+        "italic": false
+      },
+      "minecraft:lore": [
+        {
+          "text": "Сытость — 3 минуты",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Регенерация — 12 секунд",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:potion_contents": {
         "potion": "minecraft:water",
         "custom_color": 16755200,
         "custom_effects": [
           {
-            "id": "minecraft:regeneration",
+            "id": "minecraft:saturation",
             "amplifier": 0,
-            "duration": 240,
+            "duration": 3600,
             "show_particles": true
           },
           {
-            "id": "minecraft:saturation",
-            "amplifier": 1,
-            "duration": 3600,
+            "id": "minecraft:regeneration",
+            "amplifier": 0,
+            "duration": 240,
             "show_particles": true
           }
         ]

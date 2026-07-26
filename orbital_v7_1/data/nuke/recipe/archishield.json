@@ -16,6 +16,7 @@
   },
   "result": {
     "id": "minecraft:shield",
+    "count": 1,
     "components": {
       "minecraft:custom_data": {
         "archi_shield": 1
@@ -23,8 +24,16 @@
       "minecraft:custom_name": {
         "color": "gold",
         "bold": true,
+        "italic": false,
         "text": "Архи-Щит"
       },
+      "minecraft:lore": [
+        {
+          "text": "Шифт — барьер из энергии и отброс",
+          "color": "gray",
+          "italic": false
+        }
+      ],
       "minecraft:rarity": "epic",
       "minecraft:max_damage": 1680,
       "minecraft:damage": 0
