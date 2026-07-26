@@ -26,17 +26,16 @@ execute as @a[scores={stab_strike=1..}] at @s run function nuke:orbital_strike_c
 execute as @a[scores={wither_strike=1..}] at @s run function nuke:orbital_strike_cannon/activate_shots/wither
 execute as @a[scores={mortar_fire=1..}] at @s run function nuke:orbital_strike_cannon/fire_shot/init_shots/wither
 
-# ═══════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════
 # ORBITAL MORTAR — detect & process
-# ═══════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════
 
-# Method 1: Direct NBT check on entity — FireworksItem stores the item components
-execute as @e[type=firework_rocket,tag=!orbital_main,tag=!orbital_child,tag=!orbital_child_pro,tag=!orbital_child_vert,nbt={FireworksItem:{components:{"minecraft:custom_data":{orbital_rocket:1}}}}] run tag @s add orbital_main
+# Method 1: прямая проверка NBT снаряда (FireworksItem хранит компоненты предмета).
+# Дублированная строка удалена: она второй раз сканировала все фейерверки впустую.
 execute as @e[type=firework_rocket,tag=!orbital_main,tag=!orbital_child,tag=!orbital_child_pro,tag=!orbital_child_vert,nbt={FireworksItem:{components:{"minecraft:custom_data":{orbital_rocket:1}}}}] run tag @s add orbital_main
 
-# Method 2: Proximity fallback — if a player just shot from the Orbital Mortar crossbow
+# Method 2: резервное определение по близости к стрелявшему игроку.
 tag @a remove holding_orb_mortar
-execute as @a if items entity @s weapon.mainhand crossbow[custom_data~{orbital_mortar_bow:1}] run tag @s add holding_orb_mortar
 execute as @a if items entity @s weapon.mainhand crossbow[custom_data~{orbital_mortar_bow:1}] run tag @s add holding_orb_mortar
 execute as @a[tag=holding_orb_mortar] at @s run tag @e[type=firework_rocket,distance=..8,tag=!orbital_main,tag=!orbital_child,tag=!orbital_child_pro,tag=!orbital_child_vert] add orbital_main
 
@@ -50,19 +49,16 @@ execute as @e[type=firework_rocket,tag=orbital_main] at @s run function nuke:orb
 scoreboard players add @e[type=firework_rocket,tag=orbital_child] orb_lifetime 1
 execute as @e[type=firework_rocket,tag=orbital_child,scores={orb_lifetime=2..}] at @s run function nuke:orbital_strike_cannon/fire_shot/child_damage
 
-# ═══════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════
 # ARCHI-SHIELD (Архи-Щит) — mechanics & detection (1.21.11)
-# ═══════════════════════════════════════════════════════════
-execute as @a if items entity @s weapon.mainhand shield[custom_data~{archi_shield:1}] at @s run function nuke:archi_shield/main
+# Было 4 строки (по 2 дубля на каждую руку) — щит обрабатывался дважды за тик.
+# ════════════════════════════════════════════════════════════
 execute as @a if items entity @s weapon.mainhand shield[custom_data~{archi_shield:1}] at @s run function nuke:archi_shield/main
 execute as @a if items entity @s weapon.offhand shield[custom_data~{archi_shield:1}] at @s run function nuke:archi_shield/main
-execute as @a if items entity @s weapon.offhand shield[custom_data~{archi_shield:1}] at @s run function nuke:archi_shield/main
 
-
-
-# ═══════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════
 # CHAOS UPDATE v8.0 TICKS
-# ═══════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════
 # 1) Подрывной Жилет
 execute as @a if items entity @s armor.chest chainmail_chestplate[custom_data~{blast_vest:1}] at @s run function nuke:blast_vest/main
 
@@ -76,7 +72,8 @@ function nuke:light_tnt/tick
 function nuke:happy_ghast/tick
 
 # 4) Зачарование Пробивной 1 на Элитрах
-execute as @a[nbt={FallFlying:true}] if items entity @s armor.chest elytra[enchantments~[{enchantments:"breaching_enchantment:breaching"}]] at @s run function breaching_enchantment:flight_check
+# FallFlying — байтовое поле, корректный литерал — 1b.
+execute as @a[nbt={FallFlying:1b}] if items entity @s armor.chest elytra[enchantments~[{enchantments:"breaching_enchantment:breaching"}]] at @s run function breaching_enchantment:flight_check
 
 # 5) Таймер-ТНТ (item)
 execute as @e[type=item,tag=!tt_init,nbt={OnGround:1b,Item:{components:{"minecraft:custom_data":{timer_tnt:1}}}}] at @s run function nuke:timer_tnt/init
@@ -86,8 +83,9 @@ execute as @e[type=item,tag=!tt_init,nbt={OnGround:1b,Item:{components:{"minecra
 function nuke:timer_tnt/tick
 
 # 6) Защищённые Сундуки (Safe)
+# Замком теперь управляет ванильный компонент minecraft:lock,
+# поэтому ежетиковый макро-вызов на каждый сейф удалён (была главная утечка TPS).
 function nuke:safe/process_setup
-execute as @e[type=interaction,tag=safe_locked] at @s run function nuke:safe/tick
 execute as @e[type=interaction,tag=safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
 function nuke:settings/process_triggers
 execute as @a run function nuke:settings/enable_triggers
