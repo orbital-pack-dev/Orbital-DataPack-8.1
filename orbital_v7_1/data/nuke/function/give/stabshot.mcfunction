@@ -1,1 +1,1 @@
-give @s minecraft:fishing_rod[custom_data={stabshot:1b},item_name='{"text":"Stab-Shot","color":"aqua","italic":false}',lore=['{"text":"ПКМ — орбитальный STAB-удар","color":"gray","italic":false}'],rarity="rare",damage=63] 1
+give @s minecraft:fishing_rod[minecraft:custom_data={stabshot:1b},minecraft:item_name={"text":"Stab-Shot","color":"aqua","bold":true,"italic":false},minecraft:lore=[{"text":"ПКМ — орбитальный STAB-удар","color":"gray","italic":false}],minecraft:rarity="rare",minecraft:damage=63] 1

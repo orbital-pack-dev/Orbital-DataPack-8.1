@@ -1,1 +1,1 @@
-give @s minecraft:fishing_rod[custom_data={withershot:1b},item_name='{"text":"Wither-Shot","color":"dark_purple","italic":false}',lore=['{"text":"ПКМ — залп визера","color":"gray","italic":false}'],rarity="epic",damage=63] 1
+give @s minecraft:fishing_rod[minecraft:custom_data={withershot:1b},minecraft:item_name={"text":"Wither-Shot","color":"dark_purple","bold":true,"italic":false},minecraft:lore=[{"text":"ПКМ — залп визера","color":"gray","italic":false}],minecraft:rarity="epic",minecraft:damage=63] 1
