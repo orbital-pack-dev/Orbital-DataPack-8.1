@@ -2,11 +2,15 @@
 execute unless score #tt_scale nuke.settings matches 1.. run scoreboard players set #tt_scale nuke.settings 1200
 execute unless score #20 nuke.settings matches 20 run scoreboard players set #20 nuke.settings 20
 summon minecraft:block_display ~-0.5 ~-0.5 ~-0.5 {Tags:["tt_display","tt_init","tt_new"],block_state:{Name:"minecraft:tnt"},teleport_duration:0}
-# ЗАДАЧА 2.1: слайм-коллизия, чтобы игрок не проходил сквозь модель block_display.
-# Size:1 — габарит ~1.02 блока (Size:0 был бы 0.51 и болтался внутри модели,
-# Size:2 уже вылез бы за куб). Спавн в низ блока (~-0.5), чтобы совпасть с кубом.
-# Формат эффектов в 1.21.11 — active_effects (не ActiveEffects), duration:-1 = бесконечно.
-summon minecraft:slime ~ ~-0.5 ~ {Size:1,NoAI:1b,Silent:1b,Invulnerable:1b,NoGravity:1b,PersistenceRequired:1b,DeathLootTable:"minecraft:empty",active_effects:[{id:"minecraft:invisibility",duration:-1,amplifier:0b,show_particles:0b,show_icon:0b,ambient:0b}],Tags:["timer_tnt_slime","tt_init","tt_new"]}
+# СЛАЙМ-КОЛЛИЗИЯ. В 1.21.11 поля сущностей — snake_case (как fuse/block_state выше),
+# поэтому Size/NoAI/Invulnerable/DeathLootTable НЕ применялись вовсе — именно поэтому
+# слайм убивался с трёх ударов и ронял лут. Теперь всё в корректном формате:
+#   size:1              — габарит ~1.02 блока (ровно под модель block_display);
+#   health / max_health — явный огромный запас ХП (рукой не забить);
+#   invulnerable:1b     — неуязвимость;
+#   death_loot_table    — пустая таблица лута (никаких шариков слизи при kill);
+#   без xp и без размножения на мелких слаймов (size:1 делится, но kill без урона не делит).
+summon minecraft:slime ~ ~-0.5 ~ {size:1,no_ai:1b,silent:1b,invulnerable:1b,no_gravity:1b,persistence_required:1b,death_loot_table:"minecraft:empty",health:1024.0f,attributes:[{id:"minecraft:max_health",base:1024.0},{id:"minecraft:knockback_resistance",base:1.0},{id:"minecraft:movement_speed",base:0.0},{id:"minecraft:attack_damage",base:0.0}],active_effects:[{id:"minecraft:invisibility",duration:-1,amplifier:0b,show_particles:0b,show_icon:0b,ambient:0b}],Tags:["timer_tnt_slime","tt_init","tt_new"]}
 summon minecraft:interaction ~ ~-0.5 ~ {Tags:["tt_hitbox","tt_init","tt_new"],width:1.0f,height:1.0f,response:1b}
 summon minecraft:marker ~ ~ ~ {Tags:["tt_marker","tt_init","tt_new"]}
 # Marker is at block centre (Y+0.5), so +0.7 produces block Y+1.2.
