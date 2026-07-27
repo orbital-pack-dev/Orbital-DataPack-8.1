@@ -10,6 +10,7 @@ execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~-0.
 execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~-0.1 ~-0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
 execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~-0.1 ~0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
 
-execute if block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:1.0f,height:1.2f}
-execute unless block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:2.0f,height:1.2f}
+# Габариты: одиночный сундук 1.2×1.2, большой сундук 2.2×2.2 — низ блока перекрыт полностью.
+execute if block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:1.2f,height:1.2f}
+execute unless block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:2.2f,height:2.2f}
 execute unless entity @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1] run function nuke:safe/spawn_guard
