@@ -24,6 +24,10 @@ scoreboard objectives add nuke.bd_count dummy
 scoreboard objectives add nuke.xp_cost dummy
 scoreboard objectives add nuke.pid dummy
 
+# ЗАДАЧА 1: глобальные флаги конфига живут в отдельном объективе nuke.config.
+# Меню (nuke.settings) — источник истины, nuke.config — то, что читает логика.
+scoreboard objectives add nuke.config dummy
+
 scoreboard objectives add t_stab_cd trigger
 scoreboard objectives add t_nuke_cd trigger
 scoreboard objectives add t_wither_cd trigger
@@ -45,9 +49,14 @@ scoreboard objectives add t_safe_key trigger
 scoreboard objectives add t_safe_cancel trigger
 scoreboard objectives add t_bv_time trigger
 scoreboard objectives add t_tt_scale trigger
+# ЗАДАЧА 1: триггер тумблера Орбитального комплекса (1 = ВКЛ, 2 = ВЫКЛ).
+scoreboard objectives add t_orbital_enabled trigger
 
 execute unless score nuke.cfg_ready nuke.settings matches 1 run function nuke:settings/reset
 scoreboard players set nuke.cfg_ready nuke.settings 1
+
+# Тумблер Орбитального комплекса: по умолчанию ВКЛ, значение переживает /reload.
+execute unless score #orbital_enabled nuke.config matches 0.. run scoreboard players set #orbital_enabled nuke.config 1
 
 scoreboard objectives add orb_ticks dummy
 scoreboard objectives add orb_lifetime dummy
@@ -65,3 +74,6 @@ scoreboard objectives add tt_hours dummy
 scoreboard objectives add tt_seconds dummy
 scoreboard objectives add tt_mod dummy
 execute unless score #pid_seq nuke.settings matches 0.. run scoreboard players set #pid_seq nuke.settings 0
+
+# ЗАДАЧА 1: сразу привязываем настройки меню к глобальным флагам.
+function nuke:settings/sync_config

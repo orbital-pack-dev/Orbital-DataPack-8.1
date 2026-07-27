@@ -18,7 +18,13 @@ scoreboard players set global orbital_nerf 0
 scoreboard players set global block_protection 1
 scoreboard players set global personal_cd 1
 
+# ЗАДАЧА 1: Орбитальный комплекс по умолчанию включён.
+scoreboard players set #orbital_enabled nuke.config 1
+
 
 # Таймер Жилета: 32 секунды (640 тиков), синхронизировано с лором предмета.
 scoreboard players set nuke.cfg.bv_time nuke.settings 640
 scoreboard players set nuke.cfg.tt_scale nuke.settings 1200
+
+# Применяем дефолты к глобальным флагам сразу.
+function nuke:settings/sync_config

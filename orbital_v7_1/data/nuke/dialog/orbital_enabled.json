@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "🛰️ Орбитальный комплекс",
+    "color": "#ff5555",
+    "bold": true
+  },
+  "body": {
+    "type": "minecraft:plain_message",
+    "contents": {
+      "text": "ВЫКЛ: выстрелы Nuke / Stab / Wither / Fire-Shot не работают, рецепты орбиталок снимаются, а пушка в руках игрока в выживании ломается. В креативе пушка продолжает работать.",
+      "color": "gray"
+    }
+  },
+  "columns": 2,
+  "can_close_with_escape": true,
+  "actions": [
+    {
+      "label": {
+        "text": "🟢 ВКЛ",
+        "color": "#55ff55"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_orbital_enabled set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "🔴 ВЫКЛ",
+        "color": "#ff5555"
+      },
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_orbital_enabled set 2"
+      }
+    },
+    {
+      "label": {
+        "text": "📊 Показать все значения",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger t_info set 1"
+      }
+    },
+    {
+      "label": {
+        "text": "⬅️ Назад в Главное Меню",
+        "color": "#ffff55"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:main"
+      }
+    }
+  ]
+}
