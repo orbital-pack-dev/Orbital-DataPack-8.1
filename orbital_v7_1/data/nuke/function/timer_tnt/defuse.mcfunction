@@ -1,4 +1,4 @@
-# Смыв водой / снятие блока: выпадает заряд ТОГО ЖЕ уровня.
+# Обезвреживание (вода или снятие блока). Дроп ТОГО ЖЕ уровня.
 # Контекст: as <marker tt_marker>, at @s.
 setblock ~ ~ ~ air replace
 execute if score @s tt_hours matches 1 run summon minecraft:item ~ ~ ~ {Item:{id:"minecraft:tnt",count:1,components:{"minecraft:custom_data":{timer_tnt:1},"minecraft:item_name":'{"text":"Таймер-ТНТ (1 час)","color":"gold","italic":false}'}}}
