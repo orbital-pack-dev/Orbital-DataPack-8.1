@@ -4,4 +4,8 @@ execute at @e[type=minecraft:happy_ghast,distance=..6,limit=1,sort=nearest] run 
 ride @e[type=minecraft:block_display,tag=ghast_tnt_new,distance=..8,limit=1,sort=nearest] mount @e[type=minecraft:happy_ghast,distance=..6,limit=1,sort=nearest]
 tag @e[type=minecraft:block_display,tag=ghast_tnt_new,distance=..8,limit=1,sort=nearest] remove ghast_tnt_new
 playsound minecraft:entity.tnt.primed master @a[distance=..24] ~ ~ ~ 1 1.2
-kill @s
+
+# Consume exactly one TNT, never the whole stack.
+execute store result score #ghast_stack nuke.settings run data get entity @s Item.count
+execute if score #ghast_stack nuke.settings matches 2.. run function nuke:happy_ghast/shrink_stack
+execute if score #ghast_stack nuke.settings matches 1 run kill @s

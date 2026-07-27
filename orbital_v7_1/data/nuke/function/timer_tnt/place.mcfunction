@@ -10,6 +10,8 @@ summon minecraft:text_display ~ ~0.9 ~ {Tags:["tt_text","tt_init","tt_new"],bill
 scoreboard players operation @e[tag=tt_new,distance=..2] tt_hours = #tt_hours nuke.settings
 scoreboard players operation @e[tag=tt_new,distance=..2] tt_timer = #tt_hours nuke.settings
 scoreboard players operation @e[tag=tt_new,distance=..2] tt_timer *= #tt_scale nuke.settings
+
+# Initial text update must run AS the marker, not as the consumed item.
+execute as @e[type=minecraft:marker,tag=tt_marker,tag=tt_new,distance=..2,limit=1,sort=nearest] at @s run function nuke:timer_tnt/second
 tag @e[tag=tt_new,distance=..2] remove tt_new
-function nuke:timer_tnt/second
 playsound minecraft:block.note_block.bell block @a[distance=..24] ~ ~ ~ 1 0.8
