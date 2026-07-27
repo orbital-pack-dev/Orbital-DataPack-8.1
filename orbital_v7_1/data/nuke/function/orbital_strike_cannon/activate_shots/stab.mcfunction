@@ -1,4 +1,10 @@
 # activate_shots/stab — колонна ТНТ разбита на 15 тиков
+
+# ЗАДАЧА 1.3: тумблер Орбитального комплекса.
+# Если #orbital_enabled nuke.config = 0 — функция делает return 0
+# и сбрасывает попытку выстрела. Исключение — выстрел из креатива.
+execute if score #orbital_enabled nuke.config matches 0 unless entity @a[gamemode=creative,distance=..64] run return run function nuke:orbital_strike_cannon/abort_shot
+
 scoreboard players add @s stabshot_timer 1
 
 # Blast (урон по игрокам) — один раз на тике 20
