@@ -1,9 +1,7 @@
-# Подрыв жилета. Контекст: as <игрок в жилете>, at @s.
-scoreboard players set @s bv_active 0
-scoreboard players set @s bv_timer 0
-tag @s remove bv_owner
+# Подрыв жилета. Контекст: as <игрок>, at @s.
+# Все частицы/звуки/взрыв — строго в координатах владельца жилета.
 
-# Автор взрыва — сам владелец жилета.
+# Автор взрыва — сам владелец (для зачёта убийств и лута).
 tag @s add nuke_attacker
 
 particle minecraft:explosion_emitter ~ ~1 ~ 0 0 0 1 1 force
@@ -13,6 +11,7 @@ execute as @e[distance=..6,type=!minecraft:item,type=!minecraft:marker,type=!min
 
 execute if score block_protection nuke.settings matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:1s,Tags:["nuke_boom"]}
 
-# Снимаем жилет командой (проклятие мешает только игроку, не команде).
+# Удаляем предмет (проклятие мешает только игроку, не команде) и подчищаем все временные метки.
 item replace entity @s armor.chest with minecraft:air
 tag @a remove nuke_attacker
+function nuke:blast_vest/reset
