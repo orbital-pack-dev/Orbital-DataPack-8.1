@@ -1,4 +1,5 @@
-# Базовый Nuke-Shot = уровень мощности 1.
-# Делегируем в nukeshot_p1, чтобы компоненты гарантированно совпадали
-# с предметом, который ожидает orbital_strike_cannon/upgrade_nukeshot/**.
+# ВЫДАЁМ ВСЕ ЧЕТЫРЕ УРОВНЯ NUKESHOT сразу (раньше был только p1).
 function nuke:give/nukeshot_p1
+function nuke:give/nukeshot_p2
+function nuke:give/nukeshot_p3
+function nuke:give/nukeshot_p4

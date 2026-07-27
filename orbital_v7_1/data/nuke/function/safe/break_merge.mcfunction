@@ -1,17 +1,10 @@
-# ЖЁСТКАЯ АВТОПОЛОМКА склеенного сундука.
+# ЖЁСТКАЯ АВТОПОЛОМКА присоединённого сундука.
 # Контекст: at <блок сейфа>, который СЕЙЧАС не single.
-# Склеиться можно только с соседом, смотрящим В ТУ ЖЕ СТОРОНУ,
-# и только по оси, перпендикулярной взгляду — поэтому чужие сундуки рядом в безопасности.
-# Сосед ломается с выпадением предмета (destroy) — содержимое тоже выпадает.
-
-execute if block ~ ~ ~ minecraft:chest[facing=north] if block ~1 ~ ~ minecraft:chest[facing=north] unless block ~1 ~ ~ minecraft:chest[facing=north,type=single] run setblock ~1 ~ ~ air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=north] if block ~-1 ~ ~ minecraft:chest[facing=north] unless block ~-1 ~ ~ minecraft:chest[facing=north,type=single] run setblock ~-1 ~ ~ air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=south] if block ~1 ~ ~ minecraft:chest[facing=south] unless block ~1 ~ ~ minecraft:chest[facing=south,type=single] run setblock ~1 ~ ~ air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=south] if block ~-1 ~ ~ minecraft:chest[facing=south] unless block ~-1 ~ ~ minecraft:chest[facing=south,type=single] run setblock ~-1 ~ ~ air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=east] if block ~ ~ ~1 minecraft:chest[facing=east] unless block ~ ~ ~1 minecraft:chest[facing=east,type=single] run setblock ~ ~ ~1 air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=east] if block ~ ~ ~-1 minecraft:chest[facing=east] unless block ~ ~ ~-1 minecraft:chest[facing=east,type=single] run setblock ~ ~ ~-1 air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=west] if block ~ ~ ~1 minecraft:chest[facing=west] unless block ~ ~ ~1 minecraft:chest[facing=west,type=single] run setblock ~ ~ ~1 air destroy
-execute if block ~ ~ ~ minecraft:chest[facing=west] if block ~ ~ ~-1 minecraft:chest[facing=west] unless block ~ ~ ~-1 minecraft:chest[facing=west,type=single] run setblock ~ ~ ~-1 air destroy
+# Прямое уничтожение: setblock ... air destroy (сундук выпадает предметом).
+execute positioned ~1 ~ ~ if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run setblock ~ ~ ~ air destroy
+execute positioned ~-1 ~ ~ if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run setblock ~ ~ ~ air destroy
+execute positioned ~ ~ ~1 if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run setblock ~ ~ ~ air destroy
+execute positioned ~ ~ ~-1 if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run setblock ~ ~ ~ air destroy
 
 # Сейф обязан остаться одиночным и запертым.
 function nuke:safe/normalize_single

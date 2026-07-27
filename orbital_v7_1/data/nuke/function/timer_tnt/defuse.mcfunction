@@ -7,7 +7,8 @@ execute if score @s tt_hours matches 4 run summon minecraft:item ~0.5 ~0.5 ~0.5 
 
 playsound minecraft:block.fire.extinguish block @a[distance=..16] ~ ~ ~ 1 1
 particle minecraft:cloud ~0.5 ~1 ~0.5 0.3 0.3 0.3 15 0.02
-title @a[distance=..8] actionbar {"text":"Таймер-ТНТ смыт водой.","color":"aqua"}
 
-kill @e[type=minecraft:armor_stand,tag=tt_hitbox,distance=..2]
+kill @e[type=minecraft:text_display,tag=tt_text,distance=..3]
+kill @e[type=minecraft:marker,tag=tt_marker,distance=..3]
+kill @e[type=minecraft:interaction,tag=tt_hitbox,distance=..3]
 kill @s

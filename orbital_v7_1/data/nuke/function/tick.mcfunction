@@ -11,8 +11,7 @@ execute as @a[tag=!joined_player] run function nuke:setup_player
 execute as @a[tag=!nuke_recipes] run function nuke:give_recipes
 execute as @a[scores={use_rod=1..}] at @s run function nuke:orbital_strike_cannon/rod/handle_use_rod
 
-# АПГРЕЙДЫ: удочка работает В ОБЕИХ РУКАХ (раньше — только offhand,
-# из-за этого Power-2..4 не выдавались вообще).
+# АПГРЕЙДЫ: удочка работает В ОБЕИХ РУКАХ.
 execute as @a if items entity @s weapon.mainhand minecraft:fishing_rod[minecraft:custom_data~{stabshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade/trigger
 execute as @a if items entity @s weapon.offhand minecraft:fishing_rod[minecraft:custom_data~{stabshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade/trigger
 execute as @a if items entity @s weapon.mainhand minecraft:fishing_rod[minecraft:custom_data~{nukeshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade_nukeshot/trigger
@@ -43,7 +42,7 @@ execute as @e[type=firework_rocket,tag=orbital_main] at @s run function nuke:orb
 scoreboard players add @e[type=firework_rocket,tag=orbital_child] orb_lifetime 1
 execute as @e[type=firework_rocket,tag=orbital_child,scores={orb_lifetime=2..}] at @s run function nuke:orbital_strike_cannon/fire_shot/child_damage
 
-# ARCHI-SHIELD — ровно один раз за тик
+# ARCHI-SHIELD — ровно один раз за тик. Флаг СТРОГО {archi_shield:1b}.
 execute as @a if items entity @s weapon.mainhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] at @s run function nuke:archi_shield/main
 execute as @a unless items entity @s weapon.mainhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] if items entity @s weapon.offhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] at @s run function nuke:archi_shield/main
 execute as @a[scores={archi_delay=1..}] unless items entity @s weapon.mainhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] unless items entity @s weapon.offhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] run scoreboard players remove @s archi_delay 1
@@ -51,7 +50,8 @@ execute as @a[scores={archi_delay=1..}] unless items entity @s weapon.mainhand m
 # 1) Подрывной Жилет
 execute as @a if items entity @s armor.chest minecraft:chainmail_chestplate[minecraft:custom_data~{blast_vest:1b}] at @s run function nuke:blast_vest/main
 
-# 2) Лёгкий ТНТ (wind_charge)
+# 2) Лёгкий ТНТ (wind_charge). Метка снаряда — единственное место,
+# где вообще упоминается игрок. Дальше всё идёт ОТ СНАРЯДА.
 execute as @a at @s if items entity @s weapon.mainhand minecraft:wind_charge[minecraft:custom_data~{light_tnt:1b}] run tag @e[type=wind_charge,distance=..8,tag=!lt_processed] add light_tnt
 execute as @a at @s if items entity @s weapon.offhand minecraft:wind_charge[minecraft:custom_data~{light_tnt:1b}] run tag @e[type=wind_charge,distance=..8,tag=!lt_processed] add light_tnt
 execute as @e[type=wind_charge,tag=light_tnt,tag=!lt_processed] at @s run function nuke:light_tnt/init
@@ -69,7 +69,7 @@ function nuke:timer_tnt/tick
 
 # 6) Защищённые Сундуки (Safe)
 function nuke:safe/process_setup
-function nuke:safe/tick_guard
+function nuke:safe/tick
 execute as @e[type=interaction,tag=safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
 function nuke:settings/process_triggers
 execute as @a run function nuke:settings/enable_triggers
