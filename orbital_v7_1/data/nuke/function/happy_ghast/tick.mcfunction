@@ -7,3 +7,6 @@ execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:tnt"}}] at @s unless 
 
 execute as @e[type=minecraft:happy_ghast,scores={ghast_tnt=1..14}] at @s run function nuke:happy_ghast/tick_one
 execute as @e[type=minecraft:ghast,scores={ghast_tnt=1..14}] at @s run function nuke:happy_ghast/tick_one
+
+# Страховка от «призрачных» блоков: дисплей без живого Гаста-носителя рядом удаляется мгновенно.
+execute as @e[type=minecraft:block_display,tag=ghast_tnt_display] at @s unless entity @e[type=minecraft:happy_ghast,distance=..4,limit=1] unless entity @e[type=minecraft:ghast,distance=..4,limit=1] run kill @s
