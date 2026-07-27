@@ -1,1 +1,1 @@
-give @s minecraft:shield[custom_data={archi_shield:1b},item_name='{"text":"Архи-Щит","color":"aqua","italic":false}'] 1
+give @s minecraft:shield[minecraft:custom_data={archi_shield:1b},minecraft:item_name={"text":"✦ Архи-Щит ✦","color":"gold","bold":true,"italic":false},minecraft:lore=[{"text":"Shift — энергетический барьер","color":"aqua","italic":false},{"text":"Отражает снаряды и карает атакующих","color":"gray","italic":false}],minecraft:rarity="epic",minecraft:max_damage=1680,minecraft:damage=0] 1
