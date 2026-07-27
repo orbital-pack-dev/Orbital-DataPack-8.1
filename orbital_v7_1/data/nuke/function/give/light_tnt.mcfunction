@@ -1,1 +1,1 @@
-give @s minecraft:wind_charge[custom_data={light_tnt:1b},item_name='{"text":"Лёгкий ТНТ","color":"yellow","italic":false}'] 16
+give @s minecraft:wind_charge[minecraft:custom_data={light_tnt:1b},minecraft:item_name={"text":"✦ Лёгкий ТНТ ✦","color":"yellow","bold":true,"italic":false},minecraft:lore=[{"text":"Метательный мини-заряд","color":"gold","italic":false},{"text":"Взрывается при столкновении","color":"gray","italic":false}],minecraft:rarity="rare"] 8

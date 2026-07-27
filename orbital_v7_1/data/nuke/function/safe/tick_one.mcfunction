@@ -1,9 +1,10 @@
 # Context: Safe marker at its chest.
-# Missing block means break/explosion: replace vanilla chest drop with custom Safe.
 execute unless block ~ ~ ~ minecraft:chest run return run function nuke:safe/drop
-
-# Prevent either placement order from producing a double chest.
 function nuke:safe/break_neighbors
 
-# No player within six blocks: restore lock and clear temporary access.
+# Near players: hide only the runtime guard so the chest UI is clickable.
+execute if entity @a[distance=..6] run kill @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3]
+
+# No nearby player: seal and recreate the interaction guard.
 execute unless entity @a[distance=..6] run function nuke:safe/seal
+execute unless entity @a[distance=..6] run function nuke:safe/ensure_interaction
