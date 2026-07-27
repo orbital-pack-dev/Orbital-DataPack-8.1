@@ -19,6 +19,6 @@ scoreboard players set global block_protection 1
 scoreboard players set global personal_cd 1
 
 
-# Таймер Жилета: 10 секунд (200 тиков) по новой спецификации.
-scoreboard players set nuke.cfg.bv_time nuke.settings 200
+# Таймер Жилета: 32 секунды (640 тиков), синхронизировано с лором предмета.
+scoreboard players set nuke.cfg.bv_time nuke.settings 640
 scoreboard players set nuke.cfg.tt_scale nuke.settings 1200
