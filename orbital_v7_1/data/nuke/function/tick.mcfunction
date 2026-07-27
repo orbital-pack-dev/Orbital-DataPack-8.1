@@ -16,12 +16,13 @@ execute as @a if items entity @s weapon.offhand minecraft:fishing_rod[custom_dat
 execute as @e[type=minecraft:block_display,tag=stabshot] at @s run function nuke:orbital_strike_cannon/activate_shots/stab
 execute as @e[type=minecraft:block_display,tag=nukeshot] at @s run function nuke:orbital_strike_cannon/activate_shots/nuke
 execute as @e[type=minecraft:block_display,tag=withershot] at @s run function nuke:orbital_strike_cannon/activate_shots/wither
-execute as @e[type=minecraft:interaction,tag=orbital_strike_cannon] at @s run function nuke:orbital_strike_cannon/tick
+# ФИКС (аудит): удалены мёртвые строки, падавшие каждый тик:
+#  - вызов nuke:orbital_strike_cannon/tick — такой функции нет в датапаке;
+#  - вызов nuke:orbital_strike_cannon/fire_shot/init_shots/wither — функции нет;
+#  - селекторы по объективам orb_strike/stab_strike/wither_strike/mortar_fire,
+#    которые нигде не создаются (load.mcfunction) и нигде не сбрасываются.
+# Активация выстрелов полностью покрыта строками с block_display выше.
 function nuke:orbital_strike_cannon/tick_protection
-execute as @a[scores={orb_strike=1..}] at @s run function nuke:orbital_strike_cannon/activate_shots/nuke
-execute as @a[scores={stab_strike=1..}] at @s run function nuke:orbital_strike_cannon/activate_shots/stab
-execute as @a[scores={wither_strike=1..}] at @s run function nuke:orbital_strike_cannon/activate_shots/wither
-execute as @a[scores={mortar_fire=1..}] at @s run function nuke:orbital_strike_cannon/fire_shot/init_shots/wither
 
 execute as @e[type=minecraft:firework_rocket,tag=!orbital_main,tag=!orbital_child,tag=!orbital_child_pro,tag=!orbital_child_vert,nbt={FireworksItem:{components:{"minecraft:custom_data":{orbital_rocket:1b}}}}] run tag @s add orbital_main
 tag @a remove holding_orb_mortar
