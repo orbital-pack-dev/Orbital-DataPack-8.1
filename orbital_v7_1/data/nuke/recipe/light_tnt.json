@@ -17,24 +17,11 @@
       "minecraft:custom_data": {
         "light_tnt": true
       },
-      "minecraft:custom_name": {
+      "minecraft:item_name": {
+        "text": "Лёгкий ТНТ",
         "color": "yellow",
-        "bold": true,
-        "italic": false,
-        "text": "Лёгкий ТНТ"
-      },
-      "minecraft:lore": [
-        {
-          "text": "Метательный мини-заряд ТНТ с вращением",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Взрывается при столкновении",
-          "color": "dark_gray",
-          "italic": false
-        }
-      ]
+        "italic": false
+      }
     }
   }
 }

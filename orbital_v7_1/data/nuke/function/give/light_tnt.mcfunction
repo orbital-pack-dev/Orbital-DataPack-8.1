@@ -1,1 +1,2 @@
-give @s minecraft:wind_charge[minecraft:custom_data={light_tnt:1b},minecraft:custom_name={"text":"Лёгкий ТНТ","color":"yellow","bold":true,"italic":false},minecraft:lore=[{"text":"Брось — взорвётся при столкновении","color":"gray","italic":false}],minecraft:rarity="rare"] 8
+# ЛЁГКИЙ ТНТ — метательный заряд.
+give @s minecraft:wind_charge[custom_data={light_tnt:1b},item_name='{"text":"Лёгкий ТНТ","color":"yellow","italic":false}'] 16
