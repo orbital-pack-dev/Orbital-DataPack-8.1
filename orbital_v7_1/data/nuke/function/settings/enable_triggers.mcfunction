@@ -20,3 +20,6 @@ scoreboard players enable @s t_safe_cancel
 
 scoreboard players enable @s t_bv_time
 scoreboard players enable @s t_tt_scale
+
+# ЗАДАЧА 1: тумблер Орбитального комплекса.
+scoreboard players enable @s t_orbital_enabled

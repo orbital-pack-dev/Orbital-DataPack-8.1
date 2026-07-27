@@ -4,17 +4,21 @@ scoreboard players add @s orb_ticks 1
 # Keep rocket alive while flying — reset Life counter every tick
 data modify entity @s Life set value 0
 
-# HOMING — smooth turning curve towards nearest valid target
-execute at @s rotated as @s run summon marker ~ ~ ~ {Tags:["orb_tracker"]}
-execute as @e[type=marker,tag=orb_tracker,limit=1] at @s run tp @s ^ ^ ^2.5
-execute as @e[type=marker,tag=orb_tracker,limit=1] at @s facing entity @e[distance=0.1..150,type=#nuke:valid_targets,tag=!orb_owner,tag=!orb_link,tag=!orb_technical,tag=!orb_spinner,tag=!orb_spinner_vert,tag=!orbital_child,tag=!orbital_child_pro,tag=!orbital_child_vert,tag=!orbital_main,limit=1,sort=nearest] eyes run tp @s ^ ^ ^0.4
-tp @s ~ ~ ~ facing entity @e[type=marker,tag=orb_tracker,limit=1]
-kill @e[type=marker,tag=orb_tracker]
+# ЗАДАЧА 3.1 — ТРАЕКТОРИЯ.
+# Убран блок хоуминга (marker orb_tracker + tp @s facing entity), который каждый тик
+# разворачивал ракету на ближайшую цель и сбивал прицел игрока.
+# Направление зафиксировано в init_rocket (Rotation стрелка) и больше не меняется:
+# здесь по этому вектору просто пересчитывается Motion (0.35 блока/тик = 7 m/s).
+execute at @s positioned 0.0 0.0 0.0 rotated as @s run summon minecraft:marker ^ ^ ^0.35 {Tags:["orb_vector"]}
+data modify entity @s Motion set from entity @e[type=minecraft:marker,tag=orb_vector,limit=1] Pos
+kill @e[type=minecraft:marker,tag=orb_vector]
 
-# FORWARD MOVEMENT — convert facing direction to Motion vector (0.35 blocks/tick = 7 m/s)
-execute at @s positioned 0.0 0.0 0.0 rotated as @s run summon marker ^ ^ ^0.35 {Tags:["orb_vector"]}
-data modify entity @s Motion set from entity @e[type=marker,tag=orb_vector,limit=1] Pos
-kill @e[type=marker,tag=orb_vector]
+# ЗАДАЧА 3.2 — ЗВУК ПОЛЁТА БЕЗ СПАМА.
+# playsound не каждый тик, а раз в 20 тиков (modulo от orb_ticks по константе #20).
+scoreboard players operation @s nuke.temp = @s orb_ticks
+scoreboard players operation @s nuke.temp %= #20 nuke.settings
+execute if score @s nuke.temp matches 0 at @s run playsound minecraft:entity.firework_rocket.launch ambient @a[distance=..48] ~ ~ ~ 1.2 0.7
+execute if score @s nuke.temp matches 0 at @s run particle minecraft:large_smoke ~ ~ ~ 0.1 0.1 0.1 0.01 3 force
 
 # TIMELINE PHASES
 execute if score @s orb_ticks matches 40 run function nuke:orbital_strike_cannon/fire_shot/spawn_child

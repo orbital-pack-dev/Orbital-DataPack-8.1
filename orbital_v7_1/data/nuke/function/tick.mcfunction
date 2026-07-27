@@ -8,13 +8,23 @@ scoreboard players remove @a[scores={up_msg=1..}] up_msg 1
 
 execute as @a[tag=!joined_player] run function nuke:setup_player
 execute as @a[tag=!nuke_recipes] run function nuke:give_recipes
+
+# ЗАДАЧА 1: тумблер Орбитального комплекса (#orbital_enabled nuke.config).
+# Выключено — снимаем рецепты и ломаем пушки в руках вне креатива.
+execute if score #orbital_enabled nuke.config matches 0 run function nuke:orbital_strike_cannon/disabled_tick
+
 execute as @a[scores={use_rod=1..}] if items entity @s weapon.offhand minecraft:fishing_rod[custom_data~{nukeshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade_nukeshot/trigger
 execute as @a[scores={use_rod=1..}] at @s run function nuke:orbital_strike_cannon/rod/handle_use_rod
 execute as @a if items entity @s weapon.mainhand minecraft:fishing_rod[custom_data~{stabshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade/trigger
 execute as @a if items entity @s weapon.offhand minecraft:fishing_rod[custom_data~{stabshot:1b}] at @s run function nuke:orbital_strike_cannon/upgrade/trigger
 
+# ЗАДАЧА 1.3: перед тиком каждого выстрела — проверка тумблера.
+# Если комплекс выключен и рядом нет игрока в креативе — попытка выстрела
+# сбрасывается (abort_shot), и тиковая функция выстрела уже не вызывается.
 execute as @e[type=minecraft:block_display,tag=stabshot] at @s run function nuke:orbital_strike_cannon/activate_shots/stab
+execute as @e[type=minecraft:block_display,tag=nukeshot] at @s if score #orbital_enabled nuke.config matches 0 unless entity @a[gamemode=creative,distance=..64] run function nuke:orbital_strike_cannon/abort_shot
 execute as @e[type=minecraft:block_display,tag=nukeshot] at @s run function nuke:orbital_strike_cannon/activate_shots/nuke
+execute as @e[type=minecraft:block_display,tag=withershot] at @s if score #orbital_enabled nuke.config matches 0 unless entity @a[gamemode=creative,distance=..64] run function nuke:orbital_strike_cannon/abort_shot
 execute as @e[type=minecraft:block_display,tag=withershot] at @s run function nuke:orbital_strike_cannon/activate_shots/wither
 # ФИКС (аудит): удалены мёртвые строки, падавшие каждый тик:
 #  - вызов nuke:orbital_strike_cannon/tick — такой функции нет в датапаке;
@@ -55,6 +65,8 @@ function nuke:safe/process_setup
 function nuke:safe/tick
 execute as @e[type=minecraft:interaction,tag=safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
 function nuke:settings/process_triggers
+# ЗАДАЧА 1: обработка тумблера + синхронизация настроек с nuke.config.
+function nuke:settings/process_orbital_toggle
 execute as @a run function nuke:settings/enable_triggers
 scoreboard players reset @a damage_taken
 scoreboard players reset @a damage_blocked_by_shield

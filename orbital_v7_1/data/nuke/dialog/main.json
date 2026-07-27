@@ -17,6 +17,17 @@
   "actions": [
     {
       "label": {
+        "text": "🛰️ Орбитальный комплекс (ВКЛ/ВЫКЛ)",
+        "color": "#ff5555"
+      },
+      "width": 302,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "nuke:orbital_enabled"
+      }
+    },
+    {
+      "label": {
         "text": "⏱️ КД Stab-Shot",
         "color": "#55ffff"
       },
