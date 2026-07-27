@@ -1,5 +1,15 @@
-# Keep one runtime interaction for a single or double Safe.
+# Context: Safe marker at block centre.
+# Keep an existing guard exactly at the single-block centre or double-chest midpoint.
+execute if block ~ ~ ~ minecraft:chest[type=single] align xyz positioned ~0.5 ~ ~0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~ ~ as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-0.5 ~ ~ as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-0.5 ~ ~ as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~0.5 ~ ~ as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~ ~0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~ ~-0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~ ~-0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~ ~0.5 as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run tp @s ~ ~ ~
+
 execute if block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:1.0f,height:1.0f}
 execute unless block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1,sort=nearest] run data merge entity @s {width:2.0f,height:1.0f}
-execute unless entity @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1] if block ~ ~ ~ minecraft:chest[type=single] run summon minecraft:interaction ~ ~ ~ {Tags:["safe_shield","safe_guard"],width:1.0f,height:1.0f,response:1b}
-execute unless entity @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1] unless block ~ ~ ~ minecraft:chest[type=single] run summon minecraft:interaction ~ ~ ~ {Tags:["safe_shield","safe_guard"],width:2.0f,height:1.0f,response:1b}
+execute unless entity @e[type=minecraft:interaction,tag=safe_guard,distance=..1.3,limit=1] run function nuke:safe/spawn_guard

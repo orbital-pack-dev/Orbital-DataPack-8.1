@@ -1,1 +1,1 @@
-give @s minecraft:fishing_rod[custom_data={nukeshot:1b,nukeshot_power:2,power_level:2,nukeshot_p2:1b,power_tag:"power_2"},custom_model_data={floats:[1002f]},item_name='{"text":"NukeShot | Power-2","color":"red","italic":false}',rarity="rare",damage=63] 1
+give @s minecraft:fishing_rod[minecraft:custom_data={nukeshot:1b,nukeshot_power:2,power_level:2,nukeshot_p2:1b,power_tag:"power_2"},minecraft:custom_model_data={floats:[1002f]},minecraft:item_name={"text":"NukeShot | Power-2","color":"red","bold":true,"italic":false},minecraft:rarity="rare",minecraft:damage=63] 1

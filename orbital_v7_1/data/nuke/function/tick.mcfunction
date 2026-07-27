@@ -32,23 +32,15 @@ execute as @e[type=minecraft:firework_rocket,tag=orbital_main] at @s run functio
 scoreboard players add @e[type=minecraft:firework_rocket,tag=orbital_child] orb_lifetime 1
 execute as @e[type=minecraft:firework_rocket,tag=orbital_child,scores={orb_lifetime=2..}] at @s run function nuke:orbital_strike_cannon/fire_shot/child_damage
 
-# Archi-Shield: explicit holder state, with Data Components NBT fallback.
-tag @a remove archi_holder
-execute as @a if items entity @s weapon.mainhand minecraft:shield[custom_data~{archi_shield:1b}] run tag @s add archi_holder
-execute as @a if items entity @s weapon.offhand minecraft:shield[custom_data~{archi_shield:1b}] run tag @s add archi_holder
-execute as @a if data entity @s SelectedItem.components."minecraft:custom_data"{archi_shield:1b} run tag @s add archi_holder
-execute as @a if data entity @s Inventory[{Slot:-106b}].components."minecraft:custom_data"{archi_shield:1b} run tag @s add archi_holder
-execute as @a[tag=archi_holder] at @s run function nuke:archi_shield/main
-execute as @a[tag=!archi_holder,scores={archi_delay=1..}] run scoreboard players remove @s archi_delay 1
+# Direct, simple Archi-Shield checks in both hands.
+execute as @a if items entity @s weapon.mainhand *[custom_data~{archi_shield:1b}] at @s run function nuke:archi_shield/main
+execute as @a unless items entity @s weapon.mainhand *[custom_data~{archi_shield:1b}] if items entity @s weapon.offhand *[custom_data~{archi_shield:1b}] at @s run function nuke:archi_shield/main
+execute as @a[scores={archi_delay=1..}] unless items entity @s weapon.mainhand *[custom_data~{archi_shield:1b}] unless items entity @s weapon.offhand *[custom_data~{archi_shield:1b}] run scoreboard players remove @s archi_delay 1
 
-# Blast Vest: exact chest-slot detector plus component-NBT fallback.
-tag @a remove has_blast_vest
-execute as @a if items entity @s armor.chest minecraft:chainmail_chestplate[custom_data~{blast_vest:1b}] run tag @s add has_blast_vest
-execute as @a if data entity @s Inventory[{Slot:102b}].components."minecraft:custom_data"{blast_vest:1b} run tag @s add has_blast_vest
-execute as @a[tag=has_blast_vest] at @s run function nuke:blast_vest/main
-execute as @a[tag=!has_blast_vest,scores={bv_active=1..}] run function nuke:blast_vest/reset
+# Direct, simple Blast Vest check.
+execute as @a if items entity @s armor.chest *[custom_data~{blast_vest:1b}] at @s run function nuke:blast_vest/main
+execute as @a[scores={bv_active=1..}] unless items entity @s armor.chest *[custom_data~{blast_vest:1b}] run function nuke:blast_vest/reset
 
-# Light TNT projectile detection.
 execute as @a at @s if items entity @s weapon.mainhand minecraft:wind_charge[custom_data~{light_tnt:1b}] run tag @e[type=minecraft:wind_charge,distance=..8,tag=!lt_processed] add light_tnt
 execute as @a at @s if items entity @s weapon.offhand minecraft:wind_charge[custom_data~{light_tnt:1b}] run tag @e[type=minecraft:wind_charge,distance=..8,tag=!lt_processed] add light_tnt
 execute as @e[type=minecraft:wind_charge,tag=light_tnt,tag=!lt_processed] at @s run function nuke:light_tnt/init
@@ -56,16 +48,13 @@ function nuke:light_tnt/tick
 
 function nuke:happy_ghast/tick
 execute as @a[nbt={FallFlying:1b}] if items entity @s armor.chest minecraft:elytra[minecraft:enchantments~[{enchantments:"breaching_enchantment:breaching"}]] at @s run function breaching_enchantment:flight_check
-
 execute as @e[type=minecraft:item,tag=!tt_init,nbt={OnGround:1b}] at @s if data entity @s Item.components."minecraft:custom_data".timer_tnt run function nuke:timer_tnt/init
 function nuke:timer_tnt/tick
-
 function nuke:safe/process_setup
 function nuke:safe/tick
 execute as @e[type=minecraft:interaction,tag=safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
 function nuke:settings/process_triggers
 execute as @a run function nuke:settings/enable_triggers
-
 scoreboard players reset @a damage_taken
 scoreboard players reset @a damage_blocked_by_shield
 scoreboard players reset @a shield_used
