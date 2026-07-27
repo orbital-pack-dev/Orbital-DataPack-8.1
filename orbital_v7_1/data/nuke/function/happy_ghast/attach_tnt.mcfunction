@@ -1,11 +1,13 @@
-# Выполняется as Гаст, at @s
-clear @a[tag=gt_user,limit=1] minecraft:tnt 1
+# Надеваем ОДИН заряд. Контекст: as <Гаст>, at @s.
 scoreboard players add @s ghast_tnt 1
+execute if score @s ghast_tnt matches 15.. run scoreboard players set @s ghast_tnt 14
 
-execute as @a[tag=gt_user,limit=1] run function nuke:util/assign_pid
-execute if entity @a[tag=gt_user,limit=1] run scoreboard players operation @s nuke.pid = @a[tag=gt_user,limit=1] nuke.pid
+# Съедаем ровно один предмет из ближайшего стека.
+execute as @e[type=minecraft:item,distance=..6,nbt={Item:{id:"minecraft:tnt"}},limit=1,sort=nearest] run function nuke:happy_ghast/eat_one
 
-summon minecraft:block_display ~ ~2.5 ~ {Tags:["ghast_tnt_display"],block_state:{Name:"minecraft:tnt"},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[-0.35f,-0.35f,-0.35f],scale:[0.7f,0.7f,0.7f]}}
+# Визуал заряда на модельке.
+summon minecraft:block_display ~ ~1 ~ {Tags:["ghast_tnt_display"],block_state:{Name:"minecraft:tnt"},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[0.6f,0.6f,0.6f]}}
 
-playsound minecraft:entity.tnt.primed neutral @a[distance=..32] ~ ~ ~ 1 1
-tellraw @a[tag=gt_user,limit=1] [{"text":"ТНТ заминировано на Гасте. Шифт+ПКМ — подрыв.","color":"red"}]
+playsound minecraft:entity.tnt.primed master @a[distance=..24] ~ ~ ~ 1 1.2
+particle minecraft:smoke ~ ~1 ~ 0.5 0.5 0.5 8 0.02
+title @a[distance=..12] actionbar ["",{"text":"Гаст принял ТНТ: ","color":"gold"},{"score":{"name":"@s","objective":"ghast_tnt"},"color":"red","bold":true},{"text":" / 14","color":"gold"}]

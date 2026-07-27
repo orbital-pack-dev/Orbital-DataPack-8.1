@@ -1,1 +1,1 @@
-$data modify entity @e[type=minecraft:text_display,tag=tt_text,distance=..3,limit=1,sort=nearest] text set value {"text":"$(sec) сек","color":"red","bold":true}
+$data modify entity @e[type=minecraft:armor_stand,tag=tt_hitbox,distance=..1.5,limit=1] CustomName set value {text:"ТАЙМЕР-ТНТ: $(sec) сек",color:"red",bold:true}

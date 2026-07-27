@@ -1,5 +1,5 @@
-# Выполняется as marker[safe_box], at @s. Передаёт пароль в макрос восстановления замка.
-execute unless data entity @s data.pw run return fail
-data modify storage nuke:safe key.pw set from entity @s data.pw
+# Берём пароль из маркера и передаём в макрос восстановления замка.
+# Контекст: at <блок сейфа>.
+data modify storage nuke:safe key.pw set from entity @e[type=minecraft:marker,tag=safe_box,distance=..1.5,limit=1] data.pw
+execute unless data storage nuke:safe key.pw run return 0
 function nuke:safe/restore_lock with storage nuke:safe key
-data remove storage nuke:safe key.pw

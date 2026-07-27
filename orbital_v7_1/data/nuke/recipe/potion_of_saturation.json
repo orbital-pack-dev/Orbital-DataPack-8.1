@@ -14,22 +14,22 @@
     "count": 1,
     "components": {
       "minecraft:custom_data": {
-        "potion_of_saturation": 1
+        "potion_of_saturation": true
       },
       "minecraft:custom_name": {
-        "text": "🧪 Зелье Сытости",
+        "text": "Зелье Сытости",
         "color": "gold",
         "bold": true,
         "italic": false
       },
       "minecraft:lore": [
         {
-          "text": "Сытость — 3 минуты",
+          "text": "Регенерация — 3600 тиков",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "Регенерация — 12 секунд",
+          "text": "Насыщение — 240 тиков",
           "color": "gray",
           "italic": false
         }
@@ -39,14 +39,14 @@
         "custom_color": 16755200,
         "custom_effects": [
           {
-            "id": "minecraft:saturation",
+            "id": "minecraft:regeneration",
             "amplifier": 0,
             "duration": 3600,
             "show_particles": true
           },
           {
-            "id": "minecraft:regeneration",
-            "amplifier": 0,
+            "id": "minecraft:saturation",
+            "amplifier": 1,
             "duration": 240,
             "show_particles": true
           }

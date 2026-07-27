@@ -1,15 +1,16 @@
-# Выполняется as interaction[safe_shield], at @s — сейф в процессе настройки (пустой).
+# Приводим сейф к chest[type=single], СОХРАНЯЯ содержимое и замок.
+# Контекст: at <блок сейфа>.
 execute if block ~ ~ ~ minecraft:chest[type=single] run return 0
 
-data modify storage nuke:safe box set from block ~ ~ ~
+data modify storage nuke:safe box set from block ~ ~ ~ Items
 
 execute if block ~ ~ ~ minecraft:chest[facing=north] run setblock ~ ~ ~ minecraft:chest[type=single,facing=north] replace
 execute if block ~ ~ ~ minecraft:chest[facing=south] run setblock ~ ~ ~ minecraft:chest[type=single,facing=south] replace
 execute if block ~ ~ ~ minecraft:chest[facing=east] run setblock ~ ~ ~ minecraft:chest[type=single,facing=east] replace
 execute if block ~ ~ ~ minecraft:chest[facing=west] run setblock ~ ~ ~ minecraft:chest[type=single,facing=west] replace
 
-execute if data storage nuke:safe box.Items run data modify block ~ ~ ~ Items set from storage nuke:safe box.Items
+data modify block ~ ~ ~ Items set from storage nuke:safe box
 data remove storage nuke:safe box
 
-playsound minecraft:block.chest.locked block @a[distance=..16] ~ ~ ~ 1 0.7
-title @a[distance=..6] actionbar {"text":"Сейф остаётся одиночным сундуком","color":"red"}
+# Замок восстанавливаем из пароля, хранящегося в маркере.
+execute if entity @e[type=minecraft:marker,tag=safe_box,distance=..1.5] run function nuke:safe/restore_lock_read
