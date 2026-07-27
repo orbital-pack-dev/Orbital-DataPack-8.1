@@ -1,14 +1,9 @@
-# АВТОЗАКРЫТИЕ СЕЙФА. Контекст: as <маркер safe_box>, at @s.
-# Вызывается только когда в радиусе 6 блоков никого нет.
+# Context: Safe marker; called only when no player is within six blocks.
+tag @a remove safe_user
+tag @a remove safe_awaiting_key
 
-# 1) Сброс временного доступа.
-tag @a[distance=6..] remove safe_user
-tag @a[distance=6..] remove safe_awaiting_key
+# Configured marker has password data; restore the exact password lock.
+execute if data entity @s data.pw unless data block ~ ~ ~ components."minecraft:lock" run function nuke:safe/restore_lock_read
 
-# 2) Замок на месте — больше ничего не делаем (дешёвый выход).
-execute if data block ~ ~ ~ components."minecraft:lock" run return 0
-
-# 3) Сейф был разблокирован — запечатываем обратно.
-function nuke:safe/restore_lock_read
-playsound minecraft:block.chest.locked block @a[distance=..16] ~ ~ ~ 1 0.8
-particle minecraft:crit ~0.5 ~1 ~0.5 0.3 0.3 0.3 8 0.02
+# Unconfigured Safe keeps a generic active-key lock.
+execute unless data entity @s data.pw unless data block ~ ~ ~ components."minecraft:lock" run data modify block ~ ~ ~ components."minecraft:lock" set value {items:"minecraft:tripwire_hook",predicates:{"minecraft:custom_data":{nuke_key_active:1b}}}

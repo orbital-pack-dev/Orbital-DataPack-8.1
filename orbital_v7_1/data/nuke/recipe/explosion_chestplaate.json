@@ -1,50 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "pattern": [
-    ".MG",
-    "#C#",
-    "BT."
-  ],
+  "pattern": [".MG", "#C#", "BT."],
   "key": {
-    ".": "minecraft:redstone",
-    "M": "minecraft:magma_cream",
-    "G": "minecraft:gunpowder",
-    "#": "minecraft:tnt",
-    "C": "minecraft:chainmail_chestplate",
-    "B": "minecraft:blaze_powder",
-    "T": "minecraft:tnt_minecart"
+    ".": "minecraft:redstone", "M": "minecraft:magma_cream", "G": "minecraft:gunpowder",
+    "#": "minecraft:tnt", "C": "minecraft:chainmail_chestplate", "B": "minecraft:blaze_powder", "T": "minecraft:tnt_minecart"
   },
   "result": {
-    "id": "minecraft:chainmail_chestplate",
-    "count": 1,
+    "id": "minecraft:chainmail_chestplate", "count": 1,
     "components": {
-      "minecraft:custom_data": {
-        "blast_vest": true
-      },
-      "minecraft:custom_name": {
-        "color": "red",
-        "bold": true,
-        "italic": false,
-        "text": "Подрывной Жилет"
-      },
-      "minecraft:lore": [
-        {
-          "text": "Активируется при надевании — снять невозможно",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Шифт — досрочный подрыв",
-          "color": "dark_gray",
-          "italic": false
-        }
-      ],
-      "minecraft:enchantments": {
-        "minecraft:blast_protection": 4,
-        "minecraft:protection": 4,
-        "minecraft:binding_curse": 1
-      },
+      "minecraft:custom_data": {"blast_vest": true},
+      "minecraft:item_name": {"text": "Подрывной Жилет", "color": "red", "italic": false},
+      "minecraft:lore": [{"text": "Активируется при надевании", "color": "gray", "italic": false}],
+      "minecraft:enchantments": {"minecraft:blast_protection": 4, "minecraft:protection": 4, "minecraft:binding_curse": 1},
       "minecraft:rarity": "rare"
     }
   }

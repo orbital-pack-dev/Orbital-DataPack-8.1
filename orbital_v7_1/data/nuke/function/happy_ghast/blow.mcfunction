@@ -1,5 +1,5 @@
-# Контекст: as <Гаст>, at @s. Макрос нужен только ради count в дропе.
-$summon minecraft:item ~ ~ ~ {Item:{id:"minecraft:tnt",count:$(n),components:{"minecraft:custom_data":{happy_tnt:1b},"minecraft:item_name":'{"text":"Динамит Гаста","color":"red","italic":false}'}}}
+# Drop exactly the stored count, remove this Ghast's mounted displays, then explode.
+$summon minecraft:item ~ ~ ~ {Item:{id:"minecraft:tnt",count:$(n)}}
 kill @e[type=minecraft:block_display,tag=ghast_tnt_display,distance=..12]
 scoreboard players set @s ghast_tnt 0
 particle minecraft:explosion_emitter ~ ~ ~ 0 0 0 1 1 force

@@ -1,11 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "pattern": [
-    "#B#",
-    "oSo",
-    "ANA"
-  ],
+  "pattern": ["#B#", "oSo", "ANA"],
   "key": {
     "#": "minecraft:turtle_scute",
     "B": "minecraft:bolt_armor_trim_smithing_template",
@@ -18,25 +14,8 @@
     "id": "minecraft:shield",
     "count": 1,
     "components": {
-      "minecraft:custom_data": {
-        "archi_shield": true
-      },
-      "minecraft:custom_name": {
-        "color": "gold",
-        "bold": true,
-        "italic": false,
-        "text": "Архи-Щит"
-      },
-      "minecraft:lore": [
-        {
-          "text": "Шифт — барьер из энергии и отброс",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      "minecraft:rarity": "epic",
-      "minecraft:max_damage": 1680,
-      "minecraft:damage": 0
+      "minecraft:custom_data": {"archi_shield": true},
+      "minecraft:item_name": {"text": "Архи-Щит", "color": "aqua", "italic": false}
     }
   }
 }
