@@ -9,5 +9,8 @@ scoreboard players operation @s bv_mod %= #20 nuke.settings
 execute if score @s bv_mod matches 0 run playsound minecraft:block.note_block.hat master @s ~ ~ ~ 1 1
 execute if score @s bv_mod matches 0 run particle minecraft:smoke ~ ~1 ~ 0.35 0.45 0.35 8 0.02 force
 execute if score @s bv_mod matches 0 run particle minecraft:flame ~ ~1 ~ 0.2 0.3 0.2 3 0.01 force
-execute if entity @s[nbt={Pose:"CROUCHING"}] run function nuke:blast_vest/detonate
+# ФИКС: игроки не хранят Pose в NBT, поэтому проверка nbt={Pose:"CROUCHING"}
+# никогда не срабатывала. Приседание проверяем предикатом flags.is_sneaking
+# (nuke:is_sneaking уже используется в happy_ghast/try_attach).
+execute if entity @s[predicate=nuke:is_sneaking] run function nuke:blast_vest/detonate
 execute if score @s bv_timer matches ..0 run function nuke:blast_vest/detonate
