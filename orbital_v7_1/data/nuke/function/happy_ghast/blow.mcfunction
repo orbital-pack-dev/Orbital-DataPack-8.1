@@ -1,6 +1,6 @@
-# Контекст: as <Гаст>, at @s. Макрос нужен только ради count в дропе.
-$summon minecraft:item ~ ~ ~ {Item:{id:"minecraft:tnt",count:$(n),components:{"minecraft:custom_data":{happy_tnt:1b},"minecraft:item_name":'{"text":"Динамит Гаста","color":"red","italic":false}'}}}
-kill @e[type=minecraft:block_display,tag=ghast_tnt_display,distance=..12]
+# Drop exactly the stored count and remove only this Ghast's passengers.
+$summon minecraft:item ~ ~ ~ {Item:{id:"minecraft:tnt",count:$(n)}}
+execute on passengers if entity @s[type=minecraft:block_display,tag=ghast_tnt_display] run kill @s
 scoreboard players set @s ghast_tnt 0
 particle minecraft:explosion_emitter ~ ~ ~ 0 0 0 1 1 force
 playsound minecraft:entity.generic.explode master @a[distance=..64] ~ ~ ~ 1 0.8

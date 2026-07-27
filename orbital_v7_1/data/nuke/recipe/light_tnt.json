@@ -1,27 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "#.",
-    "W "
-  ],
-  "key": {
-    "#": "minecraft:tnt_minecart",
-    ".": "minecraft:blaze_powder",
-    "W": "minecraft:wind_charge"
-  },
-  "result": {
-    "id": "minecraft:wind_charge",
-    "count": 4,
-    "components": {
-      "minecraft:custom_data": {
-        "light_tnt": true
-      },
-      "minecraft:item_name": {
-        "text": "Лёгкий ТНТ",
-        "color": "yellow",
-        "italic": false
-      }
-    }
-  }
+  "type": "minecraft:crafting_shaped", "category": "misc",
+  "pattern": ["#.", "W "],
+  "key": {"#": "minecraft:tnt_minecart", ".": "minecraft:blaze_powder", "W": "minecraft:wind_charge"},
+  "result": {"id": "minecraft:wind_charge", "count": 4, "components": {
+    "minecraft:custom_data": {"light_tnt": true},
+    "minecraft:item_name": {"text": "Лёгкий ТНТ", "color": "yellow", "italic": false}
+  }}
 }
