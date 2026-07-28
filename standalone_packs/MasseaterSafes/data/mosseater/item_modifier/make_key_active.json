@@ -1,0 +1,17 @@
+[
+  {
+    "function": "minecraft:set_components",
+    "components": {
+      "minecraft:custom_data": {
+        "mosseater_key_active": true
+      },
+      "minecraft:lore": [
+        {
+          "text": "Активный ключ сейфа",
+          "color": "dark_gray",
+          "italic": false
+        }
+      ]
+    }
+  }
+]

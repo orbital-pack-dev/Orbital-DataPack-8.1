@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "hurt": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:interaction",
+          "tags": [
+            "ms_safe_shield"
+          ]
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "mosseater:safe/hurt"
+  }
+}
