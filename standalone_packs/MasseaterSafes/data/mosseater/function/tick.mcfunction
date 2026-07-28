@@ -7,7 +7,9 @@ function mosseater:safe/process_setup
 # Автономная тиковая проверка всех сейфов.
 function mosseater:safe/tick
 
-# Хитбокс без сундука жить не должен.
-execute as @e[type=minecraft:interaction,tag=ms_safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
+# ВАЖНО: защитный хитбокс стоит со смещением Y -0.2, поэтому его собственная
+# позиция лежит в блоке ПОД сундуком. Проверять надо ~ ~0.2 ~, иначе уборщик
+# убивал только что заспавненный interaction и сейф оставался без защиты.
+execute as @e[type=minecraft:interaction,tag=ms_safe_shield] at @s unless block ~ ~0.2 ~ minecraft:chest unless block ~ ~0.2 ~ minecraft:trapped_chest run kill @s
 
 execute as @a run function mosseater:enable_triggers

@@ -1,1 +1,3 @@
-$data modify block ~ ~ ~ components."minecraft:lock" set value {items:"minecraft:tripwire_hook",components:{"minecraft:custom_name":'$(pw)'},predicates:{"minecraft:custom_data":{mosseater_key_active:true}}}
+# УСТАРЕЛО: макро-версия давала неточное имя в замке (подходил любой ключ).
+# Оставлено как совместимый вход, вся логика в mosseater:safe/apply_lock.
+function mosseater:safe/apply_lock
