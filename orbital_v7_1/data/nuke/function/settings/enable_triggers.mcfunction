@@ -21,5 +21,11 @@ scoreboard players enable @s t_safe_cancel
 scoreboard players enable @s t_bv_time
 scoreboard players enable @s t_tt_scale
 
-# ЗАДАЧА 1: тумблер Орбитального комплекса.
+# Тумблер Орбитального комплекса.
 scoreboard players enable @s t_orbital_enabled
+
+# ЗАДАЧА 5 — КОРНЕВАЯ ПРИЧИНА НЕРАБОТАЮЩИХ НАСТРОЕК.
+# process_triggers записывал выбор игрока только в nuke.settings, а sync_config
+# вызывался лишь в load и при сбросе — поэтому новые значения доходили до логики
+# только после следующего /reload. Теперь зеркалирование идёт сразу после обработки триггеров.
+function nuke:settings/sync_config

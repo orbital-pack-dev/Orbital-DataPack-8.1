@@ -1,18 +1,17 @@
 # Final detonation. This function is called once when tt_timer reaches zero.
 # ЕДИНЫЙ ВЗРЫВНОЙ ГЕЙТ — #block_protection nuke.config.
-execute unless score #block_protection nuke.config matches 0.. run scoreboard players operation #block_protection nuke.config = block_protection nuke.settings
+execute unless score #block_protection nuke.config matches 0..1 run scoreboard players operation #block_protection nuke.config = block_protection nuke.settings
 
 tag @p[distance=..48] add nuke_attacker
 kill @e[type=minecraft:block_display,tag=tt_display,distance=..1.6]
 kill @e[type=minecraft:text_display,tag=tt_text,distance=..1.6]
 kill @e[type=minecraft:interaction,tag=tt_hitbox,distance=..1.6]
-# Коллизия снимается до подрыва (страховка, если слайм ещё жив).
-kill @e[type=minecraft:slime,tag=timer_tnt_slime,distance=..1.6]
+# Магма-куб сначала уходит в void и только потом умирает — без мелких кубов.
+function nuke:timer_tnt/kill_wall
 particle minecraft:explosion_emitter ~ ~ ~ 0 0 0 1 1 force
 playsound minecraft:entity.generic.explode master @a[distance=..64] ~ ~ ~ 1 0.6
 
-# Защита ВЫКЛ — гарантированный физический взрыв с разрушением блоков,
-# как у обычного ванильного ТНТ (fuse:0s — без паузы на поджиг).
+# Защита ВЫКЛ — гарантированный физический взрыв с разрушением блоков.
 execute if score #block_protection nuke.config matches 0 run summon minecraft:tnt ~ ~ ~ {fuse:0s,Tags:["tt_boom"]}
 
 # Защита ВКЛ — только урон по сущностям и частицы, блоки целы.

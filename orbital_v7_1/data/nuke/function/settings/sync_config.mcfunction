@@ -1,10 +1,9 @@
-# ЗАДАЧА 1 — ЕДИНАЯ ПРИВЯЗКА НАСТРОЕК К ГЛОБАЛЬНЫМ ФЛАГАМ.
-# Раньше значения из меню оставались только в nuke.settings и до логики
-# не доходили. Теперь после каждой обработки триггеров все флаги
-# зеркалируются в nuke.config (и в старые глобальные объективы).
+# ЕДИНАЯ ПРИВЯЗКА НАСТРОЕК К ГЛОБАЛЬНЫМ ФЛАГАМ.
+# Значения из меню (nuke.settings) зеркалируются в nuke.config и в старые global-объективы.
+# Вызывается из load, из сброса настроек И после каждой обработки триггеров меню.
 
-# Тумблер Орбитального комплекса: значение по умолчанию — ВКЛ.
-execute unless score #orbital_enabled nuke.config matches 0.. run scoreboard players set #orbital_enabled nuke.config 1
+# Тумблер Орбитального комплекса хранится только в nuke.config и НЕ перезаписывается.
+execute unless score #orbital_enabled nuke.config matches 0..1 run scoreboard players set #orbital_enabled nuke.config 1
 
 # Флаги-переключатели.
 scoreboard players operation #block_protection nuke.config = block_protection nuke.settings
@@ -27,5 +26,8 @@ scoreboard players operation global block_protection = block_protection nuke.set
 scoreboard players operation global orbital_nerf = orbital_nerf nuke.settings
 scoreboard players operation global personal_cd = personal_cd nuke.settings
 
-# Масштаб времени Таймер-ТНТ теперь реально применяется при установке заряда.
+# Масштаб времени Таймер-ТНТ реально применяется при установке заряда.
 execute if score nuke.cfg.tt_scale nuke.settings matches 1.. run scoreboard players operation #tt_scale nuke.settings = nuke.cfg.tt_scale nuke.settings
+
+# Таймер Жилета тоже должен быть доступен модулю напрямую.
+execute if score nuke.cfg.bv_time nuke.settings matches 1.. run scoreboard players operation #bv_time nuke.settings = nuke.cfg.bv_time nuke.settings

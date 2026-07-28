@@ -12,10 +12,10 @@ execute if block ~ ~ ~-1 minecraft:water run return run function nuke:timer_tnt/
 
 execute unless entity @e[type=minecraft:block_display,tag=tt_display,distance=..1.6,limit=1] run return run function nuke:timer_tnt/cleanup
 
-# ЗАДАЧА 2.2: слайм-коллизия жёстко привязана к позиции заряда.
-tp @e[type=minecraft:slime,tag=timer_tnt_slime,distance=..1.6] ~ ~-0.5 ~
-# ЗАДАЧА 2.3: на последней секунде (20 тиков до детонации) коллизия снимается.
-execute if score @s tt_timer matches ..20 run kill @e[type=minecraft:slime,tag=timer_tnt_slime,distance=..1.6]
+# Коллизия жёстко привязана к позиции заряда (ноги куба — низ блока).
+tp @e[type=minecraft:magma_cube,tag=display_solid_wall,distance=..1.6] ~ ~-0.5 ~
+# На последней секунде (20 тиков до детонации) коллизия снимается через void.
+execute if score @s tt_timer matches ..20 run function nuke:timer_tnt/kill_wall
 
 scoreboard players operation @s tt_mod = @s tt_timer
 scoreboard players operation @s tt_mod %= #20 nuke.settings

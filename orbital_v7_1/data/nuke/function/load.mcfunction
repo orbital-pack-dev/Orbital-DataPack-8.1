@@ -24,7 +24,7 @@ scoreboard objectives add nuke.bd_count dummy
 scoreboard objectives add nuke.xp_cost dummy
 scoreboard objectives add nuke.pid dummy
 
-# ЗАДАЧА 1: глобальные флаги конфига живут в отдельном объективе nuke.config.
+# Глобальные флаги конфига живут в отдельном объективе nuke.config.
 # Меню (nuke.settings) — источник истины, nuke.config — то, что читает логика.
 scoreboard objectives add nuke.config dummy
 
@@ -49,18 +49,33 @@ scoreboard objectives add t_safe_key trigger
 scoreboard objectives add t_safe_cancel trigger
 scoreboard objectives add t_bv_time trigger
 scoreboard objectives add t_tt_scale trigger
-# ЗАДАЧА 1: триггер тумблера Орбитального комплекса (1 = ВКЛ, 2 = ВЫКЛ).
+# Триггер тумблера Орбитального комплекса (1 = ВКЛ, 2 = ВЫКЛ).
 scoreboard objectives add t_orbital_enabled trigger
 
 execute unless score nuke.cfg_ready nuke.settings matches 1 run function nuke:settings/reset
 scoreboard players set nuke.cfg_ready nuke.settings 1
 
-# Тумблер Орбитального комплекса: по умолчанию ВКЛ, значение переживает /reload.
-execute unless score #orbital_enabled nuke.config matches 0.. run scoreboard players set #orbital_enabled nuke.config 1
+# ЗАДАЧА 5 — ФЛАГИ НЕ СБРАСЫВАЮТСЯ ПРИ /reload.
+# Дефолты выставляются ТОЛЬКО если значение ещё не задано (unless ... matches 0..1).
+# Уже выбранные игроком значения переживают и /reload, и перезапуск сервера.
+execute unless score #block_protection nuke.config matches 0..1 run scoreboard players set #block_protection nuke.config 0
+execute unless score #orbital_nerf nuke.config matches 0..1 run scoreboard players set #orbital_nerf nuke.config 0
+execute unless score #personal_cd nuke.config matches 0..1 run scoreboard players set #personal_cd nuke.config 1
+execute unless score #vip nuke.config matches 0..1 run scoreboard players set #vip nuke.config 1
+execute unless score #wither_skulls nuke.config matches 0..1 run scoreboard players set #wither_skulls nuke.config 0
+execute unless score #orbital_enabled nuke.config matches 0..1 run scoreboard players set #orbital_enabled nuke.config 1
+
+# Меню выравнивается по сохранённым флагам, чтобы в диалогах отображалось то же самое.
+scoreboard players operation block_protection nuke.settings = #block_protection nuke.config
+scoreboard players operation orbital_nerf nuke.settings = #orbital_nerf nuke.config
+scoreboard players operation personal_cd nuke.settings = #personal_cd nuke.config
+scoreboard players operation nuke.cfg.vip nuke.settings = #vip nuke.config
+scoreboard players operation nuke.cfg.wither nuke.settings = #wither_skulls nuke.config
 
 scoreboard objectives add orb_ticks dummy
 scoreboard objectives add orb_lifetime dummy
 scoreboard players set #20 nuke.settings 20
+scoreboard players set #four nuke.settings 4
 scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
 scoreboard objectives add damage_blocked_by_shield minecraft.custom:minecraft.damage_blocked_by_shield
 scoreboard objectives add shield_used minecraft.used:minecraft.shield
@@ -75,5 +90,5 @@ scoreboard objectives add tt_seconds dummy
 scoreboard objectives add tt_mod dummy
 execute unless score #pid_seq nuke.settings matches 0.. run scoreboard players set #pid_seq nuke.settings 0
 
-# ЗАДАЧА 1: сразу привязываем настройки меню к глобальным флагам.
+# Сразу привязываем настройки меню к глобальным флагам.
 function nuke:settings/sync_config
