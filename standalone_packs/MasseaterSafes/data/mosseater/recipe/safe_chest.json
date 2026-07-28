@@ -12,8 +12,7 @@
     "components": {
       "minecraft:custom_data": {"mosseater_safe": true},
       "minecraft:item_name": {"text": "Сундук с Паролем", "color": "gold", "italic": false},
-      "minecraft:lore": [{"text": "Поставьте, чтобы установить пароль", "color": "gray", "italic": false}],
-      "minecraft:lock": {"items": "minecraft:tripwire_hook", "predicates": {"minecraft:custom_data": {"mosseater_key_active": true}}}
+      "minecraft:lore": [{"text": "Поставьте, чтобы настроить пароль", "color": "gray", "italic": false}]
     }
   }
 }
