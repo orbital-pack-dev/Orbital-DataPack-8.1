@@ -1,15 +1,3 @@
-# Приводим сейф к chest[type=single], СОХРАНЯЯ содержимое и замок.
-# Контекст: at <блок сейфа>.
-execute if block ~ ~ ~ minecraft:chest[type=single] run return 0
-
-data modify storage mosseater:safe box set from block ~ ~ ~ Items
-
-execute if block ~ ~ ~ minecraft:chest[facing=north] run setblock ~ ~ ~ minecraft:chest[type=single,facing=north] replace
-execute if block ~ ~ ~ minecraft:chest[facing=south] run setblock ~ ~ ~ minecraft:chest[type=single,facing=south] replace
-execute if block ~ ~ ~ minecraft:chest[facing=east] run setblock ~ ~ ~ minecraft:chest[type=single,facing=east] replace
-execute if block ~ ~ ~ minecraft:chest[facing=west] run setblock ~ ~ ~ minecraft:chest[type=single,facing=west] replace
-
-data modify block ~ ~ ~ Items set from storage mosseater:safe box
-data remove storage mosseater:safe box
-
-execute if entity @e[type=minecraft:marker,tag=ms_safe_box,distance=..1.5] run function mosseater:safe/restore_lock_read
+# После разрушения половины Minecraft сам переводит оставшийся блок в type=single.
+# NBT маркера не меняется; tick нормализует interaction до 1.1 x 1.4.
+function mosseater:safe/ensure_interaction

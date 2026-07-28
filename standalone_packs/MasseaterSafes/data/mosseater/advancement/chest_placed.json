@@ -1,18 +1,16 @@
 {
   "criteria": {
-    "requirement": {
+    "placed": {
       "trigger": "minecraft:placed_block",
       "conditions": {
         "location": [
           {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:chest"
+            "condition": "minecraft:location_check",
+            "predicate": {"block": {"blocks": ["minecraft:chest"]}}
           }
         ]
       }
     }
   },
-  "rewards": {
-    "function": "mosseater:safe/guard_merge"
-  }
+  "rewards": {"function": "mosseater:safe/guard_merge"}
 }

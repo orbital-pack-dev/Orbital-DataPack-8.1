@@ -1,11 +1,6 @@
-# Контекст: as <interaction настройки>, at <блок сундука>.
-# «Оставить открытым» — сейф НИКОГДА не запечатывается автоматически.
-tag @e[type=minecraft:marker,tag=ms_safe_box,distance=..0.9,limit=1,sort=nearest] add ms_safe_unlocked
-tag @e[type=minecraft:marker,tag=ms_safe_box,distance=..0.9,limit=1,sort=nearest] remove ms_safe_unconfigured
-
-# Снимаем замок, который приходит вместе с предметом «Сундук с Паролем».
-data remove block ~ ~ ~ components."minecraft:lock"
-
-# Хитбокс всё равно нужен: открытый сейф не должен ломаться киркой.
-function mosseater:safe/ensure_interaction
+# Контекст: as <setup interaction>, at <interaction>.
+# keep_open хранится в NBT КАЖДОГО маркера конструкции и переживает merge/split/reload.
+execute as @e[type=minecraft:marker,tag=ms_safe_box,distance=..0.75] at @s run function mosseater:safe/set_keep_open_marker
+playsound minecraft:block.iron_door.open block @a[distance=..12] ~ ~ ~ 0.8 1.25
+particle minecraft:wax_off ~ ~0.8 ~ 0.35 0.25 0.35 8 0.02
 kill @s

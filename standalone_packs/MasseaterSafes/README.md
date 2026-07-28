@@ -1,63 +1,100 @@
 # MasseaterS — Standalone Password Safes
 
-> Автономный дата-пак системы сейфов с паролем для сервера Masseater.
-> Неймспейс: `mosseater`. Версия игры: **Minecraft 1.21.11** (`pack_format 75`).
-> Полностью независим от основного пака `Orbital DataPack 8.1` — не использует ни одного его скорборда, тега, диалога или предмета.
+> Автономная система сейфов для **Minecraft Java 1.21.11**.
+> Неймспейс `mosseater`; основной Orbital DataPack не изменяется и не требуется.
 
 ## Установка
 
-1. Скопируйте папку `MasseaterSafes` в `<мир>/datapacks/`.
+1. Скопируйте `MasseaterSafes` в `<мир>/datapacks/`.
 2. Выполните `/reload`.
-3. Рецепт «Сундук с Паролем» выдаётся игрокам автоматически при входе.
+3. Рецепт «Сундук с Паролем» выдаётся игрокам автоматически.
 
-## Как это работает
+## Архитектура состояния
 
-| Шаг | Что происходит |
+Каждая физическая половина защищённого сундука имеет `marker` с тегом `ms_safe_box`. Авторитетное состояние хранится в NBT маркера:
+
+```snbt
+{data:{safe:{keep_open:0b,password:<точный minecraft:custom_name ключа>}}}
+```
+
+Состояния взаимоисключающие:
+
+- `ms_safe_unconfigured` — ожидает выбор режима;
+- `ms_safe_configured` — строгий пароль и `minecraft:lock`;
+- `ms_safe_keep_open` — замок отсутствует постоянно, но защитный hitbox остаётся.
+
+Старые `data.pw` и `ms_safe_unlocked` автоматически мигрируют в новую схему без сброса пароля.
+
+## Полный жизненный цикл
+
+| Событие | Результат |
 |---|---|
-| 1 | Игрок крафтит **Сундук с Паролем** (8 железных самородков + сундук). |
-| 2 | При установке срабатывает достижение `mosseater:safe_placed` → рейкаст находит сундук и открывает диалог `mosseater:safe_setup`. |
-| 3 | Кнопка «Создать Ключ» выдаёт **Болванку Ключа** (tripwire hook). Её нужно переименовать в наковальне. |
-| 4 | Клик болванкой по сундуку записывает пароль в `minecraft:lock`, болванка становится **активным ключом**. |
-| 5 | Пока игрок ближе 4 блоков — хитбокс убирается, сундук открывается ключом. |
-| 6 | Как только игрок отошёл дальше 4 блоков — `mosseater:safe/auto_lock` возвращает замок и заново ставит `interaction`. |
+| Установка одиночного сейфа | Создаются marker + setup `interaction`, показывается диалог. |
+| Обычный сундук → рядом сейф | Обе половины double chest конвертируются в одну unconfigured-конструкцию; показывается один диалог. |
+| Сейф → рядом обычный сундук | Новая половина наследует состояние существующего сейфа без нового диалога. |
+| Два уже защищённых сундука объединились | Существующие marker/NBT не перезаписываются и блоки не ломаются. |
+| Создание пароля | Точный компонент `minecraft:custom_name` записывается в оба маркера и в строгий ItemStack predicate `minecraft:lock`. |
+| Правильный ключ | На 12 тиков снимается только защитный `interaction`; ванильный lock повторно проверяет тот же ключ и открывает GUI. |
+| Неверный ключ | Hitbox остаётся, проигрывается низкий `block.chest.locked`, появляются `smoke`. |
+| Игрок дальше 4 блоков | Отсутствующий lock восстанавливается из NBT маркера, кроме режима `keep_open`. |
+| Разрушение половины | Её marker и связанный interaction удаляются в тот же тик; оставшаяся половина нормализуется до `1.1 × 1.4`. |
 
-## Ключевые функции
+## Ключи и shared password-id
+
+Vanilla datapack не вычисляет криптографический hash произвольного текста. Поэтому устойчивым идентификатором служит **точное сериализованное значение компонента `minecraft:custom_name`**, созданное наковальней.
+
+Lock проверяет одновременно:
+
+1. предмет `minecraft:tripwire_hook`;
+2. точный `minecraft:custom_name`;
+3. точный `minecraft:custom_data={mosseater_key_active:1b}`.
+
+Следствие:
+
+- одинаково переименованные болванки создают общий ключ для нескольких сейфов;
+- разные пароли дают разные component-id и категорически не подходят друг к другу;
+- активным ключом нельзя настраивать новый сейф — настройка принимает только `mosseater_key_blank`.
+
+## Interaction-hitbox
+
+| Конструкция | Размер |
+|---|---|
+| Одинарный сундук | `width:1.1f, height:1.4f`, Y `-0.2` |
+| Двойной сундук | `width:2.1f, height:1.4f`, Y `-0.2` |
+
+`mosseater:safe/ensure_interaction` безусловно восстанавливает, центрирует и дедуплицирует hitbox. Корневой тик удаляет любой `ms_safe_shield`, возле которого нет `ms_safe_box`, поэтому фантомные сущности не накапливаются.
+
+## Основные функции
 
 | Функция | Назначение |
 |---|---|
-| `mosseater:load` | Создание скорбордов и дефолтов конфигурации. |
-| `mosseater:tick` | Корневой тик пака. |
-| `mosseater:safe/place` | Спавн `interaction` поверх сундука: `width 1.1f`, `height 1.4f`, смещение Y `-0.2` (двойной сундук — `width 2.2f`). |
-| `mosseater:safe/auto_lock` | Автозапечатывание при отходе игрока дальше 4 блоков. |
-| `mosseater:safe/tick` | Автономная тиковая проверка всех сейфов. |
-| `mosseater:safe/ensure_interaction` | Восстановление и нормализация хитбокса. |
-| `mosseater:safe/break_merge` | Запрет склейки сейфа в двойной сундук. |
-| `mosseater:give/safe_chest` | Выдать Сундук с Паролем. |
-| `mosseater:give/safe_key_blank` | Выдать Болванку Ключа. |
+| `mosseater:safe/init_new` | Атомарная инициализация single или double конструкции. |
+| `mosseater:safe/sync_double` | Безопасное создание отсутствующего маркера второй половины. |
+| `mosseater:safe/apply_lock` | Строгий ItemStack predicate по имени и custom_data ключа. |
+| `mosseater:safe/access_check` | Проверка ключа и маршрутизация UX. |
+| `mosseater:safe/auto_lock` | Восстановление lock при дистанции больше 4 блоков. |
+| `mosseater:safe/place` | Спавн защитного interaction 1.1/2.1 × 1.4. |
+| `mosseater:safe/drop` | Синхронная очистка marker/hitbox после разрушения. |
 
 ## Скорборды
 
 | Объектив | Тип | Назначение |
 |---|---|---|
-| `mosseater.safe_config` | dummy | Глобальная конфигурация: `#lock_distance` (4), `#raycast_steps` (40), `#ready`. |
-| `mosseater.safe_data` | dummy | Рабочие данные игрока (счётчик шагов рейкаста). |
-| `mosseater.safe_key` | trigger | Кнопка диалога «Создать Ключ». |
-| `mosseater.safe_cancel` | trigger | Кнопка диалога «Оставить открытым». |
+| `mosseater.safe_config` | dummy | Глобальные параметры. |
+| `mosseater.safe_data` | dummy | Рейкаст игрока и 12-тиковое окно доступа маркеров. |
+| `mosseater.safe_key` | trigger | Кнопка «Создать ключ». |
+| `mosseater.safe_cancel` | trigger | Кнопка `keep_open`. |
 
-> Объективы типа `trigger` не могут быть держателями внутри dummy-объектива — поэтому две кнопки диалога вынесены в отдельные триггеры того же неймспейса `mosseater.*`.
+## UX
 
-## Изоляция от основного пака
+- установка: `block.anvil.use` + `enchant`;
+- успешный замок: `block.chest.locked`;
+- успешный доступ / keep-open: `block.iron_door.open` + `wax_off`;
+- неверный ключ: низкий `block.chest.locked` + `smoke`;
+- привязка второй половины: звук замка + `enchant`.
 
-| Сущность | Orbital DataPack 8.1 | MasseaterS |
-|---|---|---|
-| Неймспейс | `nuke` | `mosseater` |
-| Теги сущностей | `safe_box`, `safe_shield`, `safe_guard`, … | `ms_safe_box`, `ms_safe_shield`, `ms_safe_guard`, … |
-| custom_data | `safe_box`, `nuke_key_blank`, `nuke_key_active` | `mosseater_safe`, `mosseater_key_blank`, `mosseater_key_active` |
-| Storage | `nuke:safe` | `mosseater:safe` |
-| Триггеры | `t_safe_key`, `t_safe_cancel` | `mosseater.safe_key`, `mosseater.safe_cancel` |
+## Изоляция
 
-Благодаря разным тегам и custom_data оба пака могут стоять на одном мире одновременно и не конфликтовать (совпадёт только форма крафта — при одновременной установке оставьте один из рецептов).
+Пак использует только `mosseater:*`, объективы `mosseater.*`, теги `ms_safe_*`, storage `mosseater:safe` и custom_data `mosseater_*`. Файлы основного дата-пака `orbital_v7_1/data/nuke/` не изменяются.
 
-## Поддержка
-
-Телеграм-бот поддержки сервера: **[@mosseater_server_bot](https://t.me/mosseater_server_bot)**
+Поддержка: [@mosseater_server_bot](https://t.me/mosseater_server_bot)

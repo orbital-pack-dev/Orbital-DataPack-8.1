@@ -1,14 +1,9 @@
-# Контекст: угол блока только что поставленного сундука.
+# Контекст: угол только что поставленного безопасного сундука.
 execute unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run return fail
 
-# Сундук стал половиной УЖЕ существующего сейфа: новый пароль не создаём,
-# а подтягиваем пароль и настройки первой половины.
-execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run return run function mosseater:safe/adopt_from_neighbor
+# Если новый блок присоединился к уже защищённой половине — наследуем её состояние.
+execute positioned ~0.5 ~ ~0.5 if entity @e[type=minecraft:marker,tag=ms_safe_box,distance=..1.1,limit=1] as @e[type=minecraft:marker,tag=ms_safe_box,distance=..1.1,sort=nearest,limit=1] at @s run return run function mosseater:safe/sync_double
 
-# Этот блок уже под защитой — второй раз не настраиваем.
-execute positioned ~0.5 ~ ~0.5 if entity @e[type=minecraft:marker,tag=ms_safe_box,distance=..0.9] run return 0
-
-# Маркер и interaction настройки строго в центре блока.
-summon minecraft:marker ~0.5 ~ ~0.5 {Tags:["ms_safe_box","ms_safe_unconfigured"]}
-summon minecraft:interaction ~0.5 ~ ~0.5 {Tags:["ms_safe_shield","ms_safe_setup"],width:1.0f,height:1.0f,response:1b}
-dialog show @a[tag=ms_safe_user,limit=1] mosseater:safe_setup
+# Новый одинарный сейф ИЛИ конструкция «обычный сундук + поставленный сейф»:
+# обе половины переводятся в единое состояние настройки.
+execute positioned ~0.5 ~ ~0.5 run function mosseater:safe/init_new
