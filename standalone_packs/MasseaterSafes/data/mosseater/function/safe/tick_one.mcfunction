@@ -1,6 +1,10 @@
 # Контекст: as <маркер>, at <центр блока сундука>.
 execute unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run return run function mosseater:safe/drop
 
+# Миграция состояния предыдущих сборок без потери пароля/keep_open.
+execute if entity @s[tag=ms_safe_unlocked] run function mosseater:safe/migrate_keep_open
+execute if data entity @s data.pw run function mosseater:safe/migrate_password
+
 # Если сундук стал двойным, создаём недостающий маркер второй половины,
 # не изменяя состояние уже защищённых соседей.
 execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/sync_double
