@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "interacted": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:interaction",
+          "tags": [
+            "ms_safe_shield"
+          ]
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "mosseater:safe/interact"
+  }
+}
