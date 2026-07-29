@@ -1,12 +1,20 @@
 # MASSEATER SAFES — STANDALONE LOAD (Minecraft 1.21.11)
 # Автономный пак не использует ни одного скорборда из nuke.*
 
+# Полное подавление ванильного подтверждения /trigger. Это глобальный gamerule:
+# другого server-side способа скрыть строку trigger у run_command нет.
+gamerule sendCommandFeedback false
+
 # Конфигурация сейфов (глобальные держатели #...).
 scoreboard objectives add mosseater.safe_config dummy
 # Рабочие данные (рейкаст, служебные счётчики игрока).
 scoreboard objectives add mosseater.safe_data dummy
 # Отдельное окно авторизации владельца: не смешивается с rearm interaction.
 scoreboard objectives add mosseater.safe_auth dummy
+# Разнесённые периодические проверки: плотность 60 тиков, watchdog 100 тиков.
+scoreboard objectives add mosseater.safe_scan dummy
+scoreboard objectives add mosseater.safe_watch dummy
+scoreboard objectives add mosseater.safe_density dummy
 
 # Триггеры диалога настройки (объектив типа trigger обязателен для /trigger).
 scoreboard objectives add mosseater.safe_key trigger
