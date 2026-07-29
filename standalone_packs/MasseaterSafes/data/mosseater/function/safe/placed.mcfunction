@@ -1,12 +1,11 @@
-# Точка входа: reward-функция advancement mosseater:safe_placed.
-# Контекст: as <игрок>, at <игрок>.
+# Основная мгновенная точка входа: minecraft:placed_block + match_tool.
+# match_tool проверяет именно использованный stack ДО его расходования, поэтому
+# корректно работает даже при установке последнего предмета в слоте.
 advancement revoke @s only mosseater:safe_placed
 
+# Убираем возможную fallback-метку: основной триггер уже обработал постановку.
+tag @s remove ms_safe_place_pending
 tag @s add ms_safe_user
-
-# Жёсткий лимит шагов рейкаста — защита от рекурсии и от спама постановкой блоков.
 scoreboard players set @s mosseater.safe_data 40
-
 execute anchored eyes positioned ^ ^ ^ run function mosseater:safe/raycast_loop
-
 tag @s remove ms_safe_user

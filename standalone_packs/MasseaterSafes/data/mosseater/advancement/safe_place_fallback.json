@@ -1,17 +1,9 @@
 {
   "criteria": {
-    "placed": {
-      "trigger": "minecraft:placed_block",
+    "used_safe_item": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "location": [
-          {
-            "condition": "minecraft:location_check",
-            "predicate": {
-              "block": {
-                "blocks": ["minecraft:chest", "minecraft:trapped_chest"]
-              }
-            }
-          },
           {
             "condition": "minecraft:match_tool",
             "predicate": {
@@ -28,6 +20,6 @@
     }
   },
   "rewards": {
-    "function": "mosseater:safe/placed"
+    "function": "mosseater:safe/place_intent"
   }
 }
