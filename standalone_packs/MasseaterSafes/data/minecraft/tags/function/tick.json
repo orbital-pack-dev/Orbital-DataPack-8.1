@@ -1,6 +1,5 @@
 {
   "values": [
-    "mosseater:tick",
-    "mosseater:safe/tick"
+    "mosseater:tick"
   ]
 }
