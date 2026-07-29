@@ -1,5 +1,10 @@
 # MASSEATER SAFES — единый автономный тик (Minecraft 1.21.11)
 execute as @a[tag=!ms_recipes] run function mosseater:setup_player
+
+# Fallback установки: item_used_on_block помечает игрока, а на следующем тике
+# луч находит уже поставленный блок. Основной placed_block остаётся мгновенным.
+execute as @a[tag=ms_safe_place_pending] at @s run function mosseater:safe/placed_fallback
+
 function mosseater:safe/process_setup
 function mosseater:safe/tick
 
