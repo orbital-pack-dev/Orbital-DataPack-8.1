@@ -1,12 +1,15 @@
 # Защитный interaction. Контекст: at <центр одной половины>.
+# Singleton Rule: перед любым summon полностью удаляем прежние guard в 1.1.
+kill @e[tag=ms_safe_guard,distance=..1.1,type=minecraft:interaction]
+
 # Single: 1.1 x 1.4. Double: 2.1 x 1.4. Нижняя грань Y=-0.2.
-execute if block ~ ~ ~ minecraft:chest[type=single] positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:1.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:trapped_chest positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:1.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[type=single] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:1.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:trapped_chest unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:1.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] unless entity @e[tag=ms_safe_guard,distance=..1.1,limit=1,type=minecraft:interaction] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_guard"],width:2.1f,height:1.4f,response:1b}

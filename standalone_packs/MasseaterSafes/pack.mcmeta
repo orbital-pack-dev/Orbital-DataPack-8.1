@@ -1,11 +1,10 @@
 {
   "pack": {
     "description": "Masseater Server Password Safe System (Standalone)",
-    "pack_format": 75,
-    "data_pack_format": 94,
+    "pack_format": 94,
     "supported_formats": {
-      "min_inclusive": 75,
-      "max_inclusive": 75
+      "min_inclusive": 94,
+      "max_inclusive": 94
     }
   }
 }
