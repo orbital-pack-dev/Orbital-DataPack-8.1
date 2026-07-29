@@ -1,5 +1,6 @@
 # Контекст: at <центр блока, на который поставлен предмет-сейф>.
-kill @e[tag=ms_safe_shield,distance=..0.8,type=minecraft:interaction]
+# Hard reset всех старых interaction перед инициализацией.
+kill @e[distance=..1.1,type=minecraft:interaction]
 kill @e[tag=ms_safe_box,distance=..0.7,type=minecraft:marker]
 data remove block ~ ~ ~ components."minecraft:lock"
 summon minecraft:marker ~ ~ ~ {Tags:["ms_safe_box","ms_safe_unconfigured"],data:{safe:{keep_open:0b}}}

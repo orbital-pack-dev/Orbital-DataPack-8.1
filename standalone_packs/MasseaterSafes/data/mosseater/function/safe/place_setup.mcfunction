@@ -1,11 +1,12 @@
-# Незавершённая настройка всегда получает расширенный precision hitbox.
-execute if block ~ ~ ~ minecraft:chest[type=single] positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:trapped_chest positioned ~ ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~0.5 ~-0.2 ~ run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~-0.2 ~-0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~-0.2 ~0.5 run summon minecraft:interaction ~ ~ ~ {Tags:["ms_safe_shield","ms_safe_setup","ms_safe_setting_up"],width:2.1f,height:2.1f,response:1b}
+# Setup использует тот же единый owner-center manager без oversized 2.1x2.1 hitbox.
+function mosseater:safe/cleanup_existing
+execute if block ~ ~ ~ minecraft:chest[type=single] positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_setup_single
+execute if block ~ ~ ~ minecraft:trapped_chest positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_setup_single
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~-0.2 ~ run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-0.5 ~-0.2 ~ run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-0.5 ~-0.2 ~ run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~0.5 ~-0.2 ~ run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~-0.2 ~0.5 run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~-0.2 ~-0.5 run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~-0.2 ~-0.5 run function mosseater:safe/spawn_setup_double
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~-0.2 ~0.5 run function mosseater:safe/spawn_setup_double
