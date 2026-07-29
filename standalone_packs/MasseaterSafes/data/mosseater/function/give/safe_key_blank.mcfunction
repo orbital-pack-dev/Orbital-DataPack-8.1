@@ -1,1 +1,2 @@
-give @s minecraft:tripwire_hook[minecraft:custom_data={mosseater_key_blank:1b},minecraft:item_name={text:"Болванка Ключа",color:"gray",bold:true,italic:false},minecraft:lore=[{text:"Переименуйте в наковальне",color:"dark_gray",italic:false}]] 1
+# Имя болванки после наковальни становится паролем сейфа.
+give @s minecraft:tripwire_hook[minecraft:custom_data={mosseater_key_blank:1b},minecraft:item_name={text:"Болванка Ключа",color:"gray",bold:true,italic:false},minecraft:lore=[{text:"Переименуйте в наковальне",color:"dark_gray",italic:false},{text:"Имя ключа = пароль сейфа",color:"gray",italic:false},{text:"Совет: добавляйте буквы, а не только цифры",color:"yellow",italic:false},{text:"Пример: Safe777 или Дом-42",color:"dark_gray",italic:false}]] 1
