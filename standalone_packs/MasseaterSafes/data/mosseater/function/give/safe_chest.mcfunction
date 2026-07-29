@@ -1,2 +1,3 @@
 # Предмет НЕ несёт предварительный minecraft:lock: замок появляется только после настройки.
-give @s minecraft:chest[minecraft:custom_data={mosseater_safe:1b},minecraft:item_name={text:"Сундук с Паролем",color:"gold",bold:true,italic:false},minecraft:lore=[{text:"Поставьте, чтобы настроить пароль",color:"gray",italic:false}]] 1
+# Lore заранее объясняет, что паролем становится имя ключа из наковальни.
+give @s minecraft:chest[minecraft:custom_data={mosseater_safe:1b},minecraft:item_name={text:"Сундук с Паролем",color:"gold",bold:true,italic:false},minecraft:lore=[{text:"Поставьте, чтобы настроить пароль",color:"gray",italic:false},{text:"Пароль = имя Ключа из наковальни",color:"gray",italic:false},{text:"Совет: добавляйте буквы, а не только цифры",color:"yellow",italic:false},{text:"Пример: Safe777 или Дом-42",color:"dark_gray",italic:false}]] 1

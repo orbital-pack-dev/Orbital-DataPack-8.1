@@ -7,10 +7,20 @@
   },
   "body": {
     "type": "minecraft:plain_message",
-    "contents": {
-      "text": "Этот сундук пока не защищён. Создать ключ-пароль?",
-      "color": "gray"
-    }
+    "contents": [
+      {
+        "text": "Этот сундук пока не защищён. Создать ключ-пароль?\n",
+        "color": "gray"
+      },
+      {
+        "text": "Паролем станет имя Ключа из наковальни.\n",
+        "color": "gray"
+      },
+      {
+        "text": "Совет: добавляйте буквы, а не только цифры (Safe777).",
+        "color": "yellow"
+      }
+    ]
   },
   "columns": 2,
   "can_close_with_escape": true,
