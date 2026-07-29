@@ -5,4 +5,3 @@ tag @s remove ms_safe_unconfigured
 tag @s remove ms_safe_keep_open
 tag @s add ms_safe_configured
 function mosseater:safe/apply_lock
-scoreboard players set @s mosseater.safe_data 0
