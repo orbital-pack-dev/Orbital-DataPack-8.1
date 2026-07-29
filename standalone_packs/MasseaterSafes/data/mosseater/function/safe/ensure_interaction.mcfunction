@@ -17,6 +17,12 @@ execute if block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interac
 execute if block ~ ~ ~ minecraft:trapped_chest as @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8] run data merge entity @s {width:1.1f,height:1.4f,response:1b}
 execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] as @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8] run data merge entity @s {width:2.1f,height:1.4f,response:1b}
 
+# Синхронизируем логическое состояние в persistent Tags самого interaction.
+tag @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8] remove ms_safe_guard_configured
+tag @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8] remove ms_safe_guard_keep_open
+execute if entity @s[tag=ms_safe_configured] run tag @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8,sort=nearest,limit=1] add ms_safe_guard_configured
+execute if entity @s[tag=ms_safe_keep_open] run tag @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8,sort=nearest,limit=1] add ms_safe_guard_keep_open
+
 # Дедупликация: при объединении двух ранее защищённых singles остаётся один hitbox.
 execute as @e[type=minecraft:interaction,tag=ms_safe_guard,distance=..0.8,sort=nearest,limit=1] run tag @s add ms_safe_guard_keep
 kill @e[type=minecraft:interaction,tag=ms_safe_guard,tag=!ms_safe_guard_keep,distance=..0.8]
