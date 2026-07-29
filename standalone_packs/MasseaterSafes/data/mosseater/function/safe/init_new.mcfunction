@@ -10,4 +10,7 @@ execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=s
 function mosseater:safe/place_setup
 dialog show @a[tag=ms_safe_user,limit=1] mosseater:safe_setup
 playsound minecraft:block.anvil.use block @a[distance=..12] ~ ~ ~ 0.55 1.35
-particle minecraft:enchant ~ ~0.8 ~ 0.35 0.35 0.35 12 0.03
+
+# 1.21.11: простой particle type без конфигурации; полный порядок аргументов.
+# align xyz + ~0.5 гарантируют центр блока независимо от исходной дробной позиции.
+execute align xyz run particle minecraft:enchant ~0.5 ~0.5 ~0.5 0.35 0.35 0.35 0.03 12 normal @a[distance=..32]
