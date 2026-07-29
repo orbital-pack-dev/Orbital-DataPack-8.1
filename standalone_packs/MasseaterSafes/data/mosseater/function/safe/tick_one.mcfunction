@@ -5,15 +5,14 @@ execute if entity @s[tag=ms_safe_unlocked] run function mosseater:safe/migrate_k
 execute if data entity @s data.pw run function mosseater:safe/migrate_password
 execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/sync_double
 
-# Lock возвращается сразу при distance >= 4, но защитный interaction получает
-# отдельную задержку rearm 60 тиков.
-execute unless entity @a[distance=..3.99] run function mosseater:safe/auto_lock
-execute if entity @s[tag=ms_safe_keep_open] run data remove block ~ ~ ~ components."minecraft:lock"
-
-# Единый таймер повторного включения interaction.
-execute if score @s mosseater.safe_data matches 1.. run scoreboard players remove @s mosseater.safe_data 1
-execute if score @s mosseater.safe_data matches 1.. run kill @e[tag=ms_safe_guard,distance=..0.8,type=minecraft:interaction]
+# Окно доступа обрабатывается раньше всей защитной логики: пока оно открыто,
+# сейф намеренно остаётся без lock и без хитбокса, чтобы работал vanilla GUI.
+execute if score @s mosseater.safe_data matches 1.. run function mosseater:safe/access_window
 execute if score @s mosseater.safe_data matches 1.. run return 0
+
+# Вне окна доступа сейф обязан быть запечатан.
+execute if entity @s[tag=ms_safe_keep_open] align xyz run data remove block ~ ~ ~ components."minecraft:lock"
+execute if entity @s[tag=ms_safe_configured] run function mosseater:safe/reseal
 
 execute if entity @s[tag=ms_safe_unconfigured] run return run function mosseater:safe/ensure_setup
 function mosseater:safe/ensure_interaction
