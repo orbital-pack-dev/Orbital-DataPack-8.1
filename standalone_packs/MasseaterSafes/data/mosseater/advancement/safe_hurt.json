@@ -5,9 +5,7 @@
       "conditions": {
         "entity": {
           "type": "minecraft:interaction",
-          "tags": [
-            "ms_safe_shield"
-          ]
+          "nbt": "{Tags:[\"ms_safe_shield\"]}"
         }
       }
     }
