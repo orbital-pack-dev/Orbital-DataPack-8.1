@@ -1,6 +1,5 @@
 # Единственная точка создания guard interaction.
-# Перед summon выполняется hard cleanup; в плотном складе — owner-center cleanup.
-function mosseater:safe/cleanup_existing
+function mosseater:safe/cleanup_before_spawn
 execute if block ~ ~ ~ minecraft:chest[type=single] positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_guard_single
 execute if block ~ ~ ~ minecraft:trapped_chest positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_guard_single
 execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~-0.2 ~ run function mosseater:safe/spawn_guard_double

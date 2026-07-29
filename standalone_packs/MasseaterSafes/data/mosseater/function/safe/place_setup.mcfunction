@@ -1,5 +1,5 @@
-# Setup использует тот же единый owner-center manager без oversized 2.1x2.1 hitbox.
-function mosseater:safe/cleanup_existing
+# Setup использует тот же единый owner-center manager без oversized hitbox.
+function mosseater:safe/cleanup_before_spawn
 execute if block ~ ~ ~ minecraft:chest[type=single] positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_setup_single
 execute if block ~ ~ ~ minecraft:trapped_chest positioned ~ ~-0.2 ~ run function mosseater:safe/spawn_setup_single
 execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~0.5 ~-0.2 ~ run function mosseater:safe/spawn_setup_double
