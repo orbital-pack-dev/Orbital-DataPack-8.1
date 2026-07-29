@@ -1,4 +1,5 @@
 function mosseater:safe/apply_marker_lock
+tag @s remove ms_safe_access_open
 scoreboard players set @s mosseater.safe_data 60
 kill @e[tag=ms_safe_shield,distance=..0.75,type=minecraft:interaction]
 playsound minecraft:block.chest.locked block @a[distance=..16] ~ ~ ~ 0.8 1.0
