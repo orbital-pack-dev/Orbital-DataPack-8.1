@@ -1,7 +1,7 @@
-# ItemStack predicate для Minecraft 1.21.11.
-# custom_name совпадает с password-id, а custom_data проверяется частично через
-# predicates, поэтому сторонняя metadata не делает правильный ключ неверным.
+# Совместимый вход для legacy-вызовов. Требуется storage key.password.
 execute unless data storage mosseater:safe key.password run return 0
 
-data modify block ~ ~ ~ components."minecraft:lock" set value {items:"minecraft:tripwire_hook",predicates:{"minecraft:custom_data":{mosseater_key_active:1b}}}
-data modify block ~ ~ ~ components."minecraft:lock".components."minecraft:custom_name" set from storage mosseater:safe key.password
+data modify storage mosseater:safe lock_temp set value {items:"minecraft:tripwire_hook",components:{},predicates:{"minecraft:custom_data":{mosseater_key_active:1b}}}
+data modify storage mosseater:safe lock_temp.components."minecraft:custom_name" set from storage mosseater:safe key.password
+execute align xyz run data modify block ~ ~ ~ components."minecraft:lock" set from storage mosseater:safe lock_temp
+data remove storage mosseater:safe lock_temp
