@@ -10,4 +10,6 @@ execute if entity @s[tag=ms_safe_configured] run function mosseater:safe/apply_m
 execute if entity @s[tag=ms_safe_keep_open] run data remove block ~ ~ ~ components."minecraft:lock"
 data remove storage mosseater:safe transfer
 playsound minecraft:block.chest.locked block @a[distance=..12] ~ ~ ~ 0.65 1.2
-execute align xyz run particle minecraft:enchant ~0.5 ~0.8 ~0.5 0.25 0.25 0.25 0.02 8 normal @a[distance=..32]
+data modify storage mosseater:safe fx set value {id:"minecraft:enchant",speed:0.02,count:8}
+function mosseater:safe/particle_fx with storage mosseater:safe fx
+data remove storage mosseater:safe fx

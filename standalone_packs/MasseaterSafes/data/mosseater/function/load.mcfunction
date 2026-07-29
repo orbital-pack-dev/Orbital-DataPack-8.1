@@ -5,6 +5,8 @@
 scoreboard objectives add mosseater.safe_config dummy
 # Рабочие данные (рейкаст, служебные счётчики игрока).
 scoreboard objectives add mosseater.safe_data dummy
+# Отдельное окно авторизации владельца: не смешивается с rearm interaction.
+scoreboard objectives add mosseater.safe_auth dummy
 
 # Триггеры диалога настройки (объектив типа trigger обязателен для /trigger).
 scoreboard objectives add mosseater.safe_key trigger

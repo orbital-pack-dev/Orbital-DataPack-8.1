@@ -10,7 +10,9 @@ execute as @e[tag=ms_safe_box,distance=..0.75,type=minecraft:marker] at @s run k
 item modify entity @a[tag=ms_safe_user,limit=1] weapon.mainhand mosseater:make_key_active
 title @a[tag=ms_safe_user,limit=1] actionbar {text:"Пароль сохранён. Защита включится через 3 секунды.",color:"green"}
 playsound minecraft:block.chest.locked master @a[tag=ms_safe_user,limit=1] ~ ~ ~ 1 1
-execute at @e[tag=ms_safe_box,distance=..0.75,sort=nearest,limit=1,type=minecraft:marker] align xyz run particle minecraft:happy_villager ~0.5 ~0.8 ~0.5 0.4 0.3 0.4 0.03 10 normal @a[distance=..32]
+data modify storage mosseater:safe fx set value {id:"minecraft:happy_villager",speed:0.03,count:10}
+execute as @e[tag=ms_safe_box,distance=..0.75,sort=nearest,limit=1,type=minecraft:marker] at @s run function mosseater:safe/particle_fx with storage mosseater:safe fx
+data remove storage mosseater:safe fx
 
 data remove storage mosseater:safe key
 kill @s
