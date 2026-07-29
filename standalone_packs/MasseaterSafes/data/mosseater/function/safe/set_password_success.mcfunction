@@ -2,6 +2,9 @@
 data modify storage mosseater:safe key.password set from entity @a[tag=ms_safe_user,limit=1] SelectedItem.components."minecraft:custom_name"
 execute unless data storage mosseater:safe key.password run return fail
 
+# Снимаем временный setup state и нормализуем геометрию перед деактивацией.
+execute as @e[tag=ms_safe_box,distance=..0.75,type=minecraft:marker] at @s run function mosseater:safe/normalize_setup_interaction
+
 # Обе половины double chest получают один password-id и 60-тактовое окно.
 execute as @e[tag=ms_safe_box,distance=..0.75,type=minecraft:marker] at @s run function mosseater:safe/set_password_marker
 scoreboard players set @e[tag=ms_safe_box,distance=..0.75,type=minecraft:marker] mosseater.safe_data 60

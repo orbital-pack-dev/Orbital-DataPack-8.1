@@ -3,7 +3,11 @@ execute unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_
 
 execute if entity @s[tag=ms_safe_unlocked] run function mosseater:safe/migrate_keep_open
 execute if data entity @s data.pw run function mosseater:safe/migrate_password
-execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/sync_double
+
+# Unconfigured double не клонируется: setup hitbox центрируется и ждёт пароль.
+execute if block ~ ~ ~ minecraft:chest[type=single] run tag @s remove ms_safe_merge_warned
+execute if entity @s[tag=ms_safe_unconfigured] if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/prevent_unconfigured_merge
+execute if entity @s[tag=ms_safe_configured] if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/sync_double
 
 # Статус мины сохраняется на marker до следующего тика даже после слома блока.
 function mosseater:safe/update_trap_state
