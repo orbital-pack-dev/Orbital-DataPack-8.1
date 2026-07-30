@@ -1,11 +1,20 @@
 # Контекст: as <маркер-донор>, at <его половина double chest>.
-# Функция синхронизирует только marker второй половины. Interaction lifecycle
-# выполняется после проверки таймера в tick_one.
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~1 ~ ~ unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-1 ~ ~ unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-1 ~ ~ unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~1 ~ ~ unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~ ~1 unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~ ~-1 unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~ ~-1 unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
-execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~ ~1 unless entity @e[tag=ms_safe_box,distance=..0.7,limit=1,type=minecraft:marker] run function mosseater:safe/clone_half
+# Функция обрабатывает только вторую половину текущего double chest.
+# Решение о том, усыновить половину или разорвать объединение, принимает
+# check_partner: сам sync_double больше ничего не создаёт и не ломает.
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=left] positioned ~1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=north,type=right] positioned ~-1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=left] positioned ~-1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=south,type=right] positioned ~1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=left] positioned ~ ~ ~1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=east,type=right] positioned ~ ~ ~-1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=left] positioned ~ ~ ~-1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:chest[facing=west,type=right] positioned ~ ~ ~1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=north,type=left] positioned ~1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=north,type=right] positioned ~-1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=south,type=left] positioned ~-1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=south,type=right] positioned ~1 ~ ~ run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=east,type=left] positioned ~ ~ ~1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=east,type=right] positioned ~ ~ ~-1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=west,type=left] positioned ~ ~ ~-1 run function mosseater:safe/check_partner
+execute if block ~ ~ ~ minecraft:trapped_chest[facing=west,type=right] positioned ~ ~ ~1 run function mosseater:safe/check_partner
