@@ -5,5 +5,13 @@ execute as @e[tag=ms_safe_shield,nbt={interaction:{}},type=minecraft:interaction
 scoreboard players remove #density_timer mosseater.safe_config 1
 execute if score #density_timer mosseater.safe_config matches ..0 run function mosseater:safe/density_pass
 
+# БАГ 3. Общий флаг проверки воронок и вагонеток: раз в 10 тиков.
+# Счётчики самоинициализируются: scoreboard players remove трактует
+# отсутствующее значение как 0, поэтому load для них не обязателен.
+scoreboard players set #protect_now mosseater.safe_config 0
+scoreboard players remove #protect_timer mosseater.safe_config 1
+execute if score #protect_timer mosseater.safe_config matches ..0 run scoreboard players set #protect_timer mosseater.safe_config 10
+execute if score #protect_timer mosseater.safe_config matches 10 run scoreboard players set #protect_now mosseater.safe_config 1
+
 # Каждый блок-половина имеет собственный marker состояния.
 execute as @e[tag=ms_safe_box,type=minecraft:marker] at @s run function mosseater:safe/tick_one

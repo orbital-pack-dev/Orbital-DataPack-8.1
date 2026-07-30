@@ -6,6 +6,10 @@ execute unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_
 execute if data block ~ ~ ~ Items[{id:"minecraft:tnt"}] run tag @s add ms_safe_trapped
 execute unless data block ~ ~ ~ Items[{id:"minecraft:tnt"}] run tag @s remove ms_safe_trapped
 
+# БАГ 3. Воронки и вагонеточные контейнеры игнорируют minecraft:lock, поэтому
+# они проверяются регулярно и независимо от состояния окна доступа.
+execute if score #protect_now mosseater.safe_config matches 1 run function mosseater:safe/protect_inventory
+
 execute if entity @s[tag=ms_safe_unlocked] run function mosseater:safe/migrate_keep_open
 execute if data entity @s data.pw run function mosseater:safe/migrate_password
 execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/sync_double

@@ -1,10 +1,22 @@
-# keep_open сохраняется в NBT обеих половин; lock снимается навсегда.
-execute as @e[tag=ms_safe_box,distance=..1.5,type=minecraft:marker] at @s run function mosseater:safe/set_keep_open_marker
+# Режим "Оставить открытым".
+#
+# БАГ 2. Прежняя версия работала селектором distance=..1.5 и снимала защиту с
+# любого сундука в сфере: у соседа исчезали interaction и vanilla lock, а его
+# NBT затиралось keep_open. Теперь режим применяется поблочно и только к
+# половинам текущего сейфа.
+function mosseater:safe/select_pair
+
+execute as @e[tag=ms_safe_pair,type=minecraft:marker] at @s run function mosseater:safe/set_keep_open_marker
 
 # Окно доступа 100 тиков, чтобы владелец сразу открыл сундук без хитбокса.
-scoreboard players set @e[tag=ms_safe_box,distance=..1.5,type=minecraft:marker] mosseater.safe_data 100
-execute as @e[tag=ms_safe_box,distance=..1.5,type=minecraft:marker] at @s run kill @e[tag=ms_safe_shield,distance=..1.5,type=minecraft:interaction]
+scoreboard players set @e[tag=ms_safe_pair,type=minecraft:marker] mosseater.safe_data 100
+execute as @e[tag=ms_safe_pair,type=minecraft:marker] at @s run function mosseater:safe/disable_guard
 
 playsound minecraft:block.iron_door.open block @a[distance=..12] ~ ~ ~ 0.8 1.25
-execute at @e[tag=ms_safe_box,distance=..1.5,sort=nearest,limit=1,type=minecraft:marker] align xyz run particle minecraft:wax_off ~0.5 ~0.8 ~0.5 0.35 0.25 0.35 0.02 8 normal @a[distance=..32]
+
+data modify storage mosseater:safe fx.name set value "wax_off"
+data modify storage mosseater:safe fx.count set value "8"
+execute as @e[tag=ms_safe_pair,sort=nearest,limit=1,type=minecraft:marker] at @s run function mosseater:safe/particle_fx
+
+function mosseater:safe/clear_pair
 kill @s
