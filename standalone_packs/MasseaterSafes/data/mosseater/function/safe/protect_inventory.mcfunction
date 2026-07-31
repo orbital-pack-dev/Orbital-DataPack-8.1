@@ -1,25 +1,24 @@
-# БАГ 3 — защита от воронок и вагонеток.
+# Защита от воронок и анти-локаут ключей — медленный проход, раз в 10 тиков.
 # Контекст: as <маркер>, at <центр блока сейфа>.
 #
-# Компонент minecraft:lock блокирует только ручное открытие игроком: воронка,
-# hopper_minecart и chest_minecart вытягивают содержимое запертого сундука в
-# обход всей системы паролей. Поэтому любой контейнер-похититель, примыкающий
-# к сейфу, уничтожается.
-#
-# Проверка выполняется не каждый тик, а по общему флагу #protect_now из
-# safe/tick (раз в 10 тиков): 6 проверок блока на каждый сейф каждый тик дали
-# бы заметную нагрузку на складе.
+# Воронка снизу здесь не проверяется: это единственный реальный вектор кражи,
+# и он обрабатывается каждый тик в tick_one. Оставшиеся 5 сторон могут только
+# класть предметы в сейф, поэтому их спокойно хватает медленного прохода.
 
-# 1. Воронки со всех шести сторон. destroy выбрасывает саму воронку и её
+# 1. Боковые и верхняя воронки. destroy выбрасывает и саму воронку, и её
 #    содержимое, поэтому у игрока ничего не пропадает.
-execute align xyz positioned ~ ~-1 ~ if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 execute align xyz positioned ~ ~1 ~ if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 execute align xyz positioned ~1 ~ ~ if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 execute align xyz positioned ~-1 ~ ~ if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 execute align xyz positioned ~ ~ ~1 if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 execute align xyz positioned ~ ~ ~-1 if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
 
-# 2. Вагонетки. Радиус 1.2 от центра блока сейфа перекрывает рельсы снизу и
-#    вплотную сбоку, но не достаёт до вагонетки через блок.
-execute align xyz positioned ~0.5 ~0.5 ~0.5 if entity @e[type=minecraft:hopper_minecart,distance=..1.2] run function mosseater:safe/break_minecarts
-execute align xyz positioned ~0.5 ~0.5 ~0.5 if entity @e[type=minecraft:chest_minecart,distance=..1.2] run function mosseater:safe/break_minecarts
+# 2. Вагонетки в объёмной коробке — страховка на случай, если вагонетка
+#    появилась в чанке без тика сущностей. Основную работу делает purge_cart.
+#    dy=2 покрывает два блока под сейфом, чего сфера раньше не делала.
+execute align xyz positioned ~-1 ~-2 ~-1 if entity @e[type=minecraft:hopper_minecart,dx=2,dy=3,dz=2] run function mosseater:safe/break_minecarts
+execute align xyz positioned ~-1 ~-2 ~-1 if entity @e[type=minecraft:chest_minecart,dx=2,dy=3,dz=2] run function mosseater:safe/break_minecarts
+
+# 3. АНТИ-ЛОКАУТ. Ключ физически не может лежать внутри сейфа.
+execute align xyz if data block ~ ~ ~ Items[{components:{"minecraft:custom_data":{mosseater_key_active:1b}}}] run function mosseater:safe/eject_key_active
+execute align xyz if data block ~ ~ ~ Items[{components:{"minecraft:custom_data":{mosseater_master:1b}}}] run function mosseater:safe/eject_key_master
