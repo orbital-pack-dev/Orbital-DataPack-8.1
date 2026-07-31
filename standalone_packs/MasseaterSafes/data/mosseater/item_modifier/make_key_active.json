@@ -3,6 +3,7 @@
     "function": "minecraft:set_components",
     "components": {
       "minecraft:custom_data": {"mosseater_key_active": true},
+      "minecraft:item_model": "mosseater:safe_key_active",
       "minecraft:lore": [
         {"text": "Активный ключ сейфа", "color": "dark_gray", "italic": false},
         {"text": "Совпадает только с тем же паролем", "color": "gray", "italic": false}
