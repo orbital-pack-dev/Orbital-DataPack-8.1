@@ -4,6 +4,11 @@
 # Теперь состояние читается только у половин текущего сейфа.
 function mosseater:safe/select_pair
 
+# МАСТЕР-КЛЮЧ. Проверяется ПЕРВЫМ и только по custom_data: имя предмета
+# не участвует, поэтому мастер-ключ открывает сейф с любым паролем, включая
+# сейфы, внутри которых заперт его собственный ключ.
+execute if items entity @a[tag=ms_safe_user,limit=1] weapon.mainhand minecraft:tripwire_hook[minecraft:custom_data~{mosseater_master:1b}] run return run function mosseater:safe/access_master
+
 execute if entity @e[tag=ms_safe_pair,tag=ms_safe_keep_open,limit=1,type=minecraft:marker] run return run function mosseater:safe/access_granted
 
 data remove storage mosseater:safe key

@@ -6,8 +6,14 @@ execute unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_
 execute if data block ~ ~ ~ Items[{id:"minecraft:tnt"}] run tag @s add ms_safe_trapped
 execute unless data block ~ ~ ~ Items[{id:"minecraft:tnt"}] run tag @s remove ms_safe_trapped
 
-# БАГ 3. Воронки и вагонеточные контейнеры игнорируют minecraft:lock, поэтому
-# они проверяются регулярно и независимо от состояния окна доступа.
+# КРИТИЧНО 2. ЕДИНСТВЕННЫЙ вектор кражи блоком — воронка РОВНО ПОД сейфом:
+# в ванилле только она вытягивает предметы, боковые и верхняя только кладут.
+# Поэтому она проверяется КАЖДЫЙ ТИК и ломается мгновенно, до первого цикла
+# перекачки (воронка тянет раз в 8 тиков). Это ровно ОДНА проверка блока
+# на сейф в тик — самая дешёвая операция из возможных.
+execute align xyz positioned ~ ~-1 ~ if block ~ ~ ~ minecraft:hopper run function mosseater:safe/break_hopper
+
+# Остальные 5 сторон и выброс ключей — медленный проход раз в 10 тиков.
 execute if score #protect_now mosseater.safe_config matches 1 run function mosseater:safe/protect_inventory
 
 execute if entity @s[tag=ms_safe_unlocked] run function mosseater:safe/migrate_keep_open

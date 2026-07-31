@@ -4,9 +4,11 @@
     "components": {
       "minecraft:custom_data": {"mosseater_key_active": true},
       "minecraft:item_model": "mosseater:safe_key_active",
+      "minecraft:enchantment_glint_override": true,
       "minecraft:lore": [
         {"text": "Активный ключ сейфа", "color": "dark_gray", "italic": false},
-        {"text": "Совпадает только с тем же паролем", "color": "gray", "italic": false}
+        {"text": "Совпадает только с тем же паролем", "color": "gray", "italic": false},
+        {"text": "Внутри сейфа не хранится — будет выброшен", "color": "dark_gray", "italic": false}
       ]
     }
   }
