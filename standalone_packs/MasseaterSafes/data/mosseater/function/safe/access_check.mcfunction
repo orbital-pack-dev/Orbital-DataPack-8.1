@@ -4,10 +4,15 @@
 # Теперь состояние читается только у половин текущего сейфа.
 function mosseater:safe/select_pair
 
+# ПРЕДМЕТ КЛЮЧА. Проверка идёт по тегу #mosseater:safe_keys, а не по одному
+# id. В теге лежат echo_shard (новый ключ) и tripwire_hook (ключи, выданные
+# до миграции), поэтому старые ключи на серверах продолжают работать и
+# ничего мигрировать вручную не нужно.
+#
 # МАСТЕР-КЛЮЧ. Проверяется ПЕРВЫМ и только по custom_data: имя предмета
 # не участвует, поэтому мастер-ключ открывает сейф с любым паролем, включая
 # сейфы, внутри которых заперт его собственный ключ.
-execute if items entity @a[tag=ms_safe_user,limit=1] weapon.mainhand minecraft:tripwire_hook[minecraft:custom_data~{mosseater_master:1b}] run return run function mosseater:safe/access_master
+execute if items entity @a[tag=ms_safe_user,limit=1] weapon.mainhand #mosseater:safe_keys[minecraft:custom_data~{mosseater_master:1b}] run return run function mosseater:safe/access_master
 
 execute if entity @e[tag=ms_safe_pair,tag=ms_safe_keep_open,limit=1,type=minecraft:marker] run return run function mosseater:safe/access_granted
 
@@ -17,7 +22,7 @@ execute unless data storage mosseater:safe key.password run return run function 
 
 # 1) Тип предмета и метка активного ключа. Проверка без макросов, поэтому
 #    содержимое имени здесь никак не влияет на разбор команды.
-execute unless items entity @a[tag=ms_safe_user,limit=1] weapon.mainhand minecraft:tripwire_hook[minecraft:custom_data~{mosseater_key_active:true}] run return run function mosseater:safe/access_denied
+execute unless items entity @a[tag=ms_safe_user,limit=1] weapon.mainhand #mosseater:safe_keys[minecraft:custom_data~{mosseater_key_active:true}] run return run function mosseater:safe/access_denied
 execute unless data entity @a[tag=ms_safe_user,limit=1] SelectedItem.components."minecraft:custom_name" run return run function mosseater:safe/access_denied
 
 # 2) Сравнение имени ключа с паролем сейфа на уровне NBT.

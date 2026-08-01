@@ -9,6 +9,33 @@
 2. Выполните `/reload`.
 3. Рецепт «Сундук с Паролем» выдаётся игрокам автоматически.
 
+## Предмет ключа
+
+Ключ — **`minecraft:echo_shard`** (эхо-осколок).
+
+Ранее использовался `minecraft:tripwire_hook`, но крюк является блоком: игрок мог случайно поставить его на землю, и предмет со всеми компонентами (`custom_name` = пароль, `custom_data`, `item_model`) превращался в обычный блок мира. Эхо-осколок поставить нельзя в принципе.
+
+| Свойство | Значение |
+|---|---|
+| Постановка блоком | невозможна |
+| Торговля у жителей | отсутствует у всех 15 профессий |
+| Переименование в наковальне | **работает** — на этом держится механика пароля |
+| Точило / зачарование | не применимо, компоненты не снимаются |
+| Стак | `max_stack_size=1`, ключи не собираются в стопку |
+
+Старые ключи не ломаются: предметы проверяются по тегу `#mosseater:safe_keys`, в котором лежат и `echo_shard`, и legacy `tripwire_hook`.
+
+## Защита от ванильного крафта
+
+`minecraft:custom_data` **не** блокирует подстановку предмета в ванильные рецепты: в 1.21.11 ингредиент — это список id предметов, компоненты при сопоставлении игнорируются. Единственный ванильный рецепт с эхо-осколком — Компас Возрождения (8 осколков + компас).
+
+Защита двухуровневая:
+
+1. `max_stack_size=1` — одна ячейка (включая ячейку Крафтера и воронки) не может накопить 8 ключей;
+2. advancement `mosseater:guard_key_craft` (`minecraft:recipe_crafted`) ловит крафт Компаса Возрождения с нашим ключом в ингредиентах, уничтожает результат, возвращает компас и болванку ключа и предупреждает игрока.
+
+Silence Armor Trim эхо-осколок не затрагивает: материалом трима он не является, копирование шаблона идёт на булыжном сланце.
+
 ## Архитектура состояния
 
 Каждая физическая половина защищённого сундука имеет `marker` с тегом `ms_safe_box`. Авторитетное состояние хранится в NBT маркера:
@@ -45,7 +72,7 @@ Vanilla datapack не вычисляет криптографический hash
 
 Lock проверяет одновременно:
 
-1. предмет `minecraft:tripwire_hook`;
+1. предмет из тега `#mosseater:safe_keys` (`minecraft:echo_shard`, legacy `minecraft:tripwire_hook`);
 2. точный `minecraft:custom_name`;
 3. точный `minecraft:custom_data={mosseater_key_active:1b}`.
 
@@ -72,9 +99,19 @@ Lock проверяет одновременно:
 | `mosseater:safe/sync_double` | Безопасное создание отсутствующего маркера второй половины. |
 | `mosseater:safe/apply_lock` | Строгий ItemStack predicate по имени и custom_data ключа. |
 | `mosseater:safe/access_check` | Проверка ключа и маршрутизация UX. |
+| `mosseater:safe/access_master` | Открытие любого сейфа Мастер-Ключом. |
+| `mosseater:safe/key_craft_guard` | Откат ванильного крафта, съевшего ключ. |
 | `mosseater:safe/auto_lock` | Восстановление lock при дистанции больше 4 блоков. |
 | `mosseater:safe/place` | Спавн защитного interaction 1.1/2.1 × 1.4. |
 | `mosseater:safe/drop` | Синхронная очистка marker/hitbox после разрушения. |
+
+## Админские команды
+
+| Команда | Назначение |
+|---|---|
+| `/function mosseater:give/safe_chest` | Выдать Сундук с Паролем. |
+| `/function mosseater:give/safe_key_blank` | Выдать Болванку Ключа. |
+| `/function mosseater:give/master_key` | Выдать Мастер-Ключ (op level 2). |
 
 ## Скорборды
 
@@ -84,6 +121,7 @@ Lock проверяет одновременно:
 | `mosseater.safe_data` | dummy | Рейкаст игрока и 12-тиковое окно доступа маркеров. |
 | `mosseater.safe_key` | trigger | Кнопка «Создать ключ». |
 | `mosseater.safe_cancel` | trigger | Кнопка `keep_open`. |
+| `ms_safe_neighbors` | dummy | Плотность застройки для режима склада. |
 
 ## UX
 
@@ -91,10 +129,11 @@ Lock проверяет одновременно:
 - успешный замок: `block.chest.locked`;
 - успешный доступ / keep-open: `block.iron_door.open` + `wax_off`;
 - неверный ключ: низкий `block.chest.locked` + `smoke`;
+- мастер-ключ: `block.beacon.activate`;
 - привязка второй половины: звук замка + `enchant`.
 
 ## Изоляция
 
-Пак использует только `mosseater:*`, объективы `mosseater.*`, теги `ms_safe_*`, storage `mosseater:safe` и custom_data `mosseater_*`. Файлы основного дата-пака `orbital_v7_1/data/nuke/` не изменяются.
+Пак использует только `mosseater:*`, объективы `mosseater.*`, теги `ms_safe_*`, storage `mosseater:safe`, item-тег `#mosseater:safe_keys` и custom_data `mosseater_*`. Файлы основного дата-пака `orbital_v7_1/data/nuke/` не изменяются.
 
 Поддержка: [@mosseater_server_bot](https://t.me/mosseater_server_bot)

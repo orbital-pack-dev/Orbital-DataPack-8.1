@@ -1,0 +1,56 @@
+{
+  "criteria": {
+    "active_key": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "minecraft:recovery_compass",
+        "ingredients": [
+          {
+            "items": "minecraft:echo_shard",
+            "predicates": {
+              "minecraft:custom_data": "{mosseater_key_active:1b}"
+            }
+          }
+        ]
+      }
+    },
+    "master_key": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "minecraft:recovery_compass",
+        "ingredients": [
+          {
+            "items": "minecraft:echo_shard",
+            "predicates": {
+              "minecraft:custom_data": "{mosseater_master:1b}"
+            }
+          }
+        ]
+      }
+    },
+    "blank_key": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "minecraft:recovery_compass",
+        "ingredients": [
+          {
+            "items": "minecraft:echo_shard",
+            "predicates": {
+              "minecraft:custom_data": "{mosseater_key_blank:1b}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "active_key",
+      "master_key",
+      "blank_key"
+    ]
+  ],
+  "rewards": {
+    "function": "mosseater:safe/key_craft_guard"
+  }
+}
