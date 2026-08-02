@@ -8,7 +8,11 @@ tag @s add ms_safe_configured
 
 # minecraft:lock — ItemStack predicate. Структура собирается целиком в storage,
 # после чего атомарно записывается в block entity без изменения глубокого пути.
-data modify storage mosseater:safe lock_temp set value {items:"minecraft:tripwire_hook",components:{},predicates:{"minecraft:custom_data":{mosseater_key_active:1b}}}
+#
+# items указывает на тег #mosseater:safe_keys (echo_shard + legacy
+# tripwire_hook), поэтому ванильный замок принимает и новые, и старые ключи,
+# а уже установленные сейфы не требуют переустановки пароля.
+data modify storage mosseater:safe lock_temp set value {items:"#mosseater:safe_keys",components:{},predicates:{"minecraft:custom_data":{mosseater_key_active:1b}}}
 data modify storage mosseater:safe lock_temp.components."minecraft:custom_name" set from storage mosseater:safe key.password
 execute align xyz run data modify block ~ ~ ~ components."minecraft:lock" set from storage mosseater:safe lock_temp
 data remove storage mosseater:safe lock_temp
