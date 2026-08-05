@@ -1,0 +1,5 @@
+name: DeathBeam
+version: 1.0.0
+main: dev.orbitalpack.deathbeam.DeathBeamPlugin
+api-version: '1.21.11'
+description: Optimized hold-to-fire Death Beam module for Paper 1.21.11
