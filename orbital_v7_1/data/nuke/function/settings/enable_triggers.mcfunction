@@ -15,8 +15,7 @@ scoreboard players enable @s t_block_protection
 scoreboard players enable @s t_personal_cd
 scoreboard players enable @s t_info
 scoreboard players enable @s t_reset
-scoreboard players enable @s t_safe_key
-scoreboard players enable @s t_safe_cancel
+
 
 scoreboard players enable @s t_bv_time
 scoreboard players enable @s t_tt_scale

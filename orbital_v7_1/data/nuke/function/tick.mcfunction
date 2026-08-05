@@ -61,9 +61,7 @@ function nuke:happy_ghast/tick
 execute as @a[nbt={FallFlying:1b}] if items entity @s armor.chest minecraft:elytra[minecraft:enchantments~[{enchantments:"breaching_enchantment:breaching"}]] at @s run function breaching_enchantment:flight_check
 execute as @e[type=minecraft:item,tag=!tt_init,nbt={OnGround:1b}] at @s if data entity @s Item.components."minecraft:custom_data".timer_tnt run function nuke:timer_tnt/init
 function nuke:timer_tnt/tick
-function nuke:safe/process_setup
-function nuke:safe/tick
-execute as @e[type=minecraft:interaction,tag=safe_shield] at @s unless block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:trapped_chest run kill @s
+
 function nuke:settings/process_triggers
 # ЗАДАЧА 1: обработка тумблера + синхронизация настроек с nuke.config.
 function nuke:settings/process_orbital_toggle

@@ -7,9 +7,9 @@ scoreboard players operation @s nuke.temp /= #20 nuke.settings
 title @s actionbar ["",{"text":"ПОДРЫВНОЙ ЖИЛЕТ: ","color":"red","bold":true},{"score":{"name":"@s","objective":"nuke.temp"},"color":"yellow","bold":true},{"text":" сек","color":"red","bold":true}]
 
 # Частицы задержки — каждый тик.
-particle minecraft:smoke ~ ~1 ~ 0.3 0.4 0.3 3 0.01
-execute if score @s bv_timer matches ..100 run particle minecraft:flame ~ ~1 ~ 0.3 0.4 0.3 4 0.01
-execute if score @s bv_timer matches ..100 run particle minecraft:lava ~ ~1 ~ 0.2 0.3 0.2 1 0.01
+particle minecraft:smoke ~ ~1 ~ 0.3 0.4 0.3 0.01 3
+execute if score @s bv_timer matches ..100 run particle minecraft:flame ~ ~1 ~ 0.3 0.4 0.3 0.01 4
+execute if score @s bv_timer matches ..100 run particle minecraft:lava ~ ~1 ~ 0.2 0.3 0.2 0.01 1
 
 # Звук тиканья — ровно раз в секунду (остаток от деления на 20).
 scoreboard players operation @s tt_mod = @s bv_timer

@@ -8,8 +8,8 @@ tag @s remove archi_user
 
 effect give @s minecraft:resistance 3 2 true
 effect give @s minecraft:absorption 8 1 true
-particle minecraft:flash ~ ~1 ~ 0 0 0 1 1 force
-particle minecraft:end_rod ~ ~1 ~ 1 1 1 30 0.05 force
+particle minecraft:explosion ~ ~1 ~ 0 0 0 0 1 force
+particle minecraft:end_rod ~ ~1 ~ 1 1 1 0.05 30 force
 playsound minecraft:item.shield.block master @a[distance=..16] ~ ~ ~ 1 0.7
 title @s actionbar {"text":"АРХИ-ЩИТ: защита сработала","color":"aqua","bold":true}
 execute if items entity @s weapon.mainhand minecraft:shield[minecraft:custom_data~{archi_shield:1b}] run item modify entity @s weapon.mainhand nuke:damage_shield

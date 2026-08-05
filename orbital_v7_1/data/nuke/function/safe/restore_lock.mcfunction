@@ -1,1 +1,0 @@
-$data modify block ~ ~ ~ components."minecraft:lock" set value {items:"minecraft:tripwire_hook",components:{"minecraft:custom_name":'$(pw)'},predicates:{"minecraft:custom_data":{nuke_key_active:true}}}
