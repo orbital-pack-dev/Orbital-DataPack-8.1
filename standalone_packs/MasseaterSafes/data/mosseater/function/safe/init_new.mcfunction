@@ -1,7 +1,7 @@
 # Контекст: at <центр блока, на который поставлен предмет-сейф>.
 kill @e[tag=ms_safe_shield,distance=..0.8,type=minecraft:interaction]
 kill @e[tag=ms_safe_box,distance=..0.7,type=minecraft:marker]
-data remove block ~ ~ ~ components."minecraft:lock"
+data merge block ~ ~ ~ {Lock:"SAFE_LOCKED"}
 summon minecraft:marker ~ ~ ~ {Tags:["ms_safe_box","ms_safe_unconfigured"],data:{safe:{keep_open:0b}}}
 execute if block ~ ~ ~ minecraft:chest unless block ~ ~ ~ minecraft:chest[type=single] run function mosseater:safe/init_partner
 function mosseater:safe/place_setup

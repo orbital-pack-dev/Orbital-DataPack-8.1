@@ -11,7 +11,7 @@ function mosseater:safe/particle_fx
 
 kill @e[tag=ms_safe_shield,distance=..0.8,type=minecraft:interaction]
 kill @e[tag=ms_safe_box,distance=..0.7,type=minecraft:marker]
-execute align xyz run data remove block ~ ~ ~ components."minecraft:lock"
+execute align xyz run data merge block ~ ~ ~ {Lock:""}
 
 # destroy выбрасывает и сам сундук, и его содержимое: ничего не пропадает.
 execute align xyz run setblock ~ ~ ~ minecraft:air destroy

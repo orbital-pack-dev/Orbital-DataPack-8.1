@@ -7,4 +7,4 @@ tag @s add ms_safe_keep_open
 
 # align xyz гарантирует запись в block entity собственного блока даже если
 # маркер стоит не ровно в центре.
-execute align xyz run data remove block ~ ~ ~ components."minecraft:lock"
+execute align xyz run data merge block ~ ~ ~ {Lock:""}

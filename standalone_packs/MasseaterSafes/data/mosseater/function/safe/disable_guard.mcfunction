@@ -6,4 +6,4 @@
 # набора ms_safe_pair. Независимый сосед в 1 блоке остаётся с хитбоксом и
 # ванильным замком.
 kill @e[tag=ms_safe_shield,distance=..0.8,type=minecraft:interaction]
-execute align xyz run data remove block ~ ~ ~ components."minecraft:lock"
+execute align xyz run data merge block ~ ~ ~ {Lock:""}

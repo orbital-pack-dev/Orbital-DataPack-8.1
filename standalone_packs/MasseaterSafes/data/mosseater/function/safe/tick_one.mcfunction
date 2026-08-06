@@ -30,7 +30,7 @@ execute if score @s mosseater.safe_data matches 1.. run return 0
 tag @s remove ms_safe_auth
 
 # Вне окна доступа сейф обязан быть запечатан.
-execute if entity @s[tag=ms_safe_keep_open] align xyz run data remove block ~ ~ ~ components."minecraft:lock"
+execute if entity @s[tag=ms_safe_keep_open] align xyz run data merge block ~ ~ ~ {Lock:""}
 execute if entity @s[tag=ms_safe_configured] run function mosseater:safe/reseal
 
 execute if entity @s[tag=ms_safe_unconfigured] run return run function mosseater:safe/ensure_setup
